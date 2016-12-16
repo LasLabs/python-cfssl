@@ -1,0 +1,27 @@
+addons:
+  apt:
+    packages:
+      - expect-dev  # provides unbuffer utility
+      - unixodbc-dev
+
+language: python
+
+python:
+  - "2.7"
+
+virtualenv:
+  system_site_packages: true
+
+install:
+  - pip install coveralls
+  - pip install codecov --user
+  - pip install -r test_requirements.txt
+  - pip install .
+
+# command to run tests
+script:
+  - coverage run setup.py test
+  
+after_success:
+  - coveralls
+  - codecov
