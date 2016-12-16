@@ -3,12 +3,7 @@
 # License MIT (https://opensource.org/licenses/MIT).
 
 from setuptools import Command
-
-try:
-    from xmlrunner import XMLTestRunner
-    from unittest import TestLoader
-except ImportError:
-    pass
+from unittest import TestLoader, TextTestRunner
 
 
 class FailTestException(Exception):
@@ -22,8 +17,6 @@ class Tests(Command):
     MODULE_NAMES = [
         'cfssl',
     ]
-    TEST_RESULTS = '_results'
-    COVERAGE_RESULTS = 'coverage.xml'
     user_options = []  # < For Command API compatibility
 
     def initialize_options(self, ):
@@ -35,7 +28,7 @@ class Tests(Command):
     def run(self, ):
         loader = TestLoader()
         tests = loader.discover('.', 'test_*.py')
-        t = XMLTestRunner(verbosity=1, output=self.TEST_RESULTS)
+        t = TextTestRunner(verbosity=1)
         res = t.run(tests)
         if not res.wasSuccessful():
             raise FailTestException()
