@@ -51,7 +51,7 @@
 <span class="kn">from</span> <span class="nn">.subject_info</span> <span class="k">import</span> <span class="n">SubjectInfo</span>
 
 
-<div class="viewcode-block" id="CertificateRequest"><a class="viewcode-back" href="../../../cfssl.models.certificate_request.html#cfssl.models.certificate_request.CertificateRequest">[docs]</a><span class="k">class</span> <span class="nc">CertificateRequest</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="CertificateRequest"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.models.certificate_request.CertificateRequest">[docs]</a><span class="k">class</span> <span class="nc">CertificateRequest</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; It provides a Certificate Request compatible with CFSSL. &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">common_name</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hosts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -60,7 +60,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="n">hosts</span> <span class="ow">or</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span> <span class="ow">or</span> <span class="n">KeyConfig</span><span class="p">()</span>
 
-<div class="viewcode-block" id="CertificateRequest.to_api"><a class="viewcode-back" href="../../../cfssl.models.certificate_request.html#cfssl.models.certificate_request.CertificateRequest.to_api">[docs]</a>    <span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CertificateRequest.to_api"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.models.certificate_request.CertificateRequest.to_api">[docs]</a>    <span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It returns an object compatible with the API. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s1">&#39;CN&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">common_name</span><span class="p">,</span>
