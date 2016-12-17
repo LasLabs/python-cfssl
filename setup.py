@@ -14,7 +14,7 @@ setup_vals = {
     'author_email': 'support@laslabs.com',
     'description': 'This library will allow you to interact with CFSSL '
                    'using Python.',
-    'url': 'https://github.com/laslabs/cfssl-py',
+    'url': 'https://github.com/laslabs/Python-CFSSL',
     'license': 'MIT',
     'classifiers': [
         'Development Status :: 4 - Beta',
