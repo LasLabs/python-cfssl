@@ -14,6 +14,8 @@ Setup
 Usage
 -----
 
+`API Documentation <https://laslabs.github.io/python-cfssl>`_
+
 Known Issues / Road Map
 -----------------------
 

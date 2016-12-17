@@ -6,23 +6,17 @@ addons:
 language: python
 
 python:
-  - "2.7"
+    - "2.7"
 
 virtualenv:
-  system_site_packages: true
+    system_site_packages: true
 
-install:
-  - pip install coveralls
-  - pip install codecov --user
-  - pip install codeclimate-test-reporter
-  - pip install -r requirements.txt
-  - pip install .
+env:
+    global:
+        - TESTS="0" LINT_CHECK="0" DOCS="0" VERSION="0.1.0" RELEASE="0.1.0" PROJECT="Python-CFSSL" BRANCH_PROD="master" BRANCH_DOC="gh-pages"
+    matrix:
+        - TESTS="1"
+        - DOCS="1"
 
-# command to run tests
 script:
-  - coverage run setup.py test
-  
-after_success:
-  - coveralls
-  - codecov
-  - codeclimate-test-reporter
+    - wget -O - https://gist.githubusercontent.com/lasley/e547cc2f66cff91e9494ad46b69b9571/raw/6b2cf174988d62e79b0ebedbc0dfb013d65e8dcc/Python%2520Travis%2520Tests | bash
