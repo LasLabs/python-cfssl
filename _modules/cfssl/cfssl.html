@@ -1,0 +1,480 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cfssl.cfssl &#8212; Python-CFSSL 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for cfssl.cfssl</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright 2016 LasLabs Inc.</span>
+<span class="c1"># License MIT (https://opensource.org/licenses/MIT).</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">CFSSLException</span><span class="p">,</span> <span class="n">CFSSLRemoteException</span>
+
+<span class="kn">from</span> <span class="nn">.models.config_key</span> <span class="k">import</span> <span class="n">ConfigKey</span>
+
+
+<div class="viewcode-block" id="CFSSL"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL">[docs]</a><span class="k">class</span> <span class="nc">CFSSL</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; It provides Python bindings to a remote CFSSL server via HTTP(S).</span>
+
+<span class="sd">    Additional documentation regarding the API endpoints is available at</span>
+<span class="sd">    https://github.com/cloudflare/cfssl/tree/master/doc/api</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">ssl</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">ssl</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span> <span class="k">if</span> <span class="n">ssl</span> <span class="k">else</span> <span class="s1">&#39;http&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uri_base</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">://</span><span class="si">%s</span><span class="s1">:</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ssl</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CFSSL.auth_sign"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.auth_sign">[docs]</a>    <span class="k">def</span> <span class="nf">auth_sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">datetime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">remote_address</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It provides returns a signed certificate.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            token: (str) The authentication token.</span>
+<span class="sd">            request: (cfssl.CertificateRequest) Signing request document.</span>
+<span class="sd">            datetime: (datetime.datetime) Authentication timestamp.</span>
+<span class="sd">            remote_address: (str) An address used in making the request.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            (str) A PEM-encoded certificate that has been signed by the</span>
+<span class="sd">                server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
+            <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">token</span><span class="p">,</span>
+            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+            <span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+            <span class="s1">&#39;remote_address&#39;</span><span class="p">:</span> <span class="n">remote_address</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;authsign&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CFSSL.bundle"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.bundle">[docs]</a>    <span class="k">def</span> <span class="nf">bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">certificate</span><span class="p">,</span> <span class="n">private_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">flavor</span><span class="o">=</span><span class="s1">&#39;ubiquitous&#39;</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It builds and returns certificate bundles.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            certificate: (str) The PEM-encoded certificate to be bundled.</span>
+
+<span class="sd">        If the ``certificate`` parameter is present, the following four</span>
+<span class="sd">        arguments are valid:</span>
+<span class="sd">            private_key: (str) The PEM-encoded private key to be included with</span>
+<span class="sd">                the bundle. This is valid only if the server is not running in</span>
+<span class="sd">                ``keyless`` mode.</span>
+<span class="sd">            flavor: (str) One of ``ubiquitous``, ``force``, or ``optimal``,</span>
+<span class="sd">                with a default value of ``ubiquitous``. A ubiquitous bundle is</span>
+<span class="sd">                one that has a higher probability of being verified everywhere,</span>
+<span class="sd">                even by clients using outdated or unusual trust stores. Force will</span>
+<span class="sd">                cause the endpoint to use the bundle provided in the</span>
+<span class="sd">                ``certificate`` parameter, and will only verify that the bundle</span>
+<span class="sd">                is a valid (verifiable) chain.</span>
+<span class="sd">            domain: (str) The domain name to verify as the hostname of the</span>
+<span class="sd">                certificate.</span>
+<span class="sd">            ip: (str) The IP address to verify against the certificate IP</span>
+<span class="sd">                SANs.</span>
+
+<span class="sd">        If only the ``domain`` parameter is present, the following</span>
+<span class="sd">        parameter is valid:</span>
+
+<span class="sd">        ip: (str) The IP address of the remote host; this will fetch the</span>
+<span class="sd">            certificate from the IP, and verify that it is valid for the</span>
+<span class="sd">            domain name.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (dict) Object repesenting the bundle, with the following keys:</span>
+<span class="sd">            * bundle contains the concatenated list of PEM certificates</span>
+<span class="sd">                forming the certificate chain; this forms the actual</span>
+<span class="sd">                bundle. The remaining parameters are additional metadata</span>
+<span class="sd">                supporting the bundle.</span>
+<span class="sd">            * crl_support is true if CRL information is contained in the</span>
+<span class="sd">                certificate.</span>
+<span class="sd">            * crt contains the original certificate the bundle is built</span>
+<span class="sd">                from.</span>
+<span class="sd">            * expires contains the expiration date of the certificate.</span>
+<span class="sd">            * hostnames contains the SAN hostnames for the certificate.</span>
+<span class="sd">            * issuer contains the X.509 issuer information for the</span>
+<span class="sd">                certificate.</span>
+<span class="sd">            * key contains the private key for the certificate, if one</span>
+<span class="sd">                was presented.</span>
+<span class="sd">            * key_size contains the size of the key in bits for the</span>
+<span class="sd">                certificate. It will be present even if the private key wasn&#39;t</span>
+<span class="sd">                provided because this can be determined from the public key.</span>
+<span class="sd">            * key_type contains a textual description of the key type,</span>
+<span class="sd">                e.g. &#39;2048-bit RSA&#39;.</span>
+<span class="sd">            * ocsp contains the OCSP URLs for the certificate, if present.</span>
+<span class="sd">            * ocsp_support will be true if the certificate supports OCSP</span>
+<span class="sd">                revocation checking.</span>
+<span class="sd">            * signature contains the signature type used in the</span>
+<span class="sd">                certificate, e.g. &#39;SHA1WithRSA&#39;.</span>
+<span class="sd">            * status contains a number of elements:</span>
+<span class="sd">              * code is bit-encoded error code. 1st bit indicates whether</span>
+<span class="sd">              there is a expiring certificate in the bundle. 2nd bit indicates</span>
+<span class="sd">              whether there is a ubiquity issue with the bundle.</span>
+<span class="sd">              * expiring_SKIs contains the SKIs (subject key identifiers)</span>
+<span class="sd">              for any certificates that might expire soon (within 30</span>
+<span class="sd">              days).</span>
+<span class="sd">              * messages is a list of human-readable warnings on bundle</span>
+<span class="sd">              ubiquity and certificate expiration. For example, an expiration</span>
+<span class="sd">              warning can be &quot;The expiring cert is #1 in the chain&quot;,</span>
+<span class="sd">              indicating the leaf certificate is expiring. Ubiquity warnings</span>
+<span class="sd">              include SHA-1 deprecation warning (if the bundle triggers</span>
+<span class="sd">              any major browser&#39;s SHA-1 deprecation policy), SHA-2</span>
+<span class="sd">              compatibility warning (if the bundle contains signatures using</span>
+<span class="sd">              ECDSA SHA-2 hash algorithms, it will be rejected by Windows XP</span>
+<span class="sd">              SP2), compatibility warning (if the bundle contains ECDSA</span>
+<span class="sd">              certificates, it will be rejected by Windows XP, Android 2.2 and</span>
+<span class="sd">              Android 2.3 etc) and root trust warning (if the bundle cannot be</span>
+<span class="sd">              trusted by some major OSes or browsers).</span>
+<span class="sd">              * rebundled indicates whether the server had to rebundle the</span>
+<span class="sd">              certificate. The server will rebundle the uploaded</span>
+<span class="sd">              certificate as needed; for example, if the certificate</span>
+<span class="sd">              contains none of the required intermediates or a better set</span>
+<span class="sd">              of intermediates was found. In this case, the server will</span>
+<span class="sd">              mark rebundled as true.</span>
+<span class="sd">              * untrusted_root_stores contains the names of any major</span>
+<span class="sd">              OSes and browsers that doesn&#39;t trust the bundle. The names</span>
+<span class="sd">              are used to construct the root trust warnings in the messages</span>
+<span class="sd">              list</span>
+<span class="sd">            * subject contains the X.509 subject identifier from the</span>
+<span class="sd">                certificate.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
+            <span class="s1">&#39;certificate&#39;</span><span class="p">:</span> <span class="n">certificate</span><span class="p">,</span>
+            <span class="s1">&#39;domain&#39;</span><span class="p">:</span> <span class="n">domain</span><span class="p">,</span>
+            <span class="s1">&#39;private_key&#39;</span><span class="p">:</span> <span class="n">private_key</span><span class="p">,</span>
+            <span class="s1">&#39;flavor&#39;</span><span class="p">:</span> <span class="n">flavor</span><span class="p">,</span>
+            <span class="s1">&#39;ip&#39;</span><span class="p">:</span> <span class="n">ip</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;bundle&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CFSSL.info"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It returns information about the CA, including the cert.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            label: (str) A string specifying the signer.</span>
+<span class="sd">            profile: (str) a string specifying the signing profile for the</span>
+<span class="sd">                signer. Signing profile specifies what key usages should be</span>
+<span class="sd">                used and how long the expiry should be set.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            (dict) Mapping with three keys:</span>
+<span class="sd">                * certificate: (str) a PEM-encoded certificate of the signer.</span>
+<span class="sd">                * usage: (list) a string array of key usages from the signing</span>
+<span class="sd">                    profile.</span>
+<span class="sd">                * expiry: (str) the expiry string from the signing profile.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
+            <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
+            <span class="s1">&#39;profile&#39;</span><span class="p">:</span> <span class="n">profile</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CFSSL.init_ca"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.init_ca">[docs]</a>    <span class="k">def</span> <span class="nf">init_ca</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">common_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ca</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It initializes a new certificate authority.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            hosts: (iter of cfssl.Host) Subject Alternative Name(s) for the</span>
+<span class="sd">                requested CA certificate.</span>
+<span class="sd">            names: (iter of cfssl.SubjectInfo) The Subject Info(s) for the</span>
+<span class="sd">                requested CA certificate.</span>
+<span class="sd">            common_name: (str) the common name for the certificate subject in</span>
+<span class="sd">                the requested CA certificate.</span>
+<span class="sd">            key: (cfssl.ConfigKey) Cipher and strength to use for certificate.</span>
+<span class="sd">            ca: (cfssl.ConfigServer) the CA configuration of the requested CA,</span>
+<span class="sd">                including CA pathlen and CA default expiry.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            (dict) Mapping with two keys:</span>
+<span class="sd">                * private key: (str) a PEM-encoded CA private key.</span>
+<span class="sd">                * certificate: (str) a PEM-encoded self-signed CA certificate.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">key</span> <span class="ow">or</span> <span class="n">ConfigKey</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
+            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">host</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">name</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;CN&#39;</span><span class="p">:</span> <span class="n">common_name</span><span class="p">,</span>
+            <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+            <span class="s1">&#39;ca&#39;</span><span class="p">:</span> <span class="n">ca</span> <span class="ow">and</span> <span class="n">ca</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;init_ca&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CFSSL.new_key"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.new_key">[docs]</a>    <span class="k">def</span> <span class="nf">new_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">common_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ca</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It generates and returns a new private key + CSR.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            hosts: (iter of cfssl.Host) Subject Alternative Name(s) for the</span>
+<span class="sd">                requested certificate.</span>
+<span class="sd">            names: (iter of cfssl.SubjectInfo) The Subject Info(s) for the</span>
+<span class="sd">                requested certificate.</span>
+<span class="sd">            CN: (str) the common name for the certificate subject in the</span>
+<span class="sd">                requestedrequested CA certificate.</span>
+<span class="sd">            key: (cfssl.ConfigKey) Cipher and strength to use for certificate.</span>
+<span class="sd">            ca: the CA configuration of the requested CA, including CA pathlen</span>
+<span class="sd">                and CA default expiry.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            (dict) Mapping with three keys:</span>
+<span class="sd">                * private key: (str) a PEM-encoded CA private key.</span>
+<span class="sd">                * certificate: (str) a PEM-encoded self-signed CA certificate.</span>
+<span class="sd">                * sums: (dict) Mapping holding both MD5 and SHA1 digests for the</span>
+<span class="sd">                    certificate request</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
+            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">host</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">name</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;CN&#39;</span><span class="p">:</span> <span class="n">common_name</span><span class="p">,</span>
+            <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span>
+            <span class="s1">&#39;ca&#39;</span><span class="p">:</span> <span class="n">ca</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;newkey&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CFSSL.new_cert"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.new_cert">[docs]</a>    <span class="k">def</span> <span class="nf">new_cert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bundle</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It generates and returns a new private key and certificate.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            request: (cfssl.CertificateRequest) CSR to be used for</span>
+<span class="sd">                certificate creation.</span>
+<span class="sd">            label: (str) Specifying which signer to be appointed to sign</span>
+<span class="sd">                the CSR, useful when interacting with cfssl server that stands</span>
+<span class="sd">                in front of a remote multi-root CA signer.</span>
+<span class="sd">            profile: (str) Specifying the signing profile for the signer.</span>
+<span class="sd">            bundle: (bool) Specifying whether to include an &quot;optimal&quot;</span>
+<span class="sd">                certificate bundle along with the certificate.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            (dict) mapping with these keys:</span>
+<span class="sd">                * private key: a PEM-encoded private key.</span>
+<span class="sd">                * certificate_request: a PEM-encoded certificate request.</span>
+<span class="sd">                * certificate: a PEM-encoded certificate, signed by the server.</span>
+<span class="sd">                * sums: a JSON object holding both MD5 and SHA1 digests for the</span>
+<span class="sd">                    certificate request and the certificate.</span>
+<span class="sd">                * bundle: See the result of endpoint_bundle.txt (only included</span>
+<span class="sd">                    if the bundle parameter was set).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
+            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+            <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
+            <span class="s1">&#39;profile&#39;</span><span class="p">:</span> <span class="n">profile</span><span class="p">,</span>
+            <span class="s1">&#39;bundle&#39;</span><span class="p">:</span> <span class="n">bundle</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;newcert&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CFSSL.revoke"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.revoke">[docs]</a>    <span class="k">def</span> <span class="nf">revoke</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serial</span><span class="p">,</span> <span class="n">authority_key_id</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It provides certificate revocation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            serial: (str) Specifying the serial number of a certificate.</span>
+<span class="sd">            authority_key_id: (str) Specifying the authority key identifier</span>
+<span class="sd">                of the certificate to be revoked; this is used to distinguish</span>
+<span class="sd">                which private key was used to sign the certificate.</span>
+<span class="sd">            reason: (str) Identifying why the certificate was revoked; see,</span>
+<span class="sd">                for example, ReasonStringToCode in the ocsp package or section</span>
+<span class="sd">                4.2.1.13 of RFC 5280. The &quot;reasons&quot; used here are the ReasonFlag</span>
+<span class="sd">                names in said RFC.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
+            <span class="s1">&#39;serial&#39;</span><span class="p">:</span> <span class="n">serial</span><span class="p">,</span>
+            <span class="s1">&#39;authority_key_id&#39;</span><span class="p">:</span> <span class="n">authority_key_id</span><span class="p">,</span>
+            <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="n">reason</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;revoke&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CFSSL.scan"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.scan">[docs]</a>    <span class="k">def</span> <span class="nf">scan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scanner</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It scans servers to determine the quality of their TLS setup.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            host: (cfssl.Host) The host to scan.</span>
+<span class="sd">            ip: (str) IP Address to override DNS lookup of host.</span>
+<span class="sd">            timeout: (str) The amount of time allotted for the scan to complete</span>
+<span class="sd">                (default: 1 minute).</span>
+<span class="sd">            family: (str) regular expression specifying scan famil(ies) to run.</span>
+<span class="sd">            scanner: (str) regular expression specifying scanner(s) to run.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            (dict) Mapping with keys for each scan family. Each of these</span>
+<span class="sd">            objects contains keys for each scanner run in that family </span>
+<span class="sd">            pointing to objects possibly containing the following keys:</span>
+<span class="sd">            * grade: (str) Describing the exit status of the scan. Can be:</span>
+<span class="sd">                * &quot;Good&quot;: host performing the expected state-of-the-art.</span>
+<span class="sd">                * &quot;Warning&quot;: host with non-ideal configuration,</span>
+<span class="sd">                             possibly maintaining support for legacy clients.</span>
+<span class="sd">                * &quot;Bad&quot;: host with serious misconfiguration or vulnerability</span>
+<span class="sd">                * &quot;Skipped&quot;: indicates that the scan was not performed for some</span>
+<span class="sd">                             reason.</span>
+<span class="sd">            * error: (str) Any error encountered during the scan process.</span>
+<span class="sd">            * output: (dict) Arbitrary data retrieved during the scan.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
+            <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="n">host</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+            <span class="s1">&#39;ip&#39;</span><span class="p">:</span> <span class="n">ip</span><span class="p">,</span>
+            <span class="s1">&#39;timeout&#39;</span><span class="p">:</span> <span class="n">timeout</span><span class="p">,</span>
+            <span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="n">family</span><span class="p">,</span>
+            <span class="s1">&#39;scanner&#39;</span><span class="p">:</span> <span class="n">scanner</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CFSSL.scan_info"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.scan_info">[docs]</a>    <span class="k">def</span> <span class="nf">scan_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It lists options available for scanning.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            (dict) Mapping with keys for each scan family. For each family,</span>
+<span class="sd">            there exists a `description` containing a string describing</span>
+<span class="sd">            the family and a `scanners` object mapping each of the family&#39;s</span>
+<span class="sd">            scanners to an object containing a `description` string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;scaninfo&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CFSSL.sign"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.sign">[docs]</a>    <span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">certificate_request</span><span class="p">,</span> <span class="n">hosts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">serial_sequence</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It signs and returns a certificate.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            certificate_request: (str) the CSR bytes to be signed (in PEM).</span>
+<span class="sd">            hosts: (iter of cfssl.Host) of SAN (subject alternative .names)</span>
+<span class="sd">                which overrides the ones in the CSR</span>
+<span class="sd">            subject: (str) The certificate subject which overrides</span>
+<span class="sd">                the ones in the CSR.</span>
+<span class="sd">            serial_sequence: (str) Specify the prefix which the generated</span>
+<span class="sd">                certificate serial should have.</span>
+<span class="sd">            label: (str) Specifying which signer to be appointed to sign</span>
+<span class="sd">                the CSR, useful when interacting with a remote multi-root CA</span>
+<span class="sd">                signer.</span>
+<span class="sd">            profile: (cfssl.ConfigServer) Specifying the signing profile for</span>
+<span class="sd">                the signer, useful when interacting with a remote multi-root</span>
+<span class="sd">                CA signer.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            (str) A PEM-encoded certificate that has been signed by the</span>
+<span class="sd">            server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
+            <span class="s1">&#39;certificate_request&#39;</span><span class="p">:</span> <span class="n">certificate_request</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">host</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="n">subject</span><span class="p">,</span>
+            <span class="s1">&#39;serial_sequence&#39;</span><span class="p">:</span> <span class="n">serial_sequence</span><span class="p">,</span>
+            <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
+            <span class="s1">&#39;profile&#39;</span><span class="p">:</span> <span class="n">profile</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+        <span class="p">})</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sign&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;certificate&#39;</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="CFSSL.call"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.call">[docs]</a>    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It calls the remote endpoint and returns the result, if success.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            endpoint: (str) CFSSL endpoint to call (e.g. ``newcert``).</span>
+<span class="sd">            method: (str) HTTP method to utilize for the Request.</span>
+<span class="sd">            params: (dict|bytes) Data to be sent in the query string</span>
+<span class="sd">                for the Request.</span>
+<span class="sd">            data: (dict|bytes|file) Data to send in the body of the</span>
+<span class="sd">                Request.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            (mixed) Data contained in ``result`` key of the API response.</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            CFSSLRemoteException: In the event of a ``False`` in the</span>
+<span class="sd">                ``success`` key of the API response.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/api/v1/cfssl/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri_base</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span>
+            <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+            <span class="n">url</span><span class="o">=</span><span class="n">endpoint</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">CFSSLRemoteException</span><span class="p">(</span>
+                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                    <span class="s1">&#39;Errors:&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;errors&#39;</span><span class="p">,</span> <span class="p">[])),</span>
+                    <span class="s1">&#39;Messages:&#39;</span>
+                    <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;messages&#39;</span><span class="p">,</span> <span class="p">[])),</span>
+                <span class="p">])</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span></div>
+
+    <span class="k">def</span> <span class="nf">_clean_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It removes false entries from mapping &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="p">}</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, LasLabs Inc.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
