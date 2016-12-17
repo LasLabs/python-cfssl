@@ -1,0 +1,7 @@
+cfssl.tests.test_policy_sign module
+===================================
+
+.. automodule:: cfssl.tests.test_policy_sign
+    :members:
+    :undoc-members:
+    :show-inheritance:

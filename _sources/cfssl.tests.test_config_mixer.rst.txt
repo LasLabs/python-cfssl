@@ -1,0 +1,7 @@
+cfssl.tests.test_config_mixer module
+====================================
+
+.. automodule:: cfssl.tests.test_config_mixer
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,26 @@
+cfssl.tests package
+===================
+
+Submodules
+----------
+
+.. toctree::
+
+   cfssl.tests.test_certificate_request
+   cfssl.tests.test_cfssl
+   cfssl.tests.test_config_client
+   cfssl.tests.test_config_key
+   cfssl.tests.test_config_mixer
+   cfssl.tests.test_host
+   cfssl.tests.test_policy_auth
+   cfssl.tests.test_policy_sign
+   cfssl.tests.test_policy_use
+   cfssl.tests.test_subject_info
+
+Module contents
+---------------
+
+.. automodule:: cfssl.tests
+    :members:
+    :undoc-members:
+    :show-inheritance:
