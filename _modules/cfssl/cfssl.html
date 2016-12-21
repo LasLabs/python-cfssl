@@ -203,34 +203,25 @@
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CFSSL.init_ca"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL.init_ca">[docs]</a>    <span class="k">def</span> <span class="nf">init_ca</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">common_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ca</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="CFSSL.init_ca"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL.init_ca">[docs]</a>    <span class="k">def</span> <span class="nf">init_ca</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">certificate_request</span><span class="p">,</span> <span class="n">ca</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It initializes a new certificate authority.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            hosts (:obj:`iter` of :obj:`cfssl.Host`): Subject Alternative Name(s) for the</span>
-<span class="sd">                requested CA certificate.</span>
-<span class="sd">            names (:obj:`iter` of :obj:`cfssl.SubjectInfo`): The Subject Info(s) for the</span>
-<span class="sd">                requested CA certificate.</span>
-<span class="sd">            common_name (:obj:`str`): the common name for the certificate subject in</span>
-<span class="sd">                the requested CA certificate.</span>
-<span class="sd">            key (:obj:`cfssl.ConfigKey`): Cipher and strength to use for certificate.</span>
-<span class="sd">            ca (:obj:`cfssl.ConfigServer`): the CA configuration of the requested CA,</span>
-<span class="sd">                including CA pathlen and CA default expiry.</span>
+<span class="sd">            certificate_request (:obj:`cfssl.CertificateRequest`): The certificate</span>
+<span class="sd">                request to use when creating the CA.</span>
+<span class="sd">            ca (:obj:`cfssl.ConfigServer`, optional): The configuration of the</span>
+<span class="sd">                requested Certificate Authority.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            (:obj:`dict`) Mapping with two keys:</span>
 <span class="sd">                * private key (:obj:`str`): a PEM-encoded CA private key.</span>
 <span class="sd">                * certificate (:obj:`str`): a PEM-encoded self-signed CA certificate.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="n">key</span> <span class="ow">or</span> <span class="n">ConfigKey</span><span class="p">()</span>
+        <span class="n">csr_api</span> <span class="o">=</span> <span class="n">certificate_request</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
-            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="n">host</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span>
-            <span class="p">],</span>
-            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="n">name</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span>
-            <span class="p">],</span>
-            <span class="s1">&#39;CN&#39;</span><span class="p">:</span> <span class="n">common_name</span><span class="p">,</span>
-            <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span> <span class="ow">and</span> <span class="n">key</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="ow">or</span> <span class="n">ConfigKey</span><span class="p">()</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="n">csr_api</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="n">csr_api</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;CN&#39;</span><span class="p">:</span> <span class="n">csr_api</span><span class="p">[</span><span class="s1">&#39;CN&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">csr_api</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">],</span>
             <span class="s1">&#39;ca&#39;</span><span class="p">:</span> <span class="n">ca</span> <span class="ow">and</span> <span class="n">ca</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;init_ca&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>

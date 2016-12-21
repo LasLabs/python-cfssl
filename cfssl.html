@@ -314,22 +314,16 @@ used and how long the expiry should be set.</div></blockquote>
 
 <dl class="method">
 <dt id="cfssl.cfssl.CFSSL.init_ca">
-<code class="descname">init_ca</code><span class="sig-paren">(</span><em>hosts</em>, <em>names</em>, <em>common_name=None</em>, <em>key=None</em>, <em>ca=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL.init_ca"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.cfssl.CFSSL.init_ca" title="Permalink to this definition">¶</a></dt>
+<code class="descname">init_ca</code><span class="sig-paren">(</span><em>certificate_request</em>, <em>ca=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL.init_ca"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.cfssl.CFSSL.init_ca" title="Permalink to this definition">¶</a></dt>
 <dd><p>It initializes a new certificate authority.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><dl class="first docutils">
-<dt>hosts (<code class="xref py py-obj docutils literal"><span class="pre">iter</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">cfssl.Host</span></code>): Subject Alternative Name(s) for the</dt>
-<dd>requested CA certificate.</dd>
-<dt>names (<code class="xref py py-obj docutils literal"><span class="pre">iter</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">cfssl.SubjectInfo</span></code>): The Subject Info(s) for the</dt>
-<dd>requested CA certificate.</dd>
-<dt>common_name (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): the common name for the certificate subject in</dt>
-<dd>the requested CA certificate.</dd>
+<dd><dl class="first last docutils">
+<dt>certificate_request (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.CertificateRequest</span></code>): The certificate</dt>
+<dd>request to use when creating the CA.</dd>
+<dt>ca (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.ConfigServer</span></code>, optional): The configuration of the</dt>
+<dd>requested Certificate Authority.</dd>
 </dl>
-<p>key (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.ConfigKey</span></code>): Cipher and strength to use for certificate.
-ca (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.ConfigServer</span></code>): the CA configuration of the requested CA,</p>
-<blockquote class="last">
-<div>including CA pathlen and CA default expiry.</div></blockquote>
 </dd>
 <dt>Returns:</dt>
 <dd><dl class="first last docutils">

@@ -46,10 +46,21 @@
 <span class="c1"># Copyright 2016 LasLabs Inc.</span>
 <span class="c1"># License MIT (https://opensource.org/licenses/MIT).</span>
 
+<span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">mock</span>
 <span class="kn">import</span> <span class="nn">unittest</span>
 
-<span class="kn">from</span> <span class="nn">..cfssl</span> <span class="k">import</span> <span class="n">CFSSL</span><span class="p">,</span> <span class="n">CFSSLRemoteException</span><span class="p">,</span> <span class="n">requests</span>
+<span class="kn">from</span> <span class="nn">..cfssl</span> <span class="k">import</span> <span class="p">(</span><span class="n">CFSSL</span><span class="p">,</span>
+                     <span class="n">CFSSLRemoteException</span><span class="p">,</span>
+                     <span class="n">requests</span><span class="p">,</span>
+                     <span class="p">)</span>
+
+<span class="n">_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">cfssl</span> <span class="k">import</span> <span class="n">CertificateRequest</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;CFSSL Python library not installed.&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="TestCFSSL"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL">[docs]</a><span class="k">class</span> <span class="nc">TestCFSSL</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
@@ -106,16 +117,20 @@
     <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">CFSSL</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
 <div class="viewcode-block" id="TestCFSSL.test_init_ca"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_init_ca">[docs]</a>    <span class="k">def</span> <span class="nf">test_init_ca</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
-        <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">csr_vals</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()],</span>
             <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()],</span>
             <span class="s1">&#39;common_name&#39;</span><span class="p">:</span> <span class="s1">&#39;cn&#39;</span><span class="p">,</span>
             <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
-            <span class="s1">&#39;ca&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
         <span class="p">}</span>
+        <span class="n">csr</span> <span class="o">=</span> <span class="n">CertificateRequest</span><span class="p">(</span><span class="o">**</span><span class="n">csr_vals</span><span class="p">)</span>
+        <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ca&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
+                  <span class="s1">&#39;certificate_request&#39;</span><span class="p">:</span> <span class="n">csr</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cfssl</span><span class="o">.</span><span class="n">init_ca</span><span class="p">(</span><span class="o">**</span><span class="n">expect</span><span class="p">)</span>
+        <span class="n">expect</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">csr_vals</span><span class="p">)</span>
         <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;CN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cn&#39;</span>
         <span class="k">del</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;common_name&#39;</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;certificate_request&#39;</span><span class="p">]</span>
         <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
