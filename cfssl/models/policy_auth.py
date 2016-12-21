@@ -7,6 +7,14 @@ class PolicyAuth(object):
     """ It provides a Certificate Auth policy compatible with CFSSL """
 
     def __init__(self, name, key, key_type='standard'):
+        """ Initialize a new Authentication Policy.
+
+        Args:
+            name (:obj:`str`): Canonical name for policy.
+            key (:obj:`str`): Key/password data.
+            key_type (:obj:`str`): Type of key. Currently only ``standard`` is
+                supported.
+        """
         self.name = name
         self.key = key
         self.key_type = key_type

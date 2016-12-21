@@ -7,6 +7,12 @@ class PolicyUse(object):
     """ It provides a Certificate Use policy compatible with CFSSL """
 
     def __init__(self, name, code):
+        """ Initialize a new Use Policy.
+
+        Args:
+            name (:obj:`str`): Canonical name for policy.
+            code (:obj:`str`): CFSSL use code that policy applies to.
+        """
         self.name = name
         self.code = code
 

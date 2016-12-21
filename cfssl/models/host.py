@@ -7,6 +7,14 @@ class Host(object):
     """ It provides a Host compatible with CFSSL. """
 
     def __init__(self, name, host, port=None):
+        """ Initialize a new Client Configuration.
+
+        Args:
+            name (:obj:`str`): Canonical name of host/remote.
+            host (:obj:`str`): Advertised host name or IP for host.
+            port (:obj:`int`, optional): Port number advertised by host, if
+                any.
+        """
         self.name = name
         self.host = host
         self.port = port

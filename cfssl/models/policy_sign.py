@@ -2,23 +2,34 @@
 # Copyright 2016 LasLabs Inc.
 # License MIT (https://opensource.org/licenses/MIT).
 
-from ..defaults import DEFAULT_EXPIRE_MINUTES
+from ..defaults import DEFAULT_EXPIRE_DELTA
 
 
 class PolicySign(object):
     """ It provides a Certificate Auth policy compatible with CFSSL """
 
     def __init__(self, name, usage_policies, auth_policy,
-                 expire_minutes=DEFAULT_EXPIRE_MINUTES):
+                 expire_delta=DEFAULT_EXPIRE_DELTA):
+        """ Initialize a new Signing Policy.
+
+        Args:
+            name (:obj:`str`): Canonical name for policy.
+            usage_policies (:type:`iter` of :obj:`cfssl.PolicyUse`): Usage
+                policies that should apply to this signing policy.
+            auth_policy (:obj:`obj.PolicyAuth`): Authentication policy that
+                should apply to this signing policy.
+            expire_delta  (:obj:`datetime.timedelta`): Delta representing when
+                the signature should expire.
+        """
         self.name = name
         self.usage_policies = usage_policies
         self.auth_policy = auth_policy
-        self.expire_minutes = expire_minutes
+        self.expire_delta = expire_delta
 
     def to_api(self):
         """ It returns an object compatible with the API. """
         return {
             'auth_key': self.auth_policy.name,
-            'expiry': '%dm' % self.expire_minutes,
+            'expiry': '%ds' % self.expire_delta.total_seconds(),
             'usages': [u.to_api() for u in self.usage_policies],
         }

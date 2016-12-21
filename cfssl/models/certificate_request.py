@@ -11,6 +11,18 @@ class CertificateRequest(object):
     """ It provides a Certificate Request compatible with CFSSL. """
 
     def __init__(self, common_name, names=None, hosts=None, key=None):
+        """ Initialize a new CertificateRequest.
+
+        Args:
+            common_name (:obj:`str`): The fully qualified domain name for the
+                server. This must be an exact match.
+            names (:type:`iter` of :obj:`cfssl.SubjectInfo`, optional):
+                Subject Information to be added to the request.
+            hosts (:type:`iter` of :obj:`cfssl.Host`, optional): Hosts
+                to be added to the request.
+            key (:obj:`cfssl.ConfigKey`, optional): Key configuration
+                for the request.
+        """
         self.common_name = common_name
         self.names = names or []
         self.hosts = hosts or []

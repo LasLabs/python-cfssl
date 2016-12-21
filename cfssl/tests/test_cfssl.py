@@ -86,13 +86,17 @@ class TestCFSSL(unittest.TestCase):
         expect = {
             'hosts': [mock.MagicMock()],
             'names': [mock.MagicMock()],
-            'common_name': 'cn'
+            'common_name': 'cn',
+            'ca': mock.MagicMock(),
+            'key': mock.MagicMock(),
         }
         self.cfssl.new_key(**expect)
         expect['CN'] = 'cn'
         del expect['common_name']
         expect['hosts'][0]= expect['hosts'][0].to_api()
         expect['names'][0] = expect['names'][0].to_api()
+        expect['ca'] = expect['ca'].to_api()
+        expect['key'] = expect['key'].to_api()
         call.assert_called_once_with(
             'newkey', 'POST', data=expect
         )

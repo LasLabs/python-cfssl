@@ -7,6 +7,16 @@ class ConfigMixer(object):
     """ It provides a mixer for the Client and Server Configs """
 
     def __init__(self, sign_policy_default, sign_policies_add, auth_policies):
+        """ Initialize a new General Configuration for Server or Client.
+
+        Args:
+            sign_policy_default (:obj:`cfssl.PolicySign`): Default signing
+                policy for entity to use.
+            sign_policies_add (:type:`iter` of :obj:`cfssl.PolicySign`):
+                Additional signing policies to use for the entity.
+            auth_policies (:type:`iter` of :obj:`cfssl.PolicyAuth`): Auth
+                policies for the entity.
+        """
         self.sign_policy = sign_policy_default
         self.sign_policies = sign_policies_add
         self.auth_policies = auth_policies

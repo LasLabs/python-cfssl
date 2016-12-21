@@ -7,6 +7,17 @@ class SubjectInfo(object):
     """ It provides a SubjectInfo (Name) compatible with CFSSL. """
 
     def __init__(self, org_name, org_unit, city, state, country):
+        """ Initialize a new Subject Information.
+
+        Args:
+            org_name (:obj:`str`): The full legal name of the organization. Do
+                not abbreviate.
+            org_unit (:obj:`str`): Section of the organization.
+            city (:obj:`str`): The city where the organization is legally
+                located.
+            country (:obj:`str`): The two letter ISO abbreviation for the
+                country.
+        """
         self.org_name = org_name
         self.org_unit = org_unit
         self.city = city
