@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="cfssl.tests package" href="cfssl.tests.html" />
+    <link rel="next" title="cfssl.models package" href="cfssl.models.html" />
     <link rel="prev" title="Welcome to Python-CFSSL’s documentation!" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -49,9 +49,33 @@
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="cfssl.models.html">cfssl.models package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.models.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.models.html#module-cfssl.models.certificate_request">cfssl.models.certificate_request module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.models.html#module-cfssl.models.config_client">cfssl.models.config_client module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.models.html#module-cfssl.models.config_key">cfssl.models.config_key module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.models.html#module-cfssl.models.config_mixer">cfssl.models.config_mixer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.models.html#module-cfssl.models.config_server">cfssl.models.config_server module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.models.html#module-cfssl.models.host">cfssl.models.host module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.models.html#module-cfssl.models.policy_auth">cfssl.models.policy_auth module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.models.html#module-cfssl.models.policy_sign">cfssl.models.policy_sign module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.models.html#module-cfssl.models.policy_use">cfssl.models.policy_use module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.models.html#module-cfssl.models.subject_info">cfssl.models.subject_info module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.models.html#module-cfssl.models">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="cfssl.tests.html">cfssl.tests package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cfssl.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.tests.html#module-cfssl.tests.test_certificate_request">cfssl.tests.test_certificate_request module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cfssl.tests.html#module-cfssl.tests.test_cfssl">cfssl.tests.test_cfssl module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.tests.html#module-cfssl.tests.test_config_client">cfssl.tests.test_config_client module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.tests.html#module-cfssl.tests.test_config_key">cfssl.tests.test_config_key module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.tests.html#module-cfssl.tests.test_config_mixer">cfssl.tests.test_config_mixer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.tests.html#module-cfssl.tests.test_host">cfssl.tests.test_host module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.tests.html#module-cfssl.tests.test_policy_auth">cfssl.tests.test_policy_auth module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.tests.html#module-cfssl.tests.test_policy_sign">cfssl.tests.test_policy_sign module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.tests.html#module-cfssl.tests.test_policy_use">cfssl.tests.test_policy_use module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.tests.html#module-cfssl.tests.test_subject_info">cfssl.tests.test_subject_info module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cfssl.tests.html#module-cfssl.tests">Module contents</a></li>
 </ul>
 </li>
@@ -76,13 +100,10 @@
 <dd><p>It provides returns a signed certificate.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">token: (str) The authentication token.
-request: (mixed) Signing request document (e.g. as</p>
-<blockquote>
-<div>documented in endpoint_sign.txt, but not JSON encoded).</div></blockquote>
-<p class="last">datetime: (datetime.datetime) Authentication timestamp.
-remote_address: (str) An address used in making the request.</p>
-</dd>
+<dd>token: (str) The authentication token.
+request: (cfssl.CertificateRequest) Signing request document.
+datetime: (datetime.datetime) Authentication timestamp.
+remote_address: (str) An address used in making the request.</dd>
 <dt>Returns:</dt>
 <dd><dl class="first last docutils">
 <dt>(str) A PEM-encoded certificate that has been signed by the</dt>
@@ -280,19 +301,18 @@ used and how long the expiry should be set.</div></blockquote>
 <dd><p>It initializes a new certificate authority.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">hosts: (list) Of SANs (subject alternative names) for the
-requested CA certificate.
-names: (list) the certificate subject for the requested CA</p>
-<blockquote>
-<div>certificate.</div></blockquote>
-<dl class="last docutils">
+<dd><dl class="first docutils">
+<dt>hosts: (iter of cfssl.Host) Subject Alternative Name(s) for the</dt>
+<dd>requested CA certificate.</dd>
+<dt>names: (iter of cfssl.SubjectInfo) The Subject Info(s) for the</dt>
+<dd>requested CA certificate.</dd>
 <dt>common_name: (str) the common name for the certificate subject in</dt>
 <dd>the requested CA certificate.</dd>
-<dt>key: the key algorithm and size for the newly generated private key,</dt>
-<dd>default to ECDSA-256.</dd>
-<dt>ca: the CA configuration of the requested CA, including CA pathlen</dt>
-<dd>and CA default expiry.</dd>
 </dl>
+<p>key: (cfssl.ConfigKey) Cipher and strength to use for certificate.
+ca: (cfssl.ConfigServer) the CA configuration of the requested CA,</p>
+<blockquote class="last">
+<div>including CA pathlen and CA default expiry.</div></blockquote>
 </dd>
 <dt>Returns:</dt>
 <dd><dl class="first last docutils">
@@ -313,11 +333,13 @@ names: (list) the certificate subject for the requested CA</p>
 <dd><p>It generates and returns a new private key and certificate.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">request: (dict) Specifying the certificate request.
-label: (str) Specifying which signer to be appointed to sign</p>
-<blockquote>
-<div>the CSR, useful when interacting with cfssl server that stands
-in front of a remote multi-root CA signer.</div></blockquote>
+<dd><dl class="first docutils">
+<dt>request: (cfssl.CertificateRequest) CSR to be used for</dt>
+<dd>certificate creation.</dd>
+<dt>label: (str) Specifying which signer to be appointed to sign</dt>
+<dd>the CSR, useful when interacting with cfssl server that stands
+in front of a remote multi-root CA signer.</dd>
+</dl>
 <p>profile: (str) Specifying the signing profile for the signer.
 bundle: (bool) Specifying whether to include an &#8220;optimal&#8221;</p>
 <blockquote class="last">
@@ -353,18 +375,18 @@ bundle: (bool) Specifying whether to include an &#8220;optimal&#8221;</p>
 <dd><p>It generates and returns a new private key + CSR.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><dl class="first last docutils">
-<dt>hosts: (list) Of SANs (subject alternative names) for the</dt>
-<dd>requested CA certificate.</dd>
-<dt>names: (list) the certificate subject for the requested CA</dt>
-<dd>certificate.</dd>
+<dd><dl class="first docutils">
+<dt>hosts: (iter of cfssl.Host) Subject Alternative Name(s) for the</dt>
+<dd>requested certificate.</dd>
+<dt>names: (iter of cfssl.SubjectInfo) The Subject Info(s) for the</dt>
+<dd>requested certificate.</dd>
 <dt>CN: (str) the common name for the certificate subject in the</dt>
 <dd>requestedrequested CA certificate.</dd>
-<dt>key: the key algorithm and size for the newly generated private key,</dt>
-<dd>default to ECDSA-256.</dd>
-<dt>ca: the CA configuration of the requested CA, including CA pathlen</dt>
-<dd>and CA default expiry.</dd>
 </dl>
+<p>key: (cfssl.ConfigKey) Cipher and strength to use for certificate.
+ca: the CA configuration of the requested CA, including CA pathlen</p>
+<blockquote class="last">
+<div>and CA default expiry.</div></blockquote>
 </dd>
 <dt>Returns:</dt>
 <dd><dl class="first last docutils">
@@ -411,13 +433,13 @@ names in said RFC.</dd>
 <dd><p>It scans servers to determine the quality of their TLS setup.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">host: the hostname (optionally including port) to scan.
-ip: IP Address to override DNS lookup of host.
-timeout: The amount of time allotted for the scan to complete</p>
+<dd><p class="first">host: (cfssl.Host) The host to scan.
+ip: (str) IP Address to override DNS lookup of host.
+timeout: (str) The amount of time allotted for the scan to complete</p>
 <blockquote>
 <div>(default: 1 minute).</div></blockquote>
-<p class="last">family:  regular expression specifying scan famil(ies) to run.
-scanner: regular expression specifying scanner(s) to run.</p>
+<p class="last">family: (str) regular expression specifying scan famil(ies) to run.
+scanner: (str) regular expression specifying scanner(s) to run.</p>
 </dd>
 <dt>Returns:</dt>
 <dd><p class="first">(dict) Mapping with keys for each scan family. Each of these
@@ -467,8 +489,8 @@ scanners to an object containing a <cite>description</cite> string.</dd>
 <dd><p>It signs and returns a certificate.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">certificate_request: (str) the CSR bytes to be signed in PEM.
-hosts: (iter) of SAN (subject alternative .names)</p>
+<dd><p class="first">certificate_request: (str) the CSR bytes to be signed (in PEM).
+hosts: (iter of cfssl.Host) of SAN (subject alternative .names)</p>
 <blockquote>
 <div>which overrides the ones in the CSR</div></blockquote>
 <dl class="last docutils">
@@ -479,8 +501,9 @@ hosts: (iter) of SAN (subject alternative .names)</p>
 <dt>label: (str) Specifying which signer to be appointed to sign</dt>
 <dd>the CSR, useful when interacting with a remote multi-root CA
 signer.</dd>
-<dt>profile: (str) Specifying the signing profile for the signer,</dt>
-<dd>useful when interacting with a remote multi-root CA signer.</dd>
+<dt>profile: (cfssl.ConfigServer) Specifying the signing profile for</dt>
+<dd>the signer, useful when interacting with a remote multi-root
+CA signer.</dd>
 </dl>
 </dd>
 <dt>Returns:</dt>
@@ -491,6 +514,9 @@ server.</dd>
 
 </dd></dl>
 
+</div>
+<div class="section" id="module-cfssl.defaults">
+<span id="cfssl-defaults-module"></span><h2>cfssl.defaults module<a class="headerlink" href="#module-cfssl.defaults" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-cfssl.exceptions">
 <span id="cfssl-exceptions-module"></span><h2>cfssl.exceptions module<a class="headerlink" href="#module-cfssl.exceptions" title="Permalink to this headline">¶</a></h2>
@@ -526,6 +552,7 @@ server.</dd>
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-cfssl.cfssl">cfssl.cfssl module</a></li>
+<li><a class="reference internal" href="#module-cfssl.defaults">cfssl.defaults module</a></li>
 <li><a class="reference internal" href="#module-cfssl.exceptions">cfssl.exceptions module</a></li>
 <li><a class="reference internal" href="#module-cfssl">Module contents</a></li>
 </ul>
@@ -536,7 +563,7 @@ server.</dd>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="index.html" title="previous chapter">Welcome to Python-CFSSL&#8217;s documentation!</a></li>
-      <li>Next: <a href="cfssl.tests.html" title="next chapter">cfssl.tests package</a></li>
+      <li>Next: <a href="cfssl.models.html" title="next chapter">cfssl.models package</a></li>
   </ul></li>
 </ul>
 </div>

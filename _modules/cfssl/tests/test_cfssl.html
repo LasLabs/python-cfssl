@@ -72,9 +72,10 @@
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="s1">&#39;token&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="s1">&#39;request&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cfssl</span><span class="o">.</span><span class="n">auth_sign</span><span class="p">(</span><span class="o">**</span><span class="n">expect</span><span class="p">)</span>
+        <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
             <span class="s1">&#39;authsign&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span>
         <span class="p">)</span></div>
@@ -106,13 +107,19 @@
 <div class="viewcode-block" id="TestCFSSL.test_init_ca"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_init_ca">[docs]</a>    <span class="k">def</span> <span class="nf">test_init_ca</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="s1">&#39;hosts&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="s1">&#39;names&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;common_name&#39;</span><span class="p">:</span> <span class="s1">&#39;cn&#39;</span>
+            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()],</span>
+            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()],</span>
+            <span class="s1">&#39;common_name&#39;</span><span class="p">:</span> <span class="s1">&#39;cn&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
+            <span class="s1">&#39;ca&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cfssl</span><span class="o">.</span><span class="n">init_ca</span><span class="p">(</span><span class="o">**</span><span class="n">expect</span><span class="p">)</span>
         <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;CN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cn&#39;</span>
         <span class="k">del</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;common_name&#39;</span><span class="p">]</span>
+        <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
+        <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
+        <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
+        <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;ca&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;ca&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
             <span class="s1">&#39;init_ca&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span>
         <span class="p">)</span></div>
@@ -121,13 +128,15 @@
 <div class="viewcode-block" id="TestCFSSL.test_new_key"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_new_key">[docs]</a>    <span class="k">def</span> <span class="nf">test_new_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="s1">&#39;hosts&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="s1">&#39;names&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()],</span>
+            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()],</span>
             <span class="s1">&#39;common_name&#39;</span><span class="p">:</span> <span class="s1">&#39;cn&#39;</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cfssl</span><span class="o">.</span><span class="n">new_key</span><span class="p">(</span><span class="o">**</span><span class="n">expect</span><span class="p">)</span>
         <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;CN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cn&#39;</span>
         <span class="k">del</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;common_name&#39;</span><span class="p">]</span>
+        <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
+        <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
             <span class="s1">&#39;newkey&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span>
         <span class="p">)</span></div>
@@ -136,10 +145,11 @@
 <div class="viewcode-block" id="TestCFSSL.test_new_cert"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_new_cert">[docs]</a>    <span class="k">def</span> <span class="nf">test_new_cert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="s1">&#39;request&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
             <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;label&#39;</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cfssl</span><span class="o">.</span><span class="n">new_cert</span><span class="p">(</span><span class="o">**</span><span class="n">expect</span><span class="p">)</span>
+        <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
             <span class="s1">&#39;newcert&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span>
         <span class="p">)</span></div>
@@ -161,9 +171,10 @@
 <div class="viewcode-block" id="TestCFSSL.test_scan"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_scan">[docs]</a>    <span class="k">def</span> <span class="nf">test_scan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;host&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cfssl</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="o">**</span><span class="n">expect</span><span class="p">)</span>
+        <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
             <span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">expect</span>
         <span class="p">)</span></div>
@@ -178,9 +189,14 @@
 <div class="viewcode-block" id="TestCFSSL.test_sign"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_sign">[docs]</a>    <span class="k">def</span> <span class="nf">test_sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;certificate_request&#39;</span><span class="p">:</span> <span class="s1">&#39;certificate_request&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;certificate_request&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
+            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()],</span>
+            <span class="s1">&#39;profile&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cfssl</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="o">**</span><span class="n">expect</span><span class="p">)</span>
+        <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;certificate_request&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;certificate_request&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
+        <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
+        <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
             <span class="s1">&#39;sign&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span>
         <span class="p">)</span></div>

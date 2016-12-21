@@ -50,6 +50,8 @@
 
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">CFSSLException</span><span class="p">,</span> <span class="n">CFSSLRemoteException</span>
 
+<span class="kn">from</span> <span class="nn">.models.config_key</span> <span class="k">import</span> <span class="n">ConfigKey</span>
+
 
 <div class="viewcode-block" id="CFSSL"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL">[docs]</a><span class="k">class</span> <span class="nc">CFSSL</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; It provides Python bindings to a remote CFSSL server via HTTP(S).</span>
@@ -67,8 +69,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            token: (str) The authentication token.</span>
-<span class="sd">            request: (mixed) Signing request document (e.g. as</span>
-<span class="sd">                documented in endpoint_sign.txt, but not JSON encoded).</span>
+<span class="sd">            request: (cfssl.CertificateRequest) Signing request document.</span>
 <span class="sd">            datetime: (datetime.datetime) Authentication timestamp.</span>
 <span class="sd">            remote_address: (str) An address used in making the request.</span>
 <span class="sd">        Returns:</span>
@@ -77,7 +78,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">token</span><span class="p">,</span>
-            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span>
+            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
             <span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
             <span class="s1">&#39;remote_address&#39;</span><span class="p">:</span> <span class="n">remote_address</span><span class="p">,</span>
         <span class="p">})</span>
@@ -109,11 +110,11 @@
 
 <span class="sd">        If only the ``domain`` parameter is present, the following</span>
 <span class="sd">        parameter is valid:</span>
-<span class="sd">    </span>
+
 <span class="sd">        ip: (str) The IP address of the remote host; this will fetch the</span>
 <span class="sd">            certificate from the IP, and verify that it is valid for the</span>
 <span class="sd">            domain name.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            (dict) Object repesenting the bundle, with the following keys:</span>
 <span class="sd">            * bundle contains the concatenated list of PEM certificates</span>
@@ -206,27 +207,31 @@
         <span class="sd">&quot;&quot;&quot; It initializes a new certificate authority.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            hosts: (list) Of SANs (subject alternative names) for the</span>
-<span class="sd">            requested CA certificate.</span>
-<span class="sd">            names: (list) the certificate subject for the requested CA</span>
-<span class="sd">                certificate.</span>
+<span class="sd">            hosts: (iter of cfssl.Host) Subject Alternative Name(s) for the</span>
+<span class="sd">                requested CA certificate.</span>
+<span class="sd">            names: (iter of cfssl.SubjectInfo) The Subject Info(s) for the</span>
+<span class="sd">                requested CA certificate.</span>
 <span class="sd">            common_name: (str) the common name for the certificate subject in</span>
 <span class="sd">                the requested CA certificate.</span>
-<span class="sd">            key: the key algorithm and size for the newly generated private key,</span>
-<span class="sd">                default to ECDSA-256.</span>
-<span class="sd">            ca: the CA configuration of the requested CA, including CA pathlen</span>
-<span class="sd">                and CA default expiry.</span>
+<span class="sd">            key: (cfssl.ConfigKey) Cipher and strength to use for certificate.</span>
+<span class="sd">            ca: (cfssl.ConfigServer) the CA configuration of the requested CA,</span>
+<span class="sd">                including CA pathlen and CA default expiry.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            (dict) Mapping with two keys:</span>
 <span class="sd">                * private key: (str) a PEM-encoded CA private key.</span>
 <span class="sd">                * certificate: (str) a PEM-encoded self-signed CA certificate.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">key</span> <span class="ow">or</span> <span class="n">ConfigKey</span><span class="p">()</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
-            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="n">hosts</span><span class="p">,</span>
-            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="n">names</span><span class="p">,</span>
+            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">host</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">name</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span>
+            <span class="p">],</span>
             <span class="s1">&#39;CN&#39;</span><span class="p">:</span> <span class="n">common_name</span><span class="p">,</span>
-            <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span>
-            <span class="s1">&#39;ca&#39;</span><span class="p">:</span> <span class="n">ca</span><span class="p">,</span>
+            <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+            <span class="s1">&#39;ca&#39;</span><span class="p">:</span> <span class="n">ca</span> <span class="ow">and</span> <span class="n">ca</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;init_ca&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
 
@@ -234,14 +239,13 @@
         <span class="sd">&quot;&quot;&quot; It generates and returns a new private key + CSR.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            hosts: (list) Of SANs (subject alternative names) for the</span>
-<span class="sd">                requested CA certificate.</span>
-<span class="sd">            names: (list) the certificate subject for the requested CA</span>
-<span class="sd">                certificate.</span>
+<span class="sd">            hosts: (iter of cfssl.Host) Subject Alternative Name(s) for the</span>
+<span class="sd">                requested certificate.</span>
+<span class="sd">            names: (iter of cfssl.SubjectInfo) The Subject Info(s) for the</span>
+<span class="sd">                requested certificate.</span>
 <span class="sd">            CN: (str) the common name for the certificate subject in the</span>
 <span class="sd">                requestedrequested CA certificate.</span>
-<span class="sd">            key: the key algorithm and size for the newly generated private key,</span>
-<span class="sd">                default to ECDSA-256.</span>
+<span class="sd">            key: (cfssl.ConfigKey) Cipher and strength to use for certificate.</span>
 <span class="sd">            ca: the CA configuration of the requested CA, including CA pathlen</span>
 <span class="sd">                and CA default expiry.</span>
 <span class="sd">        Returns:</span>
@@ -252,8 +256,12 @@
 <span class="sd">                    certificate request</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
-            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="n">hosts</span><span class="p">,</span>
-            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="n">names</span><span class="p">,</span>
+            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">host</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">name</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span>
+            <span class="p">],</span>
             <span class="s1">&#39;CN&#39;</span><span class="p">:</span> <span class="n">common_name</span><span class="p">,</span>
             <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span>
             <span class="s1">&#39;ca&#39;</span><span class="p">:</span> <span class="n">ca</span><span class="p">,</span>
@@ -264,7 +272,8 @@
         <span class="sd">&quot;&quot;&quot; It generates and returns a new private key and certificate.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            request: (dict) Specifying the certificate request.</span>
+<span class="sd">            request: (cfssl.CertificateRequest) CSR to be used for</span>
+<span class="sd">                certificate creation.</span>
 <span class="sd">            label: (str) Specifying which signer to be appointed to sign</span>
 <span class="sd">                the CSR, useful when interacting with cfssl server that stands</span>
 <span class="sd">                in front of a remote multi-root CA signer.</span>
@@ -282,7 +291,7 @@
 <span class="sd">                    if the bundle parameter was set).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
-            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span>
+            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
             <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
             <span class="s1">&#39;profile&#39;</span><span class="p">:</span> <span class="n">profile</span><span class="p">,</span>
             <span class="s1">&#39;bundle&#39;</span><span class="p">:</span> <span class="n">bundle</span><span class="p">,</span>
@@ -313,12 +322,12 @@
         <span class="sd">&quot;&quot;&quot; It scans servers to determine the quality of their TLS setup.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            host: the hostname (optionally including port) to scan.</span>
-<span class="sd">            ip: IP Address to override DNS lookup of host.</span>
-<span class="sd">            timeout: The amount of time allotted for the scan to complete</span>
+<span class="sd">            host: (cfssl.Host) The host to scan.</span>
+<span class="sd">            ip: (str) IP Address to override DNS lookup of host.</span>
+<span class="sd">            timeout: (str) The amount of time allotted for the scan to complete</span>
 <span class="sd">                (default: 1 minute).</span>
-<span class="sd">            family:  regular expression specifying scan famil(ies) to run.</span>
-<span class="sd">            scanner: regular expression specifying scanner(s) to run.</span>
+<span class="sd">            family: (str) regular expression specifying scan famil(ies) to run.</span>
+<span class="sd">            scanner: (str) regular expression specifying scanner(s) to run.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            (dict) Mapping with keys for each scan family. Each of these</span>
 <span class="sd">            objects contains keys for each scanner run in that family </span>
@@ -334,7 +343,7 @@
 <span class="sd">            * output: (dict) Arbitrary data retrieved during the scan.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
-            <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="n">host</span><span class="p">,</span>
+            <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="n">host</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
             <span class="s1">&#39;ip&#39;</span><span class="p">:</span> <span class="n">ip</span><span class="p">,</span>
             <span class="s1">&#39;timeout&#39;</span><span class="p">:</span> <span class="n">timeout</span><span class="p">,</span>
             <span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="n">family</span><span class="p">,</span>
@@ -358,8 +367,8 @@
         <span class="sd">&quot;&quot;&quot; It signs and returns a certificate.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            certificate_request: (str) the CSR bytes to be signed in PEM.</span>
-<span class="sd">            hosts: (iter) of SAN (subject alternative .names)</span>
+<span class="sd">            certificate_request: (str) the CSR bytes to be signed (in PEM).</span>
+<span class="sd">            hosts: (iter of cfssl.Host) of SAN (subject alternative .names)</span>
 <span class="sd">                which overrides the ones in the CSR</span>
 <span class="sd">            subject: (str) The certificate subject which overrides</span>
 <span class="sd">                the ones in the CSR.</span>
@@ -368,19 +377,22 @@
 <span class="sd">            label: (str) Specifying which signer to be appointed to sign</span>
 <span class="sd">                the CSR, useful when interacting with a remote multi-root CA</span>
 <span class="sd">                signer.</span>
-<span class="sd">            profile: (str) Specifying the signing profile for the signer,</span>
-<span class="sd">                useful when interacting with a remote multi-root CA signer.</span>
+<span class="sd">            profile: (cfssl.ConfigServer) Specifying the signing profile for</span>
+<span class="sd">                the signer, useful when interacting with a remote multi-root</span>
+<span class="sd">                CA signer.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            (str) A PEM-encoded certificate that has been signed by the</span>
 <span class="sd">            server.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
-            <span class="s1">&#39;certificate_request&#39;</span><span class="p">:</span> <span class="n">certificate_request</span><span class="p">,</span>
-            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="n">hosts</span><span class="p">,</span>
+            <span class="s1">&#39;certificate_request&#39;</span><span class="p">:</span> <span class="n">certificate_request</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">host</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span>
+            <span class="p">],</span>
             <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="n">subject</span><span class="p">,</span>
             <span class="s1">&#39;serial_sequence&#39;</span><span class="p">:</span> <span class="n">serial_sequence</span><span class="p">,</span>
             <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
-            <span class="s1">&#39;profile&#39;</span><span class="p">:</span> <span class="n">profile</span><span class="p">,</span>
+            <span class="s1">&#39;profile&#39;</span><span class="p">:</span> <span class="n">profile</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
         <span class="p">})</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sign&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;certificate&#39;</span><span class="p">]</span></div>

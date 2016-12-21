@@ -6,6 +6,7 @@ Subpackages
 
 .. toctree::
 
+    cfssl.models
     cfssl.tests
 
 Submodules
@@ -15,6 +16,14 @@ cfssl.cfssl module
 ------------------
 
 .. automodule:: cfssl.cfssl
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+cfssl.defaults module
+---------------------
+
+.. automodule:: cfssl.defaults
     :members:
     :undoc-members:
     :show-inheritance:
