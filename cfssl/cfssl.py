@@ -159,34 +159,25 @@ class CFSSL(object):
         })
         return self.call('info', 'POST', data=data)
 
-    def init_ca(self, hosts, names, common_name=None, key=None, ca=None):
+    def init_ca(self, certificate_request, ca=None):
         """ It initializes a new certificate authority.
 
         Args:
-            hosts (:obj:`iter` of :obj:`cfssl.Host`): Subject Alternative Name(s) for the
-                requested CA certificate.
-            names (:obj:`iter` of :obj:`cfssl.SubjectInfo`): The Subject Info(s) for the
-                requested CA certificate.
-            common_name (:obj:`str`): the common name for the certificate subject in
-                the requested CA certificate.
-            key (:obj:`cfssl.ConfigKey`): Cipher and strength to use for certificate.
-            ca (:obj:`cfssl.ConfigServer`): the CA configuration of the requested CA,
-                including CA pathlen and CA default expiry.
+            certificate_request (:obj:`cfssl.CertificateRequest`): The certificate
+                request to use when creating the CA.
+            ca (:obj:`cfssl.ConfigServer`, optional): The configuration of the
+                requested Certificate Authority.
         Returns:
             (:obj:`dict`) Mapping with two keys:
                 * private key (:obj:`str`): a PEM-encoded CA private key.
                 * certificate (:obj:`str`): a PEM-encoded self-signed CA certificate.
         """
-        key = key or ConfigKey()
+        csr_api = certificate_request.to_api()
         data = self._clean_mapping({
-            'hosts': [
-                host.to_api() for host in hosts
-            ],
-            'names': [
-                name.to_api() for name in names
-            ],
-            'CN': common_name,
-            'key': key and key.to_api() or ConfigKey().to_api(),
+            'hosts': csr_api['hosts'],
+            'names': csr_api['names'],
+            'CN': csr_api['CN'],
+            'key': csr_api['key'],
             'ca': ca and ca.to_api() or None,
         })
         return self.call('init_ca', 'POST', data=data)

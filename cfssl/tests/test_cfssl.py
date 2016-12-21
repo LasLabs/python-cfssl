@@ -2,10 +2,21 @@
 # Copyright 2016 LasLabs Inc.
 # License MIT (https://opensource.org/licenses/MIT).
 
+import logging
 import mock
 import unittest
 
-from ..cfssl import CFSSL, CFSSLRemoteException, requests
+from ..cfssl import (CFSSL,
+                     CFSSLRemoteException,
+                     requests,
+                     )
+
+_logger = logging.getLogger(__name__)
+
+try:
+    from cfssl import CertificateRequest
+except ImportError:
+    _logger.info('CFSSL Python library not installed.')
 
 
 class TestCFSSL(unittest.TestCase):
@@ -62,16 +73,20 @@ class TestCFSSL(unittest.TestCase):
     @mock.patch.object(CFSSL, 'call')
     def test_init_ca(self, call):
         """ It should call with proper args """
-        expect = {
+        csr_vals = {
             'hosts': [mock.MagicMock()],
             'names': [mock.MagicMock()],
             'common_name': 'cn',
             'key': mock.MagicMock(),
-            'ca': mock.MagicMock(),
         }
+        csr = CertificateRequest(**csr_vals)
+        expect = {'ca': mock.MagicMock(),
+                  'certificate_request': csr}
         self.cfssl.init_ca(**expect)
+        expect.update(csr_vals)
         expect['CN'] = 'cn'
         del expect['common_name']
+        del expect['certificate_request']
         expect['hosts'][0]= expect['hosts'][0].to_api()
         expect['names'][0] = expect['names'][0].to_api()
         expect['key'] = expect['key'].to_api()
