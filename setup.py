@@ -9,7 +9,7 @@ from tests import Tests
 
 setup_vals = {
     'name': 'cfssl',
-    'version': '0.0.1',
+    'version': '0.0.2',
     'author': 'LasLabs Inc.',
     'author_email': 'support@laslabs.com',
     'description': 'This library will allow you to interact with CFSSL '
