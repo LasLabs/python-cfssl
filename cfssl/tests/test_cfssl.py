@@ -28,9 +28,10 @@ class TestCFSSL(unittest.TestCase):
         """ It should call with proper args """
         expect = {
             'token': 'token',
-            'request': 'request',
+            'request': mock.MagicMock(),
         }
         self.cfssl.auth_sign(**expect)
+        expect['request'] = expect['request'].to_api()
         call.assert_called_once_with(
             'authsign', 'POST', data=expect
         )
@@ -62,13 +63,19 @@ class TestCFSSL(unittest.TestCase):
     def test_init_ca(self, call):
         """ It should call with proper args """
         expect = {
-            'hosts': 'hosts',
-            'names': 'names',
-            'common_name': 'cn'
+            'hosts': [mock.MagicMock()],
+            'names': [mock.MagicMock()],
+            'common_name': 'cn',
+            'key': mock.MagicMock(),
+            'ca': mock.MagicMock(),
         }
         self.cfssl.init_ca(**expect)
         expect['CN'] = 'cn'
         del expect['common_name']
+        expect['hosts'][0]= expect['hosts'][0].to_api()
+        expect['names'][0] = expect['names'][0].to_api()
+        expect['key'] = expect['key'].to_api()
+        expect['ca'] = expect['ca'].to_api()
         call.assert_called_once_with(
             'init_ca', 'POST', data=expect
         )
@@ -77,13 +84,15 @@ class TestCFSSL(unittest.TestCase):
     def test_new_key(self, call):
         """ It should call with proper args """
         expect = {
-            'hosts': 'hosts',
-            'names': 'names',
+            'hosts': [mock.MagicMock()],
+            'names': [mock.MagicMock()],
             'common_name': 'cn'
         }
         self.cfssl.new_key(**expect)
         expect['CN'] = 'cn'
         del expect['common_name']
+        expect['hosts'][0]= expect['hosts'][0].to_api()
+        expect['names'][0] = expect['names'][0].to_api()
         call.assert_called_once_with(
             'newkey', 'POST', data=expect
         )
@@ -92,10 +101,11 @@ class TestCFSSL(unittest.TestCase):
     def test_new_cert(self, call):
         """ It should call with proper args """
         expect = {
-            'request': 'request',
+            'request': mock.MagicMock(),
             'label': 'label',
         }
         self.cfssl.new_cert(**expect)
+        expect['request'] = expect['request'].to_api()
         call.assert_called_once_with(
             'newcert', 'POST', data=expect
         )
@@ -117,9 +127,10 @@ class TestCFSSL(unittest.TestCase):
     def test_scan(self, call):
         """ It should call with proper args """
         expect = {
-            'host': 'host',
+            'host': mock.MagicMock(),
         }
         self.cfssl.scan(**expect)
+        expect['host'] = expect['host'].to_api()
         call.assert_called_once_with(
             'scan', params=expect
         )
@@ -134,9 +145,14 @@ class TestCFSSL(unittest.TestCase):
     def test_sign(self, call):
         """ It should call with proper args """
         expect = {
-            'certificate_request': 'certificate_request',
+            'certificate_request': mock.MagicMock(),
+            'hosts': [mock.MagicMock()],
+            'profile': mock.MagicMock(),
         }
         self.cfssl.sign(**expect)
+        expect['certificate_request'] = expect['certificate_request'].to_api()
+        expect['hosts'][0] = expect['hosts'][0].to_api()
+        expect['profile'] = expect['profile'].to_api()
         call.assert_called_once_with(
             'sign', 'POST', data=expect
         )

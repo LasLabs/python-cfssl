@@ -4,7 +4,16 @@
 Python CFSSL Library
 ====================
 
-This library allows you to interact with a remote CFSSL using Python.
+This library allows you to interact with a remote CFSSL server using Python.
+
+CFSSL is CloudFlare's open source toolkit for everything TLS/SSL. CFSSL is used by
+CloudFlare for their internal Certificate Authority infrastructure and for all of
+their TLS certificates.
+
+* `Read more on the CloudFlare blog
+  <https://blog.cloudflare.com/introducing-cfssl/>`_.
+* `View the CFSSL source
+  <https://github.com/cloudflare/cfssl>`_.
 
 Installation
 ============
@@ -19,13 +28,13 @@ A pre-existing CFSSL server is required to use this library.
 Usage
 =====
 
-`API Documentation <https://laslabs.github.io/python-cfssl>`_
+`Read The API Documentation <https://laslabs.github.io/python-cfssl>`_
 
 Known Issues / Road Map
 =======================
 
 -  Installation, setup, usage - in ReadMe
--  Add a Certificate Request data structure
+-  Add type checking in datamodels
 
 Credits
 =======

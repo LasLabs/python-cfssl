@@ -6,6 +6,8 @@ import requests
 
 from .exceptions import CFSSLException, CFSSLRemoteException
 
+from .models.config_key import ConfigKey
+
 
 class CFSSL(object):
     """ It provides Python bindings to a remote CFSSL server via HTTP(S).
@@ -23,8 +25,7 @@ class CFSSL(object):
 
         Args:
             token: (str) The authentication token.
-            request: (mixed) Signing request document (e.g. as
-                documented in endpoint_sign.txt, but not JSON encoded).
+            request: (cfssl.CertificateRequest) Signing request document.
             datetime: (datetime.datetime) Authentication timestamp.
             remote_address: (str) An address used in making the request.
         Returns:
@@ -33,7 +34,7 @@ class CFSSL(object):
         """
         data = self._clean_mapping({
             'token': token,
-            'request': request,
+            'request': request.to_api(),
             'datetime': datetime,
             'remote_address': remote_address,
         })
@@ -65,11 +66,11 @@ class CFSSL(object):
 
         If only the ``domain`` parameter is present, the following
         parameter is valid:
-    
+
         ip: (str) The IP address of the remote host; this will fetch the
             certificate from the IP, and verify that it is valid for the
             domain name.
-        
+
         Returns:
             (dict) Object repesenting the bundle, with the following keys:
             * bundle contains the concatenated list of PEM certificates
@@ -162,27 +163,31 @@ class CFSSL(object):
         """ It initializes a new certificate authority.
 
         Args:
-            hosts: (list) Of SANs (subject alternative names) for the
-            requested CA certificate.
-            names: (list) the certificate subject for the requested CA
-                certificate.
+            hosts: (iter of cfssl.Host) Subject Alternative Name(s) for the
+                requested CA certificate.
+            names: (iter of cfssl.SubjectInfo) The Subject Info(s) for the
+                requested CA certificate.
             common_name: (str) the common name for the certificate subject in
                 the requested CA certificate.
-            key: the key algorithm and size for the newly generated private key,
-                default to ECDSA-256.
-            ca: the CA configuration of the requested CA, including CA pathlen
-                and CA default expiry.
+            key: (cfssl.ConfigKey) Cipher and strength to use for certificate.
+            ca: (cfssl.ConfigServer) the CA configuration of the requested CA,
+                including CA pathlen and CA default expiry.
         Returns:
             (dict) Mapping with two keys:
                 * private key: (str) a PEM-encoded CA private key.
                 * certificate: (str) a PEM-encoded self-signed CA certificate.
         """
+        key = key or ConfigKey()
         data = self._clean_mapping({
-            'hosts': hosts,
-            'names': names,
+            'hosts': [
+                host.to_api() for host in hosts
+            ],
+            'names': [
+                name.to_api() for name in names
+            ],
             'CN': common_name,
-            'key': key,
-            'ca': ca,
+            'key': key.to_api(),
+            'ca': ca and ca.to_api() or None,
         })
         return self.call('init_ca', 'POST', data=data)
 
@@ -190,14 +195,13 @@ class CFSSL(object):
         """ It generates and returns a new private key + CSR.
 
         Args:
-            hosts: (list) Of SANs (subject alternative names) for the
-                requested CA certificate.
-            names: (list) the certificate subject for the requested CA
-                certificate.
+            hosts: (iter of cfssl.Host) Subject Alternative Name(s) for the
+                requested certificate.
+            names: (iter of cfssl.SubjectInfo) The Subject Info(s) for the
+                requested certificate.
             CN: (str) the common name for the certificate subject in the
                 requestedrequested CA certificate.
-            key: the key algorithm and size for the newly generated private key,
-                default to ECDSA-256.
+            key: (cfssl.ConfigKey) Cipher and strength to use for certificate.
             ca: the CA configuration of the requested CA, including CA pathlen
                 and CA default expiry.
         Returns:
@@ -208,8 +212,12 @@ class CFSSL(object):
                     certificate request
         """
         data = self._clean_mapping({
-            'hosts': hosts,
-            'names': names,
+            'hosts': [
+                host.to_api() for host in hosts
+            ],
+            'names': [
+                name.to_api() for name in names
+            ],
             'CN': common_name,
             'key': key,
             'ca': ca,
@@ -220,7 +228,8 @@ class CFSSL(object):
         """ It generates and returns a new private key and certificate.
 
         Args:
-            request: (dict) Specifying the certificate request.
+            request: (cfssl.CertificateRequest) CSR to be used for
+                certificate creation.
             label: (str) Specifying which signer to be appointed to sign
                 the CSR, useful when interacting with cfssl server that stands
                 in front of a remote multi-root CA signer.
@@ -238,7 +247,7 @@ class CFSSL(object):
                     if the bundle parameter was set).
         """
         data = self._clean_mapping({
-            'request': request,
+            'request': request.to_api(),
             'label': label,
             'profile': profile,
             'bundle': bundle,
@@ -269,12 +278,12 @@ class CFSSL(object):
         """ It scans servers to determine the quality of their TLS setup.
 
         Args:
-            host: the hostname (optionally including port) to scan.
-            ip: IP Address to override DNS lookup of host.
-            timeout: The amount of time allotted for the scan to complete
+            host: (cfssl.Host) The host to scan.
+            ip: (str) IP Address to override DNS lookup of host.
+            timeout: (str) The amount of time allotted for the scan to complete
                 (default: 1 minute).
-            family:  regular expression specifying scan famil(ies) to run.
-            scanner: regular expression specifying scanner(s) to run.
+            family: (str) regular expression specifying scan famil(ies) to run.
+            scanner: (str) regular expression specifying scanner(s) to run.
         Returns:
             (dict) Mapping with keys for each scan family. Each of these
             objects contains keys for each scanner run in that family 
@@ -290,7 +299,7 @@ class CFSSL(object):
             * output: (dict) Arbitrary data retrieved during the scan.
         """
         data = self._clean_mapping({
-            'host': host,
+            'host': host.to_api(),
             'ip': ip,
             'timeout': timeout,
             'family': family,
@@ -314,8 +323,8 @@ class CFSSL(object):
         """ It signs and returns a certificate.
 
         Args:
-            certificate_request: (str) the CSR bytes to be signed in PEM.
-            hosts: (iter) of SAN (subject alternative .names)
+            certificate_request: (str) the CSR bytes to be signed (in PEM).
+            hosts: (iter of cfssl.Host) of SAN (subject alternative .names)
                 which overrides the ones in the CSR
             subject: (str) The certificate subject which overrides
                 the ones in the CSR.
@@ -324,19 +333,22 @@ class CFSSL(object):
             label: (str) Specifying which signer to be appointed to sign
                 the CSR, useful when interacting with a remote multi-root CA
                 signer.
-            profile: (str) Specifying the signing profile for the signer,
-                useful when interacting with a remote multi-root CA signer.
+            profile: (cfssl.ConfigServer) Specifying the signing profile for
+                the signer, useful when interacting with a remote multi-root
+                CA signer.
         Returns:
             (str) A PEM-encoded certificate that has been signed by the
             server.
         """
         data = self._clean_mapping({
-            'certificate_request': certificate_request,
-            'hosts': hosts,
+            'certificate_request': certificate_request.to_api(),
+            'hosts': [
+                host.to_api() for host in hosts
+            ],
             'subject': subject,
             'serial_sequence': serial_sequence,
             'label': label,
-            'profile': profile,
+            'profile': profile.to_api(),
         })
         result = self.call('sign', 'POST', data=data)
         return result['certificate']
