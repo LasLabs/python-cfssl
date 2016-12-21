@@ -10,6 +10,14 @@ class ConfigKey(object):
 
     def __init__(self, algorithm=DEFAULT_ALGORITHM,
                  strength=DEFAULT_STRENGTH):
+        """ Initialize a new Client Configuration.
+
+        Args:
+            algorithm (:obj:`str`, optional): Algorithm to use for key, one of
+                ``rsa`` or ``ecdsa``. Defaults to ``rsa``.
+            strength (:obj:`int`, optional): Key bit strength. Defaults to
+                ``4096``.
+        """
         self.algorithm = algorithm
         self.strength = strength
 

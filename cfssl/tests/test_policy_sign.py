@@ -5,6 +5,8 @@
 import mock
 import unittest
 
+from datetime import timedelta
+
 from ..models.policy_sign import PolicySign
 
 
@@ -16,7 +18,7 @@ class TestPolicySign(unittest.TestCase):
             'name': 'name',
             'usage_policies': [mock.MagicMock()],
             'auth_policy': mock.MagicMock(),
-            'expire_minutes': 1234,
+            'expire_delta': timedelta(seconds=1234),
         }
         self.model = PolicySign(**self.vals)
 
@@ -25,7 +27,7 @@ class TestPolicySign(unittest.TestCase):
         res = self.model.to_api()
         expect = {
             'auth_key': self.vals['auth_policy'].name,
-            'expiry': '1234m',
+            'expiry': '1234s',
             'usages': [self.vals['usage_policies'][0].to_api()],
         }
         self.assertDictEqual(res, expect)
