@@ -51,6 +51,16 @@
     <span class="sd">&quot;&quot;&quot; It provides a mixer for the Client and Server Configs &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sign_policy_default</span><span class="p">,</span> <span class="n">sign_policies_add</span><span class="p">,</span> <span class="n">auth_policies</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Initialize a new General Configuration for Server or Client.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sign_policy_default (:obj:`cfssl.PolicySign`): Default signing</span>
+<span class="sd">                policy for entity to use.</span>
+<span class="sd">            sign_policies_add (:type:`iter` of :obj:`cfssl.PolicySign`):</span>
+<span class="sd">                Additional signing policies to use for the entity.</span>
+<span class="sd">            auth_policies (:type:`iter` of :obj:`cfssl.PolicyAuth`): Auth</span>
+<span class="sd">                policies for the entity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sign_policy</span> <span class="o">=</span> <span class="n">sign_policy_default</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sign_policies</span> <span class="o">=</span> <span class="n">sign_policies_add</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">auth_policies</span> <span class="o">=</span> <span class="n">auth_policies</span>

@@ -51,6 +51,17 @@
     <span class="sd">&quot;&quot;&quot; It provides a SubjectInfo (Name) compatible with CFSSL. &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">org_name</span><span class="p">,</span> <span class="n">org_unit</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">country</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Initialize a new Subject Information.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            org_name (:obj:`str`): The full legal name of the organization. Do</span>
+<span class="sd">                not abbreviate.</span>
+<span class="sd">            org_unit (:obj:`str`): Section of the organization.</span>
+<span class="sd">            city (:obj:`str`): The city where the organization is legally</span>
+<span class="sd">                located.</span>
+<span class="sd">            country (:obj:`str`): The two letter ISO abbreviation for the</span>
+<span class="sd">                country.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">org_name</span> <span class="o">=</span> <span class="n">org_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">org_unit</span> <span class="o">=</span> <span class="n">org_unit</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">city</span> <span class="o">=</span> <span class="n">city</span>

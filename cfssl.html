@@ -100,13 +100,13 @@
 <dd><p>It provides returns a signed certificate.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>token: (str) The authentication token.
-request: (cfssl.CertificateRequest) Signing request document.
-datetime: (datetime.datetime) Authentication timestamp.
-remote_address: (str) An address used in making the request.</dd>
+<dd>token (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): The authentication token.
+request (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.CertificateRequest</span></code>): Signing request document.
+datetime (<code class="xref py py-obj docutils literal"><span class="pre">datetime.datetime</span></code>): Authentication timestamp.
+remote_address (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): An address used in making the request.</dd>
 <dt>Returns:</dt>
 <dd><dl class="first last docutils">
-<dt>(str) A PEM-encoded certificate that has been signed by the</dt>
+<dt>(<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) A PEM-encoded certificate that has been signed by the</dt>
 <dd>server.</dd>
 </dl>
 </dd>
@@ -119,94 +119,108 @@ remote_address: (str) An address used in making the request.</dd>
 <dd><p>It builds and returns certificate bundles.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>certificate: (str) The PEM-encoded certificate to be bundled.</dd>
+<dd>certificate (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): The PEM-encoded certificate to be bundled.</dd>
 </dl>
 <p>If the <code class="docutils literal"><span class="pre">certificate</span></code> parameter is present, the following four
 arguments are valid:</p>
 <blockquote>
 <div><dl class="docutils">
-<dt>private_key: (str) The PEM-encoded private key to be included with</dt>
+<dt>private_key (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): The PEM-encoded private key to be included with</dt>
 <dd>the bundle. This is valid only if the server is not running in
 <code class="docutils literal"><span class="pre">keyless</span></code> mode.</dd>
-<dt>flavor: (str) One of <code class="docutils literal"><span class="pre">ubiquitous</span></code>, <code class="docutils literal"><span class="pre">force</span></code>, or <code class="docutils literal"><span class="pre">optimal</span></code>,</dt>
+<dt>flavor (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): One of <code class="docutils literal"><span class="pre">ubiquitous</span></code>, <code class="docutils literal"><span class="pre">force</span></code>, or <code class="docutils literal"><span class="pre">optimal</span></code>,</dt>
 <dd>with a default value of <code class="docutils literal"><span class="pre">ubiquitous</span></code>. A ubiquitous bundle is
 one that has a higher probability of being verified everywhere,
 even by clients using outdated or unusual trust stores. Force will
 cause the endpoint to use the bundle provided in the
 <code class="docutils literal"><span class="pre">certificate</span></code> parameter, and will only verify that the bundle
 is a valid (verifiable) chain.</dd>
-<dt>domain: (str) The domain name to verify as the hostname of the</dt>
+<dt>domain (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): The domain name to verify as the hostname of the</dt>
 <dd>certificate.</dd>
-<dt>ip: (str) The IP address to verify against the certificate IP</dt>
+<dt>ip (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): The IP address to verify against the certificate IP</dt>
 <dd>SANs.</dd>
 </dl>
 </div></blockquote>
 <p>If only the <code class="docutils literal"><span class="pre">domain</span></code> parameter is present, the following
 parameter is valid:</p>
 <dl class="docutils">
-<dt>ip: (str) The IP address of the remote host; this will fetch the</dt>
+<dt>ip (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): The IP address of the remote host; this will fetch the</dt>
 <dd>certificate from the IP, and verify that it is valid for the
 domain name.</dd>
 <dt>Returns:</dt>
-<dd><p class="first">(dict) Object repesenting the bundle, with the following keys:
+<dd><p class="first">(<code class="xref py py-obj docutils literal"><span class="pre">dict</span></code>) Object repesenting the bundle, with the following keys:
 * bundle contains the concatenated list of PEM certificates</p>
 <blockquote>
 <div>forming the certificate chain; this forms the actual
 bundle. The remaining parameters are additional metadata
 supporting the bundle.</div></blockquote>
-<ul class="last simple">
+<ul class="last">
 <li><dl class="first docutils">
 <dt>crl_support is true if CRL information is contained in the</dt>
-<dd>certificate.</dd>
+<dd><p class="first last">certificate.</p>
+</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>crt contains the original certificate the bundle is built</dt>
-<dd>from.</dd>
+<dd><p class="first last">from.</p>
+</dd>
 </dl>
 </li>
-<li>expires contains the expiration date of the certificate.</li>
-<li>hostnames contains the SAN hostnames for the certificate.</li>
+<li><p class="first">expires contains the expiration date of the certificate.</p>
+</li>
+<li><p class="first">hostnames contains the SAN hostnames for the certificate.</p>
+</li>
 <li><dl class="first docutils">
 <dt>issuer contains the X.509 issuer information for the</dt>
-<dd>certificate.</dd>
+<dd><p class="first last">certificate.</p>
+</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>key contains the private key for the certificate, if one</dt>
-<dd>was presented.</dd>
+<dd><p class="first last">was presented.</p>
+</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>key_size contains the size of the key in bits for the</dt>
-<dd>certificate. It will be present even if the private key wasn&#8217;t
-provided because this can be determined from the public key.</dd>
+<dd><p class="first last">certificate. It will be present even if the private key wasn&#8217;t
+provided because this can be determined from the public key.</p>
+</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>key_type contains a textual description of the key type,</dt>
-<dd>e.g. &#8216;2048-bit RSA&#8217;.</dd>
+<dd><p class="first last">e.g. &#8216;2048-bit RSA&#8217;.</p>
+</dd>
 </dl>
 </li>
-<li>ocsp contains the OCSP URLs for the certificate, if present.</li>
+<li><p class="first">ocsp contains the OCSP URLs for the certificate, if present.</p>
+</li>
 <li><dl class="first docutils">
 <dt>ocsp_support will be true if the certificate supports OCSP</dt>
-<dd>revocation checking.</dd>
+<dd><p class="first last">revocation checking.</p>
+</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt>signature contains the signature type used in the</dt>
-<dd>certificate, e.g. &#8216;SHA1WithRSA&#8217;.</dd>
+<dd><p class="first last">certificate, e.g. &#8216;SHA1WithRSA&#8217;.</p>
+</dd>
 </dl>
 </li>
-<li>status contains a number of elements:
-* code is bit-encoded error code. 1st bit indicates whether
-there is a expiring certificate in the bundle. 2nd bit indicates
-whether there is a ubiquity issue with the bundle.
-* expiring_SKIs contains the SKIs (subject key identifiers)
+<li><p class="first">status contains a number of elements:
+* code is bit-encoded error code. 1st bit indicates whether</p>
+<blockquote>
+<div><p>there is a expiring certificate in the bundle. 2nd bit indicates
+whether there is a ubiquity issue with the bundle.</p>
+</div></blockquote>
+<ul class="simple">
+<li>expiring_SKIs contains the SKIs (subject key identifiers)
 for any certificates that might expire soon (within 30
-days).
-* messages is a list of human-readable warnings on bundle
+days).</li>
+<li>messages is a list of human-readable warnings on bundle
 ubiquity and certificate expiration. For example, an expiration
 warning can be &#8220;The expiring cert is #1 in the chain&#8221;,
 indicating the leaf certificate is expiring. Ubiquity warnings
@@ -217,20 +231,23 @@ ECDSA SHA-2 hash algorithms, it will be rejected by Windows XP
 SP2), compatibility warning (if the bundle contains ECDSA
 certificates, it will be rejected by Windows XP, Android 2.2 and
 Android 2.3 etc) and root trust warning (if the bundle cannot be
-trusted by some major OSes or browsers).
-* rebundled indicates whether the server had to rebundle the
+trusted by some major OSes or browsers).</li>
+<li>rebundled indicates whether the server had to rebundle the
 certificate. The server will rebundle the uploaded
 certificate as needed; for example, if the certificate
 contains none of the required intermediates or a better set
 of intermediates was found. In this case, the server will
-mark rebundled as true.
-* untrusted_root_stores contains the names of any major
+mark rebundled as true.</li>
+<li>untrusted_root_stores contains the names of any major
 OSes and browsers that doesn&#8217;t trust the bundle. The names
 are used to construct the root trust warnings in the messages
 list</li>
+</ul>
+</li>
 <li><dl class="first docutils">
 <dt>subject contains the X.509 subject identifier from the</dt>
-<dd>certificate.</dd>
+<dd><p class="first last">certificate.</p>
+</dd>
 </dl>
 </li>
 </ul>
@@ -244,21 +261,21 @@ list</li>
 <dd><p>It calls the remote endpoint and returns the result, if success.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">endpoint: (str) CFSSL endpoint to call (e.g. <code class="docutils literal"><span class="pre">newcert</span></code>).
-method: (str) HTTP method to utilize for the Request.
+<dd><p class="first">endpoint (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): CFSSL endpoint to call (e.g. <code class="docutils literal"><span class="pre">newcert</span></code>).
+method (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): HTTP method to utilize for the Request.
 params: (dict|bytes) Data to be sent in the query string</p>
 <blockquote>
 <div>for the Request.</div></blockquote>
 <dl class="last docutils">
-<dt>data: (dict|bytes|file) Data to send in the body of the</dt>
-<dd>Request.</dd>
+<dt>data: (<code class="xref py py-obj docutils literal"><span class="pre">dict`|:obj:`bytes`|:obj:`file</span></code>) Data to send in the body</dt>
+<dd>of the Request.</dd>
 </dl>
 </dd>
 <dt>Returns:</dt>
 <dd>(mixed) Data contained in <code class="docutils literal"><span class="pre">result</span></code> key of the API response.</dd>
 <dt>Raises:</dt>
 <dd><dl class="first last docutils">
-<dt>CFSSLRemoteException: In the event of a <code class="docutils literal"><span class="pre">False</span></code> in the</dt>
+<dt><code class="xref py py-obj docutils literal"><span class="pre">CFSSLRemoteException</span></code>: In the event of a <code class="docutils literal"><span class="pre">False</span></code> in the</dt>
 <dd><code class="docutils literal"><span class="pre">success</span></code> key of the API response.</dd>
 </dl>
 </dd>
@@ -271,23 +288,23 @@ params: (dict|bytes) Data to be sent in the query string</p>
 <dd><p>It returns information about the CA, including the cert.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">label: (str) A string specifying the signer.
-profile: (str) a string specifying the signing profile for the</p>
+<dd><p class="first">label (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): A string specifying the signer.
+profile (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): a string specifying the signing profile for the</p>
 <blockquote class="last">
 <div>signer. Signing profile specifies what key usages should be
 used and how long the expiry should be set.</div></blockquote>
 </dd>
 <dt>Returns:</dt>
 <dd><dl class="first last docutils">
-<dt>(dict) Mapping with three keys:</dt>
+<dt>(<code class="xref py py-obj docutils literal"><span class="pre">dict</span></code>) Mapping with three keys:</dt>
 <dd><ul class="first last simple">
-<li>certificate: (str) a PEM-encoded certificate of the signer.</li>
+<li>certificate (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): a PEM-encoded certificate of the signer.</li>
 <li><dl class="first docutils">
-<dt>usage: (list) a string array of key usages from the signing</dt>
+<dt>usage (<code class="xref py py-obj docutils literal"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): Key usages from the signing</dt>
 <dd>profile.</dd>
 </dl>
 </li>
-<li>expiry: (str) the expiry string from the signing profile.</li>
+<li>expiry (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): the expiry string from the signing profile.</li>
 </ul>
 </dd>
 </dl>
@@ -302,24 +319,24 @@ used and how long the expiry should be set.</div></blockquote>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><dl class="first docutils">
-<dt>hosts: (iter of cfssl.Host) Subject Alternative Name(s) for the</dt>
+<dt>hosts (<code class="xref py py-obj docutils literal"><span class="pre">iter</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">cfssl.Host</span></code>): Subject Alternative Name(s) for the</dt>
 <dd>requested CA certificate.</dd>
-<dt>names: (iter of cfssl.SubjectInfo) The Subject Info(s) for the</dt>
+<dt>names (<code class="xref py py-obj docutils literal"><span class="pre">iter</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">cfssl.SubjectInfo</span></code>): The Subject Info(s) for the</dt>
 <dd>requested CA certificate.</dd>
-<dt>common_name: (str) the common name for the certificate subject in</dt>
+<dt>common_name (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): the common name for the certificate subject in</dt>
 <dd>the requested CA certificate.</dd>
 </dl>
-<p>key: (cfssl.ConfigKey) Cipher and strength to use for certificate.
-ca: (cfssl.ConfigServer) the CA configuration of the requested CA,</p>
+<p>key (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.ConfigKey</span></code>): Cipher and strength to use for certificate.
+ca (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.ConfigServer</span></code>): the CA configuration of the requested CA,</p>
 <blockquote class="last">
 <div>including CA pathlen and CA default expiry.</div></blockquote>
 </dd>
 <dt>Returns:</dt>
 <dd><dl class="first last docutils">
-<dt>(dict) Mapping with two keys:</dt>
+<dt>(<code class="xref py py-obj docutils literal"><span class="pre">dict</span></code>) Mapping with two keys:</dt>
 <dd><ul class="first last simple">
-<li>private key: (str) a PEM-encoded CA private key.</li>
-<li>certificate: (str) a PEM-encoded self-signed CA certificate.</li>
+<li>private key (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): a PEM-encoded CA private key.</li>
+<li>certificate (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): a PEM-encoded self-signed CA certificate.</li>
 </ul>
 </dd>
 </dl>
@@ -334,20 +351,20 @@ ca: (cfssl.ConfigServer) the CA configuration of the requested CA,</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><dl class="first docutils">
-<dt>request: (cfssl.CertificateRequest) CSR to be used for</dt>
+<dt>request (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.CertificateRequest</span></code>): CSR to be used for</dt>
 <dd>certificate creation.</dd>
-<dt>label: (str) Specifying which signer to be appointed to sign</dt>
+<dt>label (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): Specifying which signer to be appointed to sign</dt>
 <dd>the CSR, useful when interacting with cfssl server that stands
 in front of a remote multi-root CA signer.</dd>
 </dl>
-<p>profile: (str) Specifying the signing profile for the signer.
-bundle: (bool) Specifying whether to include an &#8220;optimal&#8221;</p>
+<p>profile (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): Specifying the signing profile for the signer.
+bundle (<code class="xref py py-obj docutils literal"><span class="pre">bool</span></code>): Specifying whether to include an &#8220;optimal&#8221;</p>
 <blockquote class="last">
 <div>certificate bundle along with the certificate.</div></blockquote>
 </dd>
 <dt>Returns:</dt>
 <dd><dl class="first last docutils">
-<dt>(dict) mapping with these keys:</dt>
+<dt>(<code class="xref py py-obj docutils literal"><span class="pre">dict</span></code>) mapping with these keys:</dt>
 <dd><ul class="first last simple">
 <li>private key: a PEM-encoded private key.</li>
 <li>certificate_request: a PEM-encoded certificate request.</li>
@@ -376,26 +393,24 @@ bundle: (bool) Specifying whether to include an &#8220;optimal&#8221;</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><dl class="first docutils">
-<dt>hosts: (iter of cfssl.Host) Subject Alternative Name(s) for the</dt>
+<dt>hosts (<code class="xref py py-obj docutils literal"><span class="pre">iter</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">cfssl.Host</span></code>): Subject Alternative Name(s) for the</dt>
 <dd>requested certificate.</dd>
-<dt>names: (iter of cfssl.SubjectInfo) The Subject Info(s) for the</dt>
+<dt>names (<code class="xref py py-obj docutils literal"><span class="pre">iter</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">cfssl.SubjectInfo</span></code>): The Subject Info(s) for the</dt>
 <dd>requested certificate.</dd>
-<dt>CN: (str) the common name for the certificate subject in the</dt>
+<dt>CN (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): the common name for the certificate subject in the</dt>
 <dd>requestedrequested CA certificate.</dd>
 </dl>
-<p>key: (cfssl.ConfigKey) Cipher and strength to use for certificate.
-ca: the CA configuration of the requested CA, including CA pathlen</p>
-<blockquote class="last">
-<div>and CA default expiry.</div></blockquote>
+<p class="last">key (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.ConfigKey</span></code>): Cipher and strength to use for certificate.
+ca (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.ConfigServer</span></code>): the CA configuration of the requested CA.</p>
 </dd>
 <dt>Returns:</dt>
 <dd><dl class="first last docutils">
-<dt>(dict) Mapping with three keys:</dt>
+<dt>(<code class="xref py py-obj docutils literal"><span class="pre">dict</span></code>) Mapping with three keys:</dt>
 <dd><ul class="first last simple">
-<li>private key: (str) a PEM-encoded CA private key.</li>
-<li>certificate: (str) a PEM-encoded self-signed CA certificate.</li>
+<li>private key (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): a PEM-encoded CA private key.</li>
+<li>certificate (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): a PEM-encoded self-signed CA certificate.</li>
 <li><dl class="first docutils">
-<dt>sums: (dict) Mapping holding both MD5 and SHA1 digests for the</dt>
+<dt>sums: (<code class="xref py py-obj docutils literal"><span class="pre">dict</span></code>) Mapping holding both MD5 and SHA1 digests for the</dt>
 <dd>certificate request</dd>
 </dl>
 </li>
@@ -412,13 +427,13 @@ ca: the CA configuration of the requested CA, including CA pathlen</p>
 <dd><p>It provides certificate revocation.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">serial: (str) Specifying the serial number of a certificate.
-authority_key_id: (str) Specifying the authority key identifier</p>
+<dd><p class="first">serial (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): Specifying the serial number of a certificate.
+authority_key_id (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): Specifying the authority key identifier</p>
 <blockquote>
 <div>of the certificate to be revoked; this is used to distinguish
 which private key was used to sign the certificate.</div></blockquote>
 <dl class="last docutils">
-<dt>reason: (str) Identifying why the certificate was revoked; see,</dt>
+<dt>reason (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): Identifying why the certificate was revoked; see,</dt>
 <dd>for example, ReasonStringToCode in the ocsp package or section
 4.2.1.13 of RFC 5280. The &#8220;reasons&#8221; used here are the ReasonFlag
 names in said RFC.</dd>
@@ -433,19 +448,19 @@ names in said RFC.</dd>
 <dd><p>It scans servers to determine the quality of their TLS setup.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">host: (cfssl.Host) The host to scan.
-ip: (str) IP Address to override DNS lookup of host.
-timeout: (str) The amount of time allotted for the scan to complete</p>
+<dd><p class="first">host (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.Host</span></code>): The host to scan.
+ip (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): IP Address to override DNS lookup of host.
+timeout (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): The amount of time allotted for the scan to complete</p>
 <blockquote>
 <div>(default: 1 minute).</div></blockquote>
-<p class="last">family: (str) regular expression specifying scan famil(ies) to run.
-scanner: (str) regular expression specifying scanner(s) to run.</p>
+<p class="last">family (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): regular expression specifying scan famil(ies) to run.
+scanner (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): regular expression specifying scanner(s) to run.</p>
 </dd>
 <dt>Returns:</dt>
-<dd><p class="first">(dict) Mapping with keys for each scan family. Each of these
+<dd><p class="first">(<code class="xref py py-obj docutils literal"><span class="pre">dict</span></code>) Mapping with keys for each scan family. Each of these
 objects contains keys for each scanner run in that family 
 pointing to objects possibly containing the following keys:
-* grade: (str) Describing the exit status of the scan. Can be:</p>
+* grade (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): Describing the exit status of the scan. Can be:</p>
 <blockquote>
 <div><ul class="simple">
 <li>&#8220;Good&#8221;: host performing the expected state-of-the-art.</li>
@@ -463,8 +478,8 @@ pointing to objects possibly containing the following keys:
 </ul>
 </div></blockquote>
 <ul class="last simple">
-<li>error: (str) Any error encountered during the scan process.</li>
-<li>output: (dict) Arbitrary data retrieved during the scan.</li>
+<li>error (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): Any error encountered during the scan process.</li>
+<li>output: (<code class="xref py py-obj docutils literal"><span class="pre">dict</span></code>) Arbitrary data retrieved during the scan.</li>
 </ul>
 </dd>
 </dl>
@@ -476,7 +491,7 @@ pointing to objects possibly containing the following keys:
 <dd><p>It lists options available for scanning.</p>
 <dl class="docutils">
 <dt>Returns:</dt>
-<dd>(dict) Mapping with keys for each scan family. For each family,
+<dd>(<code class="xref py py-obj docutils literal"><span class="pre">dict</span></code>) Mapping with keys for each scan family. For each family,
 there exists a <cite>description</cite> containing a string describing
 the family and a <cite>scanners</cite> object mapping each of the family&#8217;s
 scanners to an object containing a <cite>description</cite> string.</dd>
@@ -489,25 +504,25 @@ scanners to an object containing a <cite>description</cite> string.</dd>
 <dd><p>It signs and returns a certificate.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">certificate_request: (str) the CSR bytes to be signed (in PEM).
-hosts: (iter of cfssl.Host) of SAN (subject alternative .names)</p>
+<dd><p class="first">certificate_request (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): the CSR bytes to be signed (in PEM).
+hosts (<code class="xref py py-obj docutils literal"><span class="pre">iter</span></code> of <code class="xref py py-obj docutils literal"><span class="pre">cfssl.Host</span></code>): of SAN (subject alternative .names)</p>
 <blockquote>
 <div>which overrides the ones in the CSR</div></blockquote>
 <dl class="last docutils">
-<dt>subject: (str) The certificate subject which overrides</dt>
+<dt>subject (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): The certificate subject which overrides</dt>
 <dd>the ones in the CSR.</dd>
-<dt>serial_sequence: (str) Specify the prefix which the generated</dt>
+<dt>serial_sequence (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): Specify the prefix which the generated</dt>
 <dd>certificate serial should have.</dd>
-<dt>label: (str) Specifying which signer to be appointed to sign</dt>
+<dt>label (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): Specifying which signer to be appointed to sign</dt>
 <dd>the CSR, useful when interacting with a remote multi-root CA
 signer.</dd>
-<dt>profile: (cfssl.ConfigServer) Specifying the signing profile for</dt>
+<dt>profile (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.ConfigServer</span></code>): Specifying the signing profile for</dt>
 <dd>the signer, useful when interacting with a remote multi-root
 CA signer.</dd>
 </dl>
 </dd>
 <dt>Returns:</dt>
-<dd>(str) A PEM-encoded certificate that has been signed by the
+<dd>(<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) A PEM-encoded certificate that has been signed by the
 server.</dd>
 </dl>
 </dd></dl>

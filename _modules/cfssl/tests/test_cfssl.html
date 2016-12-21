@@ -130,13 +130,17 @@
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()],</span>
             <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()],</span>
-            <span class="s1">&#39;common_name&#39;</span><span class="p">:</span> <span class="s1">&#39;cn&#39;</span>
+            <span class="s1">&#39;common_name&#39;</span><span class="p">:</span> <span class="s1">&#39;cn&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ca&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
+            <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cfssl</span><span class="o">.</span><span class="n">new_key</span><span class="p">(</span><span class="o">**</span><span class="n">expect</span><span class="p">)</span>
         <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;CN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cn&#39;</span>
         <span class="k">del</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;common_name&#39;</span><span class="p">]</span>
         <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
+        <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;ca&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;ca&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
+        <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expect</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
             <span class="s1">&#39;newkey&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">expect</span>
         <span class="p">)</span></div>

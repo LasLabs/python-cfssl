@@ -55,6 +55,18 @@
     <span class="sd">&quot;&quot;&quot; It provides a Certificate Request compatible with CFSSL. &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">common_name</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hosts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Initialize a new CertificateRequest.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            common_name (:obj:`str`): The fully qualified domain name for the</span>
+<span class="sd">                server. This must be an exact match.</span>
+<span class="sd">            names (:type:`iter` of :obj:`cfssl.SubjectInfo`, optional):</span>
+<span class="sd">                Subject Information to be added to the request.</span>
+<span class="sd">            hosts (:type:`iter` of :obj:`cfssl.Host`, optional): Hosts</span>
+<span class="sd">                to be added to the request.</span>
+<span class="sd">            key (:obj:`cfssl.ConfigKey`, optional): Key configuration</span>
+<span class="sd">                for the request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">common_name</span> <span class="o">=</span> <span class="n">common_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">names</span> <span class="ow">or</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="n">hosts</span> <span class="ow">or</span> <span class="p">[]</span>
