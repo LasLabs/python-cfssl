@@ -1,47 +1,166 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>cfssl.models package &#8212; Python-CFSSL 0.1.0 documentation</title>
-    
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="cfssl.tests package" href="cfssl.tests.html" />
-    <link rel="prev" title="cfssl package" href="cfssl.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
   
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
-  </head>
-  <body role="document">
+  <title>cfssl.models package &mdash; Python-CFSSL 0.1.0 documentation</title>
   
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Python-CFSSL 0.1.0 documentation" href="index.html"/>
+        <link rel="up" title="cfssl package" href="cfssl.html"/>
+        <link rel="next" title="cfssl.tests package" href="cfssl.tests.html"/>
+        <link rel="prev" title="cfssl package" href="cfssl.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Python-CFSSL
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="cfssl.html">cfssl package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cfssl.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">cfssl.models package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-cfssl.models.certificate_request">cfssl.models.certificate_request module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-cfssl.models.config_client">cfssl.models.config_client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-cfssl.models.config_key">cfssl.models.config_key module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-cfssl.models.config_mixer">cfssl.models.config_mixer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-cfssl.models.config_server">cfssl.models.config_server module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-cfssl.models.host">cfssl.models.host module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-cfssl.models.policy_auth">cfssl.models.policy_auth module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-cfssl.models.policy_sign">cfssl.models.policy_sign module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-cfssl.models.policy_use">cfssl.models.policy_use module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-cfssl.models.subject_info">cfssl.models.subject_info module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-cfssl.models">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cfssl.tests.html">cfssl.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.html#module-cfssl.cfssl">cfssl.cfssl module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.html#module-cfssl.defaults">cfssl.defaults module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.html#module-cfssl.exceptions">cfssl.exceptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cfssl.html#module-cfssl">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">setup module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">tests module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Python-CFSSL</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="cfssl.html">cfssl package</a> &raquo;</li>
+      
+    <li>cfssl.models package</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/cfssl.models.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="cfssl-models-package">
 <h1>cfssl.models package<a class="headerlink" href="#cfssl-models-package" title="Permalink to this headline">¶</a></h1>
@@ -53,7 +172,7 @@
 <dl class="class">
 <dt id="cfssl.models.certificate_request.CertificateRequest">
 <em class="property">class </em><code class="descclassname">cfssl.models.certificate_request.</code><code class="descname">CertificateRequest</code><span class="sig-paren">(</span><em>common_name</em>, <em>names=None</em>, <em>hosts=None</em>, <em>key=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/certificate_request.html#CertificateRequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.models.certificate_request.CertificateRequest" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>It provides a Certificate Request compatible with CFSSL.</p>
 <dl class="method">
 <dt id="cfssl.models.certificate_request.CertificateRequest.to_api">
@@ -85,7 +204,7 @@
 <dl class="class">
 <dt id="cfssl.models.config_key.ConfigKey">
 <em class="property">class </em><code class="descclassname">cfssl.models.config_key.</code><code class="descname">ConfigKey</code><span class="sig-paren">(</span><em>algorithm='rsa'</em>, <em>strength=4096</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/config_key.html#ConfigKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.models.config_key.ConfigKey" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>It provides a Key Config compatible with CFSSL.</p>
 <dl class="method">
 <dt id="cfssl.models.config_key.ConfigKey.to_api">
@@ -101,7 +220,7 @@
 <dl class="class">
 <dt id="cfssl.models.config_mixer.ConfigMixer">
 <em class="property">class </em><code class="descclassname">cfssl.models.config_mixer.</code><code class="descname">ConfigMixer</code><span class="sig-paren">(</span><em>sign_policy_default</em>, <em>sign_policies_add</em>, <em>auth_policies</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/config_mixer.html#ConfigMixer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.models.config_mixer.ConfigMixer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>It provides a mixer for the Client and Server Configs</p>
 <dl class="method">
 <dt id="cfssl.models.config_mixer.ConfigMixer.to_api">
@@ -127,7 +246,7 @@
 <dl class="class">
 <dt id="cfssl.models.host.Host">
 <em class="property">class </em><code class="descclassname">cfssl.models.host.</code><code class="descname">Host</code><span class="sig-paren">(</span><em>name</em>, <em>host</em>, <em>port=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/host.html#Host"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.models.host.Host" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>It provides a Host compatible with CFSSL.</p>
 <dl class="method">
 <dt id="cfssl.models.host.Host.to_api">
@@ -143,7 +262,7 @@
 <dl class="class">
 <dt id="cfssl.models.policy_auth.PolicyAuth">
 <em class="property">class </em><code class="descclassname">cfssl.models.policy_auth.</code><code class="descname">PolicyAuth</code><span class="sig-paren">(</span><em>name</em>, <em>key</em>, <em>key_type='standard'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/policy_auth.html#PolicyAuth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.models.policy_auth.PolicyAuth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>It provides a Certificate Auth policy compatible with CFSSL</p>
 <dl class="method">
 <dt id="cfssl.models.policy_auth.PolicyAuth.to_api">
@@ -159,7 +278,7 @@
 <dl class="class">
 <dt id="cfssl.models.policy_sign.PolicySign">
 <em class="property">class </em><code class="descclassname">cfssl.models.policy_sign.</code><code class="descname">PolicySign</code><span class="sig-paren">(</span><em>name</em>, <em>usage_policies</em>, <em>auth_policy</em>, <em>expire_delta=datetime.timedelta(365)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/policy_sign.html#PolicySign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.models.policy_sign.PolicySign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>It provides a Certificate Auth policy compatible with CFSSL</p>
 <dl class="method">
 <dt id="cfssl.models.policy_sign.PolicySign.to_api">
@@ -175,7 +294,7 @@
 <dl class="class">
 <dt id="cfssl.models.policy_use.PolicyUse">
 <em class="property">class </em><code class="descclassname">cfssl.models.policy_use.</code><code class="descname">PolicyUse</code><span class="sig-paren">(</span><em>name</em>, <em>code</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/policy_use.html#PolicyUse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.models.policy_use.PolicyUse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>It provides a Certificate Use policy compatible with CFSSL</p>
 <dl class="method">
 <dt id="cfssl.models.policy_use.PolicyUse.to_api">
@@ -191,7 +310,7 @@
 <dl class="class">
 <dt id="cfssl.models.subject_info.SubjectInfo">
 <em class="property">class </em><code class="descclassname">cfssl.models.subject_info.</code><code class="descname">SubjectInfo</code><span class="sig-paren">(</span><em>org_name</em>, <em>org_unit</em>, <em>city</em>, <em>state</em>, <em>country</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/subject_info.html#SubjectInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.models.subject_info.SubjectInfo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>It provides a SubjectInfo (Name) compatible with CFSSL.</p>
 <dl class="method">
 <dt id="cfssl.models.subject_info.SubjectInfo.to_api">
@@ -208,75 +327,71 @@
 </div>
 
 
+           </div>
           </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cfssl.tests.html" class="btn btn-neutral float-right" title="cfssl.tests package" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cfssl.html" class="btn btn-neutral" title="cfssl package" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, LasLabs Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">cfssl.models package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-cfssl.models.certificate_request">cfssl.models.certificate_request module</a></li>
-<li><a class="reference internal" href="#module-cfssl.models.config_client">cfssl.models.config_client module</a></li>
-<li><a class="reference internal" href="#module-cfssl.models.config_key">cfssl.models.config_key module</a></li>
-<li><a class="reference internal" href="#module-cfssl.models.config_mixer">cfssl.models.config_mixer module</a></li>
-<li><a class="reference internal" href="#module-cfssl.models.config_server">cfssl.models.config_server module</a></li>
-<li><a class="reference internal" href="#module-cfssl.models.host">cfssl.models.host module</a></li>
-<li><a class="reference internal" href="#module-cfssl.models.policy_auth">cfssl.models.policy_auth module</a></li>
-<li><a class="reference internal" href="#module-cfssl.models.policy_sign">cfssl.models.policy_sign module</a></li>
-<li><a class="reference internal" href="#module-cfssl.models.policy_use">cfssl.models.policy_use module</a></li>
-<li><a class="reference internal" href="#module-cfssl.models.subject_info">cfssl.models.subject_info module</a></li>
-<li><a class="reference internal" href="#module-cfssl.models">Module contents</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="cfssl.html">cfssl package</a><ul>
-      <li>Previous: <a href="cfssl.html" title="previous chapter">cfssl package</a></li>
-      <li>Next: <a href="cfssl.tests.html" title="next chapter">cfssl.tests package</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/cfssl.models.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2016, LasLabs Inc..
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
-      
-      |
-      <a href="_sources/cfssl.models.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
 
-    
+    </section>
 
-    
-  </body>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
 </html>
