@@ -4,86 +4,18 @@ cfssl.models package
 Submodules
 ----------
 
-cfssl.models.certificate_request module
----------------------------------------
+.. toctree::
 
-.. automodule:: cfssl.models.certificate_request
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-cfssl.models.config_client module
----------------------------------
-
-.. automodule:: cfssl.models.config_client
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-cfssl.models.config_key module
-------------------------------
-
-.. automodule:: cfssl.models.config_key
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-cfssl.models.config_mixer module
---------------------------------
-
-.. automodule:: cfssl.models.config_mixer
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-cfssl.models.config_server module
----------------------------------
-
-.. automodule:: cfssl.models.config_server
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-cfssl.models.host module
-------------------------
-
-.. automodule:: cfssl.models.host
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-cfssl.models.policy_auth module
--------------------------------
-
-.. automodule:: cfssl.models.policy_auth
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-cfssl.models.policy_sign module
--------------------------------
-
-.. automodule:: cfssl.models.policy_sign
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-cfssl.models.policy_use module
-------------------------------
-
-.. automodule:: cfssl.models.policy_use
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-cfssl.models.subject_info module
---------------------------------
-
-.. automodule:: cfssl.models.subject_info
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   cfssl.models.certificate_request
+   cfssl.models.config_client
+   cfssl.models.config_key
+   cfssl.models.config_mixer
+   cfssl.models.config_server
+   cfssl.models.host
+   cfssl.models.policy_auth
+   cfssl.models.policy_sign
+   cfssl.models.policy_use
+   cfssl.models.subject_info
 
 Module contents
 ---------------

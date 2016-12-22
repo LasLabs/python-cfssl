@@ -49,7 +49,7 @@
 <span class="kn">from</span> <span class="nn">.config_mixer</span> <span class="k">import</span> <span class="n">ConfigMixer</span>
 
 
-<div class="viewcode-block" id="ConfigClient"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.models.config_client.ConfigClient">[docs]</a><span class="k">class</span> <span class="nc">ConfigClient</span><span class="p">(</span><span class="n">ConfigMixer</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfigClient"><a class="viewcode-back" href="../../../cfssl.models.config_client.html#cfssl.models.config_client.ConfigClient">[docs]</a><span class="k">class</span> <span class="nc">ConfigClient</span><span class="p">(</span><span class="n">ConfigMixer</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; It provides a Client Config compatible with CFSSL. &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sign_policy_default</span><span class="p">,</span>
@@ -71,7 +71,7 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">remotes</span> <span class="o">=</span> <span class="n">remotes</span>
 
-<div class="viewcode-block" id="ConfigClient.to_api"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.models.config_client.ConfigClient.to_api">[docs]</a>    <span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfigClient.to_api"><a class="viewcode-back" href="../../../cfssl.models.config_client.html#cfssl.models.config_client.ConfigClient.to_api">[docs]</a>    <span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It returns an object compatible with the API. &quot;&quot;&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ConfigClient</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="n">res</span><span class="p">[</span><span class="s1">&#39;remotes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>

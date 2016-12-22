@@ -49,7 +49,7 @@
 <span class="kn">from</span> <span class="nn">..defaults</span> <span class="k">import</span> <span class="n">DEFAULT_ALGORITHM</span><span class="p">,</span> <span class="n">DEFAULT_STRENGTH</span>
 
 
-<div class="viewcode-block" id="ConfigKey"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.models.config_key.ConfigKey">[docs]</a><span class="k">class</span> <span class="nc">ConfigKey</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfigKey"><a class="viewcode-back" href="../../../cfssl.models.config_key.html#cfssl.models.config_key.ConfigKey">[docs]</a><span class="k">class</span> <span class="nc">ConfigKey</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; It provides a Key Config compatible with CFSSL. &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="n">DEFAULT_ALGORITHM</span><span class="p">,</span>
@@ -65,7 +65,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span> <span class="o">=</span> <span class="n">algorithm</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">strength</span> <span class="o">=</span> <span class="n">strength</span>
 
-<div class="viewcode-block" id="ConfigKey.to_api"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.models.config_key.ConfigKey.to_api">[docs]</a>    <span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfigKey.to_api"><a class="viewcode-back" href="../../../cfssl.models.config_key.html#cfssl.models.config_key.ConfigKey.to_api">[docs]</a>    <span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It returns an object compatible with the API. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s1">&#39;algo&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithm</span><span class="p">,</span>

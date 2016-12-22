@@ -1,0 +1,7 @@
+cfssl.tests.test_config_client module
+=====================================
+
+.. automodule:: cfssl.tests.test_config_client
+    :members:
+    :undoc-members:
+    :show-inheritance:

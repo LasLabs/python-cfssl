@@ -12,30 +12,11 @@ Subpackages
 Submodules
 ----------
 
-cfssl.cfssl module
-------------------
+.. toctree::
 
-.. automodule:: cfssl.cfssl
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-cfssl.defaults module
----------------------
-
-.. automodule:: cfssl.defaults
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-cfssl.exceptions module
------------------------
-
-.. automodule:: cfssl.exceptions
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   cfssl.cfssl
+   cfssl.defaults
+   cfssl.exceptions
 
 Module contents
 ---------------

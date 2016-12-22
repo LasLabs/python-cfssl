@@ -47,7 +47,7 @@
 <span class="c1"># License MIT (https://opensource.org/licenses/MIT).</span>
 
 
-<div class="viewcode-block" id="SubjectInfo"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.models.subject_info.SubjectInfo">[docs]</a><span class="k">class</span> <span class="nc">SubjectInfo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="SubjectInfo"><a class="viewcode-back" href="../../../cfssl.models.subject_info.html#cfssl.models.subject_info.SubjectInfo">[docs]</a><span class="k">class</span> <span class="nc">SubjectInfo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; It provides a SubjectInfo (Name) compatible with CFSSL. &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">org_name</span><span class="p">,</span> <span class="n">org_unit</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">country</span><span class="p">):</span>
@@ -68,7 +68,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">country</span>
 
-<div class="viewcode-block" id="SubjectInfo.to_api"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.models.subject_info.SubjectInfo.to_api">[docs]</a>    <span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SubjectInfo.to_api"><a class="viewcode-back" href="../../../cfssl.models.subject_info.html#cfssl.models.subject_info.SubjectInfo.to_api">[docs]</a>    <span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It returns an object compatible with the API. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s1">&#39;O&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">org_name</span><span class="p">,</span>

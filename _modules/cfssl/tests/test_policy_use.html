@@ -51,9 +51,9 @@
 <span class="kn">from</span> <span class="nn">..models.policy_use</span> <span class="k">import</span> <span class="n">PolicyUse</span>
 
 
-<div class="viewcode-block" id="TestPolicyUse"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_policy_use.TestPolicyUse">[docs]</a><span class="k">class</span> <span class="nc">TestPolicyUse</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestPolicyUse"><a class="viewcode-back" href="../../../cfssl.tests.test_policy_use.html#cfssl.tests.test_policy_use.TestPolicyUse">[docs]</a><span class="k">class</span> <span class="nc">TestPolicyUse</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
 
-<div class="viewcode-block" id="TestPolicyUse.setUp"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_policy_use.TestPolicyUse.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestPolicyUse.setUp"><a class="viewcode-back" href="../../../cfssl.tests.test_policy_use.html#cfssl.tests.test_policy_use.TestPolicyUse.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">TestPolicyUse</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setUp</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vals</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span>
@@ -61,7 +61,7 @@
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">PolicyUse</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">vals</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TestPolicyUse.test_to_api"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_policy_use.TestPolicyUse.test_to_api">[docs]</a>    <span class="k">def</span> <span class="nf">test_to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestPolicyUse.test_to_api"><a class="viewcode-back" href="../../../cfssl.tests.test_policy_use.html#cfssl.tests.test_policy_use.TestPolicyUse.test_to_api">[docs]</a>    <span class="k">def</span> <span class="nf">test_to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should return the correctly compatible obj &quot;&quot;&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vals</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">])</span></div></div>
