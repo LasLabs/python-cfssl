@@ -53,7 +53,7 @@
 <span class="kn">from</span> <span class="nn">.models.config_key</span> <span class="k">import</span> <span class="n">ConfigKey</span>
 
 
-<div class="viewcode-block" id="CFSSL"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL">[docs]</a><span class="k">class</span> <span class="nc">CFSSL</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="CFSSL"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL">[docs]</a><span class="k">class</span> <span class="nc">CFSSL</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; It provides Python bindings to a remote CFSSL server via HTTP(S).</span>
 
 <span class="sd">    Additional documentation regarding the API endpoints is available at</span>
@@ -64,7 +64,7 @@
         <span class="n">ssl</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span> <span class="k">if</span> <span class="n">ssl</span> <span class="k">else</span> <span class="s1">&#39;http&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">uri_base</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">://</span><span class="si">%s</span><span class="s1">:</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ssl</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
 
-<div class="viewcode-block" id="CFSSL.auth_sign"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.auth_sign">[docs]</a>    <span class="k">def</span> <span class="nf">auth_sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">datetime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">remote_address</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="CFSSL.auth_sign"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL.auth_sign">[docs]</a>    <span class="k">def</span> <span class="nf">auth_sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">datetime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">remote_address</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It provides returns a signed certificate.</span>
 
 <span class="sd">        Args:</span>
@@ -84,7 +84,7 @@
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;authsign&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CFSSL.bundle"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.bundle">[docs]</a>    <span class="k">def</span> <span class="nf">bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">certificate</span><span class="p">,</span> <span class="n">private_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="CFSSL.bundle"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL.bundle">[docs]</a>    <span class="k">def</span> <span class="nf">bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">certificate</span><span class="p">,</span> <span class="n">private_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                <span class="n">flavor</span><span class="o">=</span><span class="s1">&#39;ubiquitous&#39;</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It builds and returns certificate bundles.</span>
 
@@ -182,7 +182,7 @@
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;bundle&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CFSSL.info"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="CFSSL.info"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It returns information about the CA, including the cert.</span>
 
 <span class="sd">        Args:</span>
@@ -203,7 +203,7 @@
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CFSSL.init_ca"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.init_ca">[docs]</a>    <span class="k">def</span> <span class="nf">init_ca</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">certificate_request</span><span class="p">,</span> <span class="n">ca</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="CFSSL.init_ca"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL.init_ca">[docs]</a>    <span class="k">def</span> <span class="nf">init_ca</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">certificate_request</span><span class="p">,</span> <span class="n">ca</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It initializes a new certificate authority.</span>
 
 <span class="sd">        Args:</span>
@@ -226,7 +226,7 @@
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;init_ca&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CFSSL.new_key"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.new_key">[docs]</a>    <span class="k">def</span> <span class="nf">new_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">common_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ca</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="CFSSL.new_key"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL.new_key">[docs]</a>    <span class="k">def</span> <span class="nf">new_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">common_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ca</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It generates and returns a new private key + CSR.</span>
 
 <span class="sd">        Args:</span>
@@ -258,7 +258,7 @@
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;newkey&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CFSSL.new_cert"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.new_cert">[docs]</a>    <span class="k">def</span> <span class="nf">new_cert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bundle</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="CFSSL.new_cert"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL.new_cert">[docs]</a>    <span class="k">def</span> <span class="nf">new_cert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bundle</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It generates and returns a new private key and certificate.</span>
 
 <span class="sd">        Args:</span>
@@ -288,7 +288,7 @@
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;newcert&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CFSSL.revoke"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.revoke">[docs]</a>    <span class="k">def</span> <span class="nf">revoke</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serial</span><span class="p">,</span> <span class="n">authority_key_id</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
+<div class="viewcode-block" id="CFSSL.revoke"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL.revoke">[docs]</a>    <span class="k">def</span> <span class="nf">revoke</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serial</span><span class="p">,</span> <span class="n">authority_key_id</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It provides certificate revocation.</span>
 
 <span class="sd">        Args:</span>
@@ -308,7 +308,7 @@
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;revoke&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CFSSL.scan"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.scan">[docs]</a>    <span class="k">def</span> <span class="nf">scan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scanner</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="CFSSL.scan"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL.scan">[docs]</a>    <span class="k">def</span> <span class="nf">scan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scanner</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It scans servers to determine the quality of their TLS setup.</span>
 
 <span class="sd">        Args:</span>
@@ -341,7 +341,7 @@
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CFSSL.scan_info"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.scan_info">[docs]</a>    <span class="k">def</span> <span class="nf">scan_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CFSSL.scan_info"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL.scan_info">[docs]</a>    <span class="k">def</span> <span class="nf">scan_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It lists options available for scanning.</span>
 
 <span class="sd">        Returns:</span>
@@ -352,7 +352,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;scaninfo&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CFSSL.sign"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.sign">[docs]</a>    <span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">certificate_request</span><span class="p">,</span> <span class="n">hosts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="CFSSL.sign"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL.sign">[docs]</a>    <span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">certificate_request</span><span class="p">,</span> <span class="n">hosts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">serial_sequence</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It signs and returns a certificate.</span>
 
@@ -387,7 +387,7 @@
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sign&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;certificate&#39;</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="CFSSL.call"><a class="viewcode-back" href="../../cfssl.cfssl.html#cfssl.cfssl.CFSSL.call">[docs]</a>    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="CFSSL.call"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL.call">[docs]</a>    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It calls the remote endpoint and returns the result, if success.</span>
 
 <span class="sd">        Args:</span>
@@ -483,7 +483,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016, LasLabs Inc..
+      &copy;2016 LasLabs Inc..
       
     </div>
 

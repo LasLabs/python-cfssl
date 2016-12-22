@@ -63,23 +63,23 @@
     <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;CFSSL Python library not installed.&#39;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="TestCFSSL"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL">[docs]</a><span class="k">class</span> <span class="nc">TestCFSSL</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL">[docs]</a><span class="k">class</span> <span class="nc">TestCFSSL</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
 
-<div class="viewcode-block" id="TestCFSSL.setUp"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.setUp"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">TestCFSSL</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setUp</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cfssl</span> <span class="o">=</span> <span class="n">CFSSL</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TestCFSSL.test_uri_base_https"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_uri_base_https">[docs]</a>    <span class="k">def</span> <span class="nf">test_uri_base_https</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_uri_base_https"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_uri_base_https">[docs]</a>    <span class="k">def</span> <span class="nf">test_uri_base_https</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should have an HTTP URI by default &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfssl</span><span class="o">.</span><span class="n">uri_base</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TestCFSSL.test_uri_base_http"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_uri_base_http">[docs]</a>    <span class="k">def</span> <span class="nf">test_uri_base_http</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_uri_base_http"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_uri_base_http">[docs]</a>    <span class="k">def</span> <span class="nf">test_uri_base_http</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should have an HTTP URI if someone decides to be crazy &quot;&quot;&quot;</span>
         <span class="n">cfssl</span> <span class="o">=</span> <span class="n">CFSSL</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;http://&#39;</span><span class="p">,</span> <span class="n">cfssl</span><span class="o">.</span><span class="n">uri_base</span><span class="p">)</span></div>
 
     <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">CFSSL</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="TestCFSSL.test_auth_sign"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_auth_sign">[docs]</a>    <span class="k">def</span> <span class="nf">test_auth_sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_auth_sign"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_auth_sign">[docs]</a>    <span class="k">def</span> <span class="nf">test_auth_sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="s1">&#39;token&#39;</span><span class="p">,</span>
@@ -92,7 +92,7 @@
         <span class="p">)</span></div>
 
     <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">CFSSL</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="TestCFSSL.test_bundle"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_bundle">[docs]</a>    <span class="k">def</span> <span class="nf">test_bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_bundle"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_bundle">[docs]</a>    <span class="k">def</span> <span class="nf">test_bundle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;certificate&#39;</span><span class="p">:</span> <span class="s1">&#39;certificate&#39;</span><span class="p">,</span>
@@ -104,7 +104,7 @@
         <span class="p">)</span></div>
 
     <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">CFSSL</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="TestCFSSL.test_info"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_info">[docs]</a>    <span class="k">def</span> <span class="nf">test_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_info"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_info">[docs]</a>    <span class="k">def</span> <span class="nf">test_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;label&#39;</span><span class="p">,</span>
@@ -115,7 +115,7 @@
         <span class="p">)</span></div>
 
     <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">CFSSL</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="TestCFSSL.test_init_ca"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_init_ca">[docs]</a>    <span class="k">def</span> <span class="nf">test_init_ca</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_init_ca"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_init_ca">[docs]</a>    <span class="k">def</span> <span class="nf">test_init_ca</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">csr_vals</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()],</span>
@@ -140,7 +140,7 @@
         <span class="p">)</span></div>
 
     <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">CFSSL</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="TestCFSSL.test_new_key"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_new_key">[docs]</a>    <span class="k">def</span> <span class="nf">test_new_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_new_key"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_new_key">[docs]</a>    <span class="k">def</span> <span class="nf">test_new_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()],</span>
@@ -161,7 +161,7 @@
         <span class="p">)</span></div>
 
     <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">CFSSL</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="TestCFSSL.test_new_cert"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_new_cert">[docs]</a>    <span class="k">def</span> <span class="nf">test_new_cert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_new_cert"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_new_cert">[docs]</a>    <span class="k">def</span> <span class="nf">test_new_cert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
@@ -174,7 +174,7 @@
         <span class="p">)</span></div>
 
     <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">CFSSL</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="TestCFSSL.test_revoke"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_revoke">[docs]</a>    <span class="k">def</span> <span class="nf">test_revoke</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_revoke"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_revoke">[docs]</a>    <span class="k">def</span> <span class="nf">test_revoke</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;serial&#39;</span><span class="p">:</span> <span class="s1">&#39;Ben-S&#39;</span><span class="p">,</span>
@@ -187,7 +187,7 @@
         <span class="p">)</span></div>
 
     <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">CFSSL</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="TestCFSSL.test_scan"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_scan">[docs]</a>    <span class="k">def</span> <span class="nf">test_scan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_scan"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_scan">[docs]</a>    <span class="k">def</span> <span class="nf">test_scan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
@@ -199,13 +199,13 @@
         <span class="p">)</span></div>
 
     <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">CFSSL</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="TestCFSSL.test_scan_info"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_scan_info">[docs]</a>    <span class="k">def</span> <span class="nf">test_scan_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_scan_info"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_scan_info">[docs]</a>    <span class="k">def</span> <span class="nf">test_scan_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cfssl</span><span class="o">.</span><span class="n">scan_info</span><span class="p">()</span>
         <span class="n">call</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s1">&#39;scaninfo&#39;</span><span class="p">)</span></div>
 
     <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">CFSSL</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="TestCFSSL.test_sign"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_sign">[docs]</a>    <span class="k">def</span> <span class="nf">test_sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_sign"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_sign">[docs]</a>    <span class="k">def</span> <span class="nf">test_sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call with proper args &quot;&quot;&quot;</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;certificate_request&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
@@ -221,7 +221,7 @@
         <span class="p">)</span></div>
 
     <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">requests</span><span class="p">,</span> <span class="s1">&#39;request&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="TestCFSSL.test_call_request"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_call_request">[docs]</a>    <span class="k">def</span> <span class="nf">test_call_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_call_request"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_call_request">[docs]</a>    <span class="k">def</span> <span class="nf">test_call_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should call requests with proper args &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cfssl</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>
         <span class="n">requests</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span>
@@ -232,14 +232,14 @@
         <span class="p">)</span></div>
 
     <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">requests</span><span class="p">,</span> <span class="s1">&#39;request&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="TestCFSSL.test_call_error"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_call_error">[docs]</a>    <span class="k">def</span> <span class="nf">test_call_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_call_error"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_call_error">[docs]</a>    <span class="k">def</span> <span class="nf">test_call_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should raise on non-success response &quot;&quot;&quot;</span>
         <span class="n">requests</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">CFSSLRemoteException</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">cfssl</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;None&#39;</span><span class="p">)</span></div>
 
     <span class="nd">@mock</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">object</span><span class="p">(</span><span class="n">requests</span><span class="p">,</span> <span class="s1">&#39;request&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="TestCFSSL.test_call_success"><a class="viewcode-back" href="../../../cfssl.tests.test_cfssl.html#cfssl.tests.test_cfssl.TestCFSSL.test_call_success">[docs]</a>    <span class="k">def</span> <span class="nf">test_call_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests</span><span class="p">):</span>
+<div class="viewcode-block" id="TestCFSSL.test_call_success"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_cfssl.TestCFSSL.test_call_success">[docs]</a>    <span class="k">def</span> <span class="nf">test_call_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should reteurn result on success response &quot;&quot;&quot;</span>
         <span class="n">requests</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                                         <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="s1">&#39;result&#39;</span><span class="p">}</span>
@@ -306,7 +306,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016, LasLabs Inc..
+      &copy;2016 LasLabs Inc..
       
     </div>
 

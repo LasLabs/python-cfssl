@@ -51,9 +51,9 @@
 <span class="kn">from</span> <span class="nn">..models.subject_info</span> <span class="k">import</span> <span class="n">SubjectInfo</span>
 
 
-<div class="viewcode-block" id="TestSubjectInfo"><a class="viewcode-back" href="../../../cfssl.tests.test_subject_info.html#cfssl.tests.test_subject_info.TestSubjectInfo">[docs]</a><span class="k">class</span> <span class="nc">TestSubjectInfo</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestSubjectInfo"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_subject_info.TestSubjectInfo">[docs]</a><span class="k">class</span> <span class="nc">TestSubjectInfo</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
 
-<div class="viewcode-block" id="TestSubjectInfo.setUp"><a class="viewcode-back" href="../../../cfssl.tests.test_subject_info.html#cfssl.tests.test_subject_info.TestSubjectInfo.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestSubjectInfo.setUp"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_subject_info.TestSubjectInfo.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">TestSubjectInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setUp</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vals</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;org_name&#39;</span><span class="p">:</span> <span class="s1">&#39;org name&#39;</span><span class="p">,</span>
@@ -64,7 +64,7 @@
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">SubjectInfo</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">vals</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TestSubjectInfo.test_to_api"><a class="viewcode-back" href="../../../cfssl.tests.test_subject_info.html#cfssl.tests.test_subject_info.TestSubjectInfo.test_to_api">[docs]</a>    <span class="k">def</span> <span class="nf">test_to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TestSubjectInfo.test_to_api"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_subject_info.TestSubjectInfo.test_to_api">[docs]</a>    <span class="k">def</span> <span class="nf">test_to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should return the correctly compatible obj &quot;&quot;&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
@@ -137,7 +137,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016, LasLabs Inc..
+      &copy;2016 LasLabs Inc..
       
     </div>
 
