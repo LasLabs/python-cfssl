@@ -1,7 +1,7 @@
 addons:
-  apt:
-    packages:
-      - expect-dev  # provides unbuffer utility
+    apt:
+        packages:
+            - expect-dev  # provides unbuffer utility
 
 language: python
 
@@ -13,10 +13,18 @@ virtualenv:
 
 env:
     global:
-        - TESTS="0" LINT_CHECK="0" DOCS="0" VERSION="0.1.0" RELEASE="0.1.0" PROJECT="Python-CFSSL" BRANCH_PROD="master" BRANCH_DOC="gh-pages"
+        - TESTS="0" LINT_CHECK="0" DOCS="0" VERSION="0.1.0" RELEASE="0.1.0" PROJECT="Python CFSSL" BRANCH_PROD="master" BRANCH_DOC="gh-pages"
     matrix:
         - TESTS="1"
         - DOCS="1"
 
+install:
+    - git clone --depth=1 https://github.com/LasLabs/python-quality-tools.git ${HOME}/python-quality-tools
+    - export PATH=${HOME}/python-quality-tools/travis:${PATH}
+    - travis_install
+
 script:
-    - wget -O - https://gist.githubusercontent.com/lasley/e547cc2f66cff91e9494ad46b69b9571/raw/6b2cf174988d62e79b0ebedbc0dfb013d65e8dcc/Python%2520Travis%2520Tests | bash
+    - travis_run
+
+after_success:
+    - travis_after_success
