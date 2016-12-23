@@ -103,19 +103,22 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; The authentication token.</li>
-<li><strong>request</strong> (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.CertificateRequest</span></code>) &#8211; Signing request document.</li>
-<li><strong>datetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">datetime.datetime</span></code></a>) &#8211; Authentication timestamp.</li>
-<li><strong>remote_address</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; An address used in making the request.</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The authentication token.</li>
+<li><strong>request</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.certificate_request.CertificateRequest" title="cfssl.models.certificate_request.CertificateRequest"><em>CertificateRequest</em></a>) &#8211; Signing request document.</li>
+<li><strong>datetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><em>datetime.datetime</em></a>) &#8211; Authentication timestamp.</li>
+<li><strong>remote_address</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; An address used in making the request.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><dl class="docutils">
-<dt>(<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) A PEM-encoded certificate that has been signed by the</dt>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>A PEM-encoded certificate that has been signed by the</dt>
 <dd><p class="first last">server.</p>
 </dd>
 </dl>
 </p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></p>
 </td>
 </tr>
 </tbody>
@@ -130,7 +133,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>certificate</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; The PEM-encoded certificate to be bundled.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>certificate</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The PEM-encoded certificate to be bundled.</td>
 </tr>
 </tbody>
 </table>
@@ -138,26 +141,26 @@
 arguments are valid:</p>
 <blockquote>
 <div><dl class="docutils">
-<dt>private_key (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>): The PEM-encoded private key to be included with</dt>
+<dt>private_key (str): The PEM-encoded private key to be included with</dt>
 <dd>the bundle. This is valid only if the server is not running in
 <code class="docutils literal"><span class="pre">keyless</span></code> mode.</dd>
-<dt>flavor (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>): One of <code class="docutils literal"><span class="pre">ubiquitous</span></code>, <code class="docutils literal"><span class="pre">force</span></code>, or <code class="docutils literal"><span class="pre">optimal</span></code>,</dt>
+<dt>flavor (str): One of <code class="docutils literal"><span class="pre">ubiquitous</span></code>, <code class="docutils literal"><span class="pre">force</span></code>, or <code class="docutils literal"><span class="pre">optimal</span></code>,</dt>
 <dd>with a default value of <code class="docutils literal"><span class="pre">ubiquitous</span></code>. A ubiquitous bundle is
 one that has a higher probability of being verified everywhere,
 even by clients using outdated or unusual trust stores. Force will
 cause the endpoint to use the bundle provided in the
 <code class="docutils literal"><span class="pre">certificate</span></code> parameter, and will only verify that the bundle
 is a valid (verifiable) chain.</dd>
-<dt>domain (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>): The domain name to verify as the hostname of the</dt>
+<dt>domain (str): The domain name to verify as the hostname of the</dt>
 <dd>certificate.</dd>
-<dt>ip (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>): The IP address to verify against the certificate IP</dt>
+<dt>ip (str): The IP address to verify against the certificate IP</dt>
 <dd>SANs.</dd>
 </dl>
 </div></blockquote>
 <p>If only the <code class="docutils literal"><span class="pre">domain</span></code> parameter is present, the following
 parameter is valid:</p>
 <dl class="docutils">
-<dt>ip (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>): The IP address of the remote host; this will fetch the</dt>
+<dt>ip (str): The IP address of the remote host; this will fetch the</dt>
 <dd>certificate from the IP, and verify that it is valid for the
 domain name.</dd>
 </dl>
@@ -165,59 +168,34 @@ domain name.</dd>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul>
-<li><dl class="first docutils">
-<dt>bundle contains the concatenated list of PEM certificates</dt>
-<dd>forming the certificate chain; this forms the actual
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>Object repesenting the bundle, with the following keys:</dt>
+<dd><ul class="first last">
+<li>bundle contains the concatenated list of PEM certificates
+forming the certificate chain; this forms the actual
 bundle. The remaining parameters are additional metadata
-supporting the bundle.</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>crl_support is true if CRL information is contained in the</dt>
-<dd>certificate.</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>crt contains the original certificate the bundle is built</dt>
-<dd>from.</dd>
-</dl>
-</li>
+supporting the bundle.</li>
+<li>crl_support is true if CRL information is contained in the
+certificate.</li>
+<li>crt contains the original certificate the bundle is built
+from.</li>
 <li>expires contains the expiration date of the certificate.</li>
 <li>hostnames contains the SAN hostnames for the certificate.</li>
-<li><dl class="first docutils">
-<dt>issuer contains the X.509 issuer information for the</dt>
-<dd>certificate.</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>key contains the private key for the certificate, if one</dt>
-<dd>was presented.</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>key_size contains the size of the key in bits for the</dt>
-<dd>certificate. It will be present even if the private key wasn&#8217;t
-provided because this can be determined from the public key.</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>key_type contains a textual description of the key type,</dt>
-<dd>e.g. &#8216;2048-bit RSA&#8217;.</dd>
-</dl>
-</li>
+<li>issuer contains the X.509 issuer information for the
+certificate.</li>
+<li>key contains the private key for the certificate, if one
+was presented.</li>
+<li>key_size contains the size of the key in bits for the
+certificate. It will be present even if the private key wasn&#8217;t
+provided because this can be determined from the public key.</li>
+<li>key_type contains a textual description of the key type,
+e.g. &#8216;2048-bit RSA&#8217;.</li>
 <li>ocsp contains the OCSP URLs for the certificate, if present.</li>
-<li><dl class="first docutils">
-<dt>ocsp_support will be true if the certificate supports OCSP</dt>
-<dd>revocation checking.</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>signature contains the signature type used in the</dt>
-<dd>certificate, e.g. &#8216;SHA1WithRSA&#8217;.</dd>
-</dl>
-</li>
-<li>status contains a number of elements:
+<li>ocsp_support will be true if the certificate supports OCSP
+revocation checking.</li>
+<li>signature contains the signature type used in the
+certificate, e.g. <code class="docutils literal"><span class="pre">SHA1WithRSA</span></code>.</li>
+<li>status contains a <a href="#id1"><span class="problematic" id="id2">:type:`dict`</span></a> of elements:
 * code is bit-encoded error code. 1st bit indicates whether<blockquote>
 <div>there is a expiring certificate in the bundle. 2nd bit indicates
 whether there is a ubiquity issue with the bundle.</div></blockquote>
@@ -255,9 +233,11 @@ list</li>
 </dl>
 </li>
 </ul>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">(<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></a>) Object repesenting the bundle, with the following keys</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
 </tr>
 </tbody>
 </table>
@@ -272,11 +252,11 @@ list</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>endpoint</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; CFSSL endpoint to call (e.g. <code class="docutils literal"><span class="pre">newcert</span></code>).</li>
-<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; HTTP method to utilize for the Request.</li>
+<li><strong>endpoint</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; CFSSL endpoint to call (e.g. <code class="docutils literal"><span class="pre">newcert</span></code>).</li>
+<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; HTTP method to utilize for the Request.</li>
 <li><strong>params</strong> &#8211; (dict|bytes) Data to be sent in the query string
 for the Request.</li>
-<li><strong>data</strong> &#8211; (<code class="xref py py-obj docutils literal"><span class="pre">dict`|:obj:`bytes`|:obj:`file</span></code>) Data to send in the body
+<li><strong>data</strong> &#8211; (dict or bytes or file) Data to send in the body
 of the Request.</li>
 </ul>
 </td>
@@ -284,7 +264,7 @@ of the Request.</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">(mixed) Data contained in <code class="docutils literal"><span class="pre">result</span></code> key of the API response.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-obj docutils literal"><span class="pre">CFSSLRemoteException</span></code> &#8211; In the event of a <code class="docutils literal"><span class="pre">False</span></code> in the
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">CFSSLRemoteException</span></code> &#8211; In the event of a <code class="docutils literal"><span class="pre">False</span></code> in the
 <code class="docutils literal"><span class="pre">success</span></code> key of the API response.</p>
 </td>
 </tr>
@@ -301,26 +281,30 @@ of the Request.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; A string specifying the signer.</li>
-<li><strong>profile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; a string specifying the signing profile for the
+<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; A string specifying the signer.</li>
+<li><strong>profile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; a string specifying the signing profile for the
 signer. Signing profile specifies what key usages should be
 used and how long the expiry should be set.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
-<li>certificate (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>): a PEM-encoded certificate of the signer.</li>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>Mapping with three keys:</dt>
+<dd><ul class="first last simple">
+<li>certificate (str): a PEM-encoded certificate of the signer.</li>
 <li><dl class="first docutils">
-<dt>usage (<a class="reference external" href="https://docs.python.org/2/library/functions.html#list" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>): Key usages from the signing</dt>
+<dt>usage (list of str): Key usages from the signing</dt>
 <dd>profile.</dd>
 </dl>
 </li>
-<li>expiry (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>): the expiry string from the signing profile.</li>
+<li>expiry (str): the expiry string from the signing profile.</li>
 </ul>
+</dd>
+</dl>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></a>) Mapping with three keys</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -336,21 +320,25 @@ used and how long the expiry should be set.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>certificate_request</strong> (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.CertificateRequest</span></code>) &#8211; The certificate
+<li><strong>certificate_request</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.certificate_request.CertificateRequest" title="cfssl.models.certificate_request.CertificateRequest"><em>CertificateRequest</em></a>) &#8211; The certificate
 request to use when creating the CA.</li>
-<li><strong>ca</strong> (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.ConfigServer</span></code>, optional) &#8211; The configuration of the
+<li><strong>ca</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_server.ConfigServer" title="cfssl.models.config_server.ConfigServer"><em>ConfigServer</em></a><em>, </em><em>optional</em>) &#8211; The configuration of the
 requested Certificate Authority.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
-<li>private key (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>): a PEM-encoded CA private key.</li>
-<li>certificate (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>): a PEM-encoded self-signed CA certificate.</li>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>Mapping with two keys:</dt>
+<dd><ul class="first last simple">
+<li>private key (str): a PEM-encoded CA private key.</li>
+<li>certificate (str): a PEM-encoded self-signed CA certificate.</li>
 </ul>
+</dd>
+</dl>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></a>) Mapping with two keys</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -366,36 +354,40 @@ requested Certificate Authority.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>request</strong> (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.CertificateRequest</span></code>) &#8211; CSR to be used for
+<li><strong>request</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.certificate_request.CertificateRequest" title="cfssl.models.certificate_request.CertificateRequest"><em>CertificateRequest</em></a>) &#8211; CSR to be used for
 certificate creation.</li>
-<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; Specifying which signer to be appointed to sign
+<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Specifying which signer to be appointed to sign
 the CSR, useful when interacting with cfssl server that stands
 in front of a remote multi-root CA signer.</li>
-<li><strong>profile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; Specifying the signing profile for the signer.</li>
-<li><strong>bundle</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">bool</span></code></a>) &#8211; Specifying whether to include an &#8220;optimal&#8221;
+<li><strong>profile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Specifying the signing profile for the signer.</li>
+<li><strong>bundle</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Specifying whether to include an &#8220;optimal&#8221;
 certificate bundle along with the certificate.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
-<li>private key: a PEM-encoded private key.</li>
-<li>certificate_request: a PEM-encoded certificate request.</li>
-<li>certificate: a PEM-encoded certificate, signed by the server.</li>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>mapping with these keys:</dt>
+<dd><ul class="first last simple">
+<li>private key (str): a PEM-encoded private key.</li>
+<li>certificate_request (str): a PEM-encoded certificate request.</li>
+<li>certificate (str): a PEM-encoded certificate, signed by the server.</li>
 <li><dl class="first docutils">
-<dt>sums: a JSON object holding both MD5 and SHA1 digests for the</dt>
+<dt>sums (dict): Holding both MD5 and SHA1 digests for the</dt>
 <dd>certificate request and the certificate.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>bundle: See the result of endpoint_bundle.txt (only included</dt>
+<dt>bundle (str): See the result of endpoint_bundle.txt (only included</dt>
 <dd>if the bundle parameter was set).</dd>
 </dl>
 </li>
 </ul>
+</dd>
+</dl>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></a>) mapping with these keys</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -411,30 +403,31 @@ certificate bundle along with the certificate.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>hosts</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#iter" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">iter</span></code></a> of <code class="xref py py-obj docutils literal"><span class="pre">cfssl.Host</span></code>) &#8211; Subject Alternative Name(s) for the
+<li><strong>hosts</strong> (<em>tuple of Host</em>) &#8211; Subject Alternative Name(s) for the
 requested certificate.</li>
-<li><strong>names</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#iter" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">iter</span></code></a> of <code class="xref py py-obj docutils literal"><span class="pre">cfssl.SubjectInfo</span></code>) &#8211; The Subject Info(s) for the
+<li><strong>names</strong> (<em>tuple of SubjectInfo</em>) &#8211; The Subject Info(s) for the
 requested certificate.</li>
-<li><strong>CN</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; the common name for the certificate subject in the
+<li><strong>CN</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the common name for the certificate subject in the
 requestedrequested CA certificate.</li>
-<li><strong>key</strong> (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.ConfigKey</span></code>) &#8211; Cipher and strength to use for certificate.</li>
-<li><strong>ca</strong> (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.ConfigServer</span></code>) &#8211; the CA configuration of the requested CA.</li>
+<li><strong>key</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_key.ConfigKey" title="cfssl.models.config_key.ConfigKey"><em>ConfigKey</em></a>) &#8211; Cipher and strength to use for certificate.</li>
+<li><strong>ca</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_server.ConfigServer" title="cfssl.models.config_server.ConfigServer"><em>ConfigServer</em></a>) &#8211; the CA configuration of the requested CA.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
-<li>private key (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>): a PEM-encoded CA private key.</li>
-<li>certificate (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>): a PEM-encoded self-signed CA certificate.</li>
-<li><dl class="first docutils">
-<dt>sums: (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></a>) Mapping holding both MD5 and SHA1 digests for the</dt>
-<dd>certificate request</dd>
-</dl>
-</li>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>Mapping with three keys:</dt>
+<dd><ul class="first last simple">
+<li>private key (str): a PEM-encoded CA private key.</li>
+<li>certificate (str): a PEM-encoded self-signed CA certificate.</li>
+<li>sums (dict): Mapping holding both MD5 and SHA1 digests for
+the certificate request</li>
 </ul>
+</dd>
+</dl>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></a>) Mapping with three keys</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -450,11 +443,11 @@ requestedrequested CA certificate.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>serial</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; Specifying the serial number of a certificate.</li>
-<li><strong>authority_key_id</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; Specifying the authority key identifier
+<li><strong>serial</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Specifying the serial number of a certificate.</li>
+<li><strong>authority_key_id</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Specifying the authority key identifier
 of the certificate to be revoked; this is used to distinguish
 which private key was used to sign the certificate.</li>
-<li><strong>reason</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; Identifying why the certificate was revoked; see,
+<li><strong>reason</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Identifying why the certificate was revoked; see,
 for example, ReasonStringToCode in the ocsp package or section
 4.2.1.13 of RFC 5280. The &#8220;reasons&#8221; used here are the ReasonFlag
 names in said RFC.</li>
@@ -474,19 +467,19 @@ names in said RFC.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>host</strong> (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.Host</span></code>) &#8211; The host to scan.</li>
-<li><strong>ip</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; IP Address to override DNS lookup of host.</li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; The amount of time allotted for the scan to complete
+<li><strong>host</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.host.Host" title="cfssl.models.host.Host"><em>Host</em></a>) &#8211; The host to scan.</li>
+<li><strong>ip</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; IP Address to override DNS lookup of host.</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The amount of time allotted for the scan to complete
 (default: 1 minute).</li>
-<li><strong>family</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; regular expression specifying scan famil(ies) to run.</li>
-<li><strong>scanner</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; regular expression specifying scanner(s) to run.</li>
+<li><strong>family</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; regular expression specifying scan famil(ies) to run.</li>
+<li><strong>scanner</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; regular expression specifying scanner(s) to run.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><p>(<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></a>) Mapping with keys for each scan family. Each of these
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>Mapping with keys for each scan family. Each of these
 objects contains keys for each scanner run in that family
 pointing to objects possibly containing the following keys:
-* grade (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>): Describing the exit status of the scan. Can be:</p>
+* grade (str): Describing the exit status of the scan. Can be:</p>
 <blockquote>
 <div><ul class="simple">
 <li>&#8220;Good&#8221;: host performing the expected state-of-the-art.</li>
@@ -504,10 +497,13 @@ pointing to objects possibly containing the following keys:
 </ul>
 </div></blockquote>
 <ul class="simple">
-<li>error (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>): Any error encountered during the scan process.</li>
-<li>output: (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></a>) Arbitrary data retrieved during the scan.</li>
+<li>error (str): Any error encountered during the scan process.</li>
+<li>output: (dict) Arbitrary data retrieved during the scan.</li>
 </ul>
 </p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></p>
 </td>
 </tr>
 </tbody>
@@ -522,10 +518,15 @@ pointing to objects possibly containing the following keys:
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">(<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></a>) Mapping with keys for each scan family. For each family,
-there exists a <cite>description</cite> containing a string describing
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>Mapping with keys for each scan family. For each family,</dt>
+<dd>there exists a <cite>description</cite> containing a string describing
 the family and a <cite>scanners</cite> object mapping each of the family&#8217;s
-scanners to an object containing a <cite>description</cite> string.</td>
+scanners to an object containing a <cite>description</cite> string.</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
 </tr>
 </tbody>
 </table>
@@ -540,24 +541,31 @@ scanners to an object containing a <cite>description</cite> string.</td>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>certificate_request</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; the CSR bytes to be signed (in PEM).</li>
-<li><strong>hosts</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#iter" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">iter</span></code></a> of <code class="xref py py-obj docutils literal"><span class="pre">cfssl.Host</span></code>) &#8211; of SAN (subject alternative .names)
+<li><strong>certificate_request</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the CSR bytes to be signed (in PEM).</li>
+<li><strong>hosts</strong> (<em>tuple of Host</em>) &#8211; of SAN (subject alternative .names)
 which overrides the ones in the CSR</li>
-<li><strong>subject</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; The certificate subject which overrides
+<li><strong>subject</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The certificate subject which overrides
 the ones in the CSR.</li>
-<li><strong>serial_sequence</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; Specify the prefix which the generated
+<li><strong>serial_sequence</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Specify the prefix which the generated
 certificate serial should have.</li>
-<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) &#8211; Specifying which signer to be appointed to sign
+<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Specifying which signer to be appointed to sign
 the CSR, useful when interacting with a remote multi-root CA
 signer.</li>
-<li><strong>profile</strong> (<code class="xref py py-obj docutils literal"><span class="pre">cfssl.ConfigServer</span></code>) &#8211; Specifying the signing profile for
+<li><strong>profile</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_server.ConfigServer" title="cfssl.models.config_server.ConfigServer"><em>ConfigServer</em></a>) &#8211; Specifying the signing profile for
 the signer, useful when interacting with a remote multi-root
 CA signer.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">(<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">str</span></code></a>) A PEM-encoded certificate that has been signed by the
-server.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>A PEM-encoded certificate that has been signed by the</dt>
+<dd><p class="first last">server.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></p>
 </td>
 </tr>
 </tbody>
@@ -589,6 +597,14 @@ server.</p>
 </div>
 <div class="section" id="module-cfssl">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cfssl" title="Permalink to this headline">¶</a></h2>
+<p>This library allows you to interact with a remote CFSSL server using Python.</p>
+<p>CFSSL is CloudFlare&#8217;s open source toolkit for everything TLS/SSL. CFSSL is used by
+CloudFlare for their internal Certificate Authority infrastructure and for all of
+their TLS certificates.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://blog.cloudflare.com/introducing-cfssl/">Read more on the CloudFlare blog</a>.</li>
+<li><a class="reference external" href="https://github.com/cloudflare/cfssl">View the CFSSL source</a>.</li>
+</ul>
 </div>
 </div>
 

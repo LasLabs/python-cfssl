@@ -68,12 +68,12 @@
         <span class="sd">&quot;&quot;&quot; It provides returns a signed certificate.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            token (:obj:`str`): The authentication token.</span>
-<span class="sd">            request (:obj:`cfssl.CertificateRequest`): Signing request document.</span>
-<span class="sd">            datetime (:obj:`datetime.datetime`): Authentication timestamp.</span>
-<span class="sd">            remote_address (:obj:`str`): An address used in making the request.</span>
+<span class="sd">            token (str): The authentication token.</span>
+<span class="sd">            request (CertificateRequest): Signing request document.</span>
+<span class="sd">            datetime (datetime.datetime): Authentication timestamp.</span>
+<span class="sd">            remote_address (str): An address used in making the request.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (:obj:`str`) A PEM-encoded certificate that has been signed by the</span>
+<span class="sd">            str: A PEM-encoded certificate that has been signed by the</span>
 <span class="sd">                server.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
@@ -89,89 +89,89 @@
         <span class="sd">&quot;&quot;&quot; It builds and returns certificate bundles.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            certificate (:obj:`str`): The PEM-encoded certificate to be bundled.</span>
+<span class="sd">            certificate (str): The PEM-encoded certificate to be bundled.</span>
 
 <span class="sd">        If the ``certificate`` parameter is present, the following four</span>
 <span class="sd">        arguments are valid:</span>
-<span class="sd">            private_key (:obj:`str`): The PEM-encoded private key to be included with</span>
+<span class="sd">            private_key (str): The PEM-encoded private key to be included with</span>
 <span class="sd">                the bundle. This is valid only if the server is not running in</span>
 <span class="sd">                ``keyless`` mode.</span>
-<span class="sd">            flavor (:obj:`str`): One of ``ubiquitous``, ``force``, or ``optimal``,</span>
+<span class="sd">            flavor (str): One of ``ubiquitous``, ``force``, or ``optimal``,</span>
 <span class="sd">                with a default value of ``ubiquitous``. A ubiquitous bundle is</span>
 <span class="sd">                one that has a higher probability of being verified everywhere,</span>
 <span class="sd">                even by clients using outdated or unusual trust stores. Force will</span>
 <span class="sd">                cause the endpoint to use the bundle provided in the</span>
 <span class="sd">                ``certificate`` parameter, and will only verify that the bundle</span>
 <span class="sd">                is a valid (verifiable) chain.</span>
-<span class="sd">            domain (:obj:`str`): The domain name to verify as the hostname of the</span>
+<span class="sd">            domain (str): The domain name to verify as the hostname of the</span>
 <span class="sd">                certificate.</span>
-<span class="sd">            ip (:obj:`str`): The IP address to verify against the certificate IP</span>
+<span class="sd">            ip (str): The IP address to verify against the certificate IP</span>
 <span class="sd">                SANs.</span>
 
 <span class="sd">        If only the ``domain`` parameter is present, the following</span>
 <span class="sd">        parameter is valid:</span>
 
-<span class="sd">        ip (:obj:`str`): The IP address of the remote host; this will fetch the</span>
+<span class="sd">        ip (str): The IP address of the remote host; this will fetch the</span>
 <span class="sd">            certificate from the IP, and verify that it is valid for the</span>
 <span class="sd">            domain name.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            (:obj:`dict`) Object repesenting the bundle, with the following keys:</span>
-<span class="sd">            * bundle contains the concatenated list of PEM certificates</span>
-<span class="sd">                forming the certificate chain; this forms the actual</span>
-<span class="sd">                bundle. The remaining parameters are additional metadata</span>
-<span class="sd">                supporting the bundle.</span>
-<span class="sd">            * crl_support is true if CRL information is contained in the</span>
-<span class="sd">                certificate.</span>
-<span class="sd">            * crt contains the original certificate the bundle is built</span>
-<span class="sd">                from.</span>
-<span class="sd">            * expires contains the expiration date of the certificate.</span>
-<span class="sd">            * hostnames contains the SAN hostnames for the certificate.</span>
-<span class="sd">            * issuer contains the X.509 issuer information for the</span>
-<span class="sd">                certificate.</span>
-<span class="sd">            * key contains the private key for the certificate, if one</span>
-<span class="sd">                was presented.</span>
-<span class="sd">            * key_size contains the size of the key in bits for the</span>
-<span class="sd">                certificate. It will be present even if the private key wasn&#39;t</span>
-<span class="sd">                provided because this can be determined from the public key.</span>
-<span class="sd">            * key_type contains a textual description of the key type,</span>
-<span class="sd">                e.g. &#39;2048-bit RSA&#39;.</span>
-<span class="sd">            * ocsp contains the OCSP URLs for the certificate, if present.</span>
-<span class="sd">            * ocsp_support will be true if the certificate supports OCSP</span>
-<span class="sd">                revocation checking.</span>
-<span class="sd">            * signature contains the signature type used in the</span>
-<span class="sd">                certificate, e.g. &#39;SHA1WithRSA&#39;.</span>
-<span class="sd">            * status contains a number of elements:</span>
-<span class="sd">              * code is bit-encoded error code. 1st bit indicates whether</span>
-<span class="sd">                there is a expiring certificate in the bundle. 2nd bit indicates</span>
-<span class="sd">                whether there is a ubiquity issue with the bundle.</span>
-<span class="sd">              * expiring_SKIs contains the SKIs (subject key identifiers)</span>
-<span class="sd">                for any certificates that might expire soon (within 30</span>
-<span class="sd">                days).</span>
-<span class="sd">              * messages is a list of human-readable warnings on bundle</span>
-<span class="sd">                ubiquity and certificate expiration. For example, an expiration</span>
-<span class="sd">                warning can be &quot;The expiring cert is #1 in the chain&quot;,</span>
-<span class="sd">                indicating the leaf certificate is expiring. Ubiquity warnings</span>
-<span class="sd">                include SHA-1 deprecation warning (if the bundle triggers</span>
-<span class="sd">                any major browser&#39;s SHA-1 deprecation policy), SHA-2</span>
-<span class="sd">                compatibility warning (if the bundle contains signatures using</span>
-<span class="sd">                ECDSA SHA-2 hash algorithms, it will be rejected by Windows XP</span>
-<span class="sd">                SP2), compatibility warning (if the bundle contains ECDSA</span>
-<span class="sd">                certificates, it will be rejected by Windows XP, Android 2.2 and</span>
-<span class="sd">                Android 2.3 etc) and root trust warning (if the bundle cannot be</span>
-<span class="sd">                trusted by some major OSes or browsers).</span>
-<span class="sd">              * rebundled indicates whether the server had to rebundle the</span>
-<span class="sd">                certificate. The server will rebundle the uploaded</span>
-<span class="sd">                certificate as needed; for example, if the certificate</span>
-<span class="sd">                contains none of the required intermediates or a better set</span>
-<span class="sd">                of intermediates was found. In this case, the server will</span>
-<span class="sd">                mark rebundled as true.</span>
-<span class="sd">              * untrusted_root_stores contains the names of any major</span>
-<span class="sd">                OSes and browsers that doesn&#39;t trust the bundle. The names</span>
-<span class="sd">                are used to construct the root trust warnings in the messages</span>
-<span class="sd">                list</span>
-<span class="sd">            * subject contains the X.509 subject identifier from the</span>
-<span class="sd">                certificate.</span>
+<span class="sd">            dict: Object repesenting the bundle, with the following keys:</span>
+<span class="sd">                * bundle contains the concatenated list of PEM certificates</span>
+<span class="sd">                  forming the certificate chain; this forms the actual</span>
+<span class="sd">                  bundle. The remaining parameters are additional metadata</span>
+<span class="sd">                  supporting the bundle.</span>
+<span class="sd">                * crl_support is true if CRL information is contained in the</span>
+<span class="sd">                  certificate.</span>
+<span class="sd">                * crt contains the original certificate the bundle is built</span>
+<span class="sd">                  from.</span>
+<span class="sd">                * expires contains the expiration date of the certificate.</span>
+<span class="sd">                * hostnames contains the SAN hostnames for the certificate.</span>
+<span class="sd">                * issuer contains the X.509 issuer information for the</span>
+<span class="sd">                  certificate.</span>
+<span class="sd">                * key contains the private key for the certificate, if one</span>
+<span class="sd">                  was presented.</span>
+<span class="sd">                * key_size contains the size of the key in bits for the</span>
+<span class="sd">                  certificate. It will be present even if the private key wasn&#39;t</span>
+<span class="sd">                  provided because this can be determined from the public key.</span>
+<span class="sd">                * key_type contains a textual description of the key type,</span>
+<span class="sd">                  e.g. &#39;2048-bit RSA&#39;.</span>
+<span class="sd">                * ocsp contains the OCSP URLs for the certificate, if present.</span>
+<span class="sd">                * ocsp_support will be true if the certificate supports OCSP</span>
+<span class="sd">                  revocation checking.</span>
+<span class="sd">                * signature contains the signature type used in the</span>
+<span class="sd">                  certificate, e.g. ``SHA1WithRSA``.</span>
+<span class="sd">                * status contains a :type:`dict` of elements:</span>
+<span class="sd">                  * code is bit-encoded error code. 1st bit indicates whether</span>
+<span class="sd">                    there is a expiring certificate in the bundle. 2nd bit indicates</span>
+<span class="sd">                    whether there is a ubiquity issue with the bundle.</span>
+<span class="sd">                  * expiring_SKIs contains the SKIs (subject key identifiers)</span>
+<span class="sd">                    for any certificates that might expire soon (within 30</span>
+<span class="sd">                    days).</span>
+<span class="sd">                  * messages is a list of human-readable warnings on bundle</span>
+<span class="sd">                    ubiquity and certificate expiration. For example, an expiration</span>
+<span class="sd">                    warning can be &quot;The expiring cert is #1 in the chain&quot;,</span>
+<span class="sd">                    indicating the leaf certificate is expiring. Ubiquity warnings</span>
+<span class="sd">                    include SHA-1 deprecation warning (if the bundle triggers</span>
+<span class="sd">                    any major browser&#39;s SHA-1 deprecation policy), SHA-2</span>
+<span class="sd">                    compatibility warning (if the bundle contains signatures using</span>
+<span class="sd">                    ECDSA SHA-2 hash algorithms, it will be rejected by Windows XP</span>
+<span class="sd">                    SP2), compatibility warning (if the bundle contains ECDSA</span>
+<span class="sd">                    certificates, it will be rejected by Windows XP, Android 2.2 and</span>
+<span class="sd">                    Android 2.3 etc) and root trust warning (if the bundle cannot be</span>
+<span class="sd">                    trusted by some major OSes or browsers).</span>
+<span class="sd">                  * rebundled indicates whether the server had to rebundle the</span>
+<span class="sd">                    certificate. The server will rebundle the uploaded</span>
+<span class="sd">                    certificate as needed; for example, if the certificate</span>
+<span class="sd">                    contains none of the required intermediates or a better set</span>
+<span class="sd">                    of intermediates was found. In this case, the server will</span>
+<span class="sd">                    mark rebundled as true.</span>
+<span class="sd">                  * untrusted_root_stores contains the names of any major</span>
+<span class="sd">                    OSes and browsers that doesn&#39;t trust the bundle. The names</span>
+<span class="sd">                    are used to construct the root trust warnings in the messages</span>
+<span class="sd">                    list</span>
+<span class="sd">                * subject contains the X.509 subject identifier from the</span>
+<span class="sd">                    certificate.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;certificate&#39;</span><span class="p">:</span> <span class="n">certificate</span><span class="p">,</span>
@@ -186,16 +186,16 @@
         <span class="sd">&quot;&quot;&quot; It returns information about the CA, including the cert.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            label (:obj:`str`): A string specifying the signer.</span>
-<span class="sd">            profile (:obj:`str`): a string specifying the signing profile for the</span>
+<span class="sd">            label (str): A string specifying the signer.</span>
+<span class="sd">            profile (str): a string specifying the signing profile for the</span>
 <span class="sd">                signer. Signing profile specifies what key usages should be</span>
 <span class="sd">                used and how long the expiry should be set.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (:obj:`dict`) Mapping with three keys:</span>
-<span class="sd">                * certificate (:obj:`str`): a PEM-encoded certificate of the signer.</span>
-<span class="sd">                * usage (:obj:`list` of :obj:`str`): Key usages from the signing</span>
+<span class="sd">            dict: Mapping with three keys:</span>
+<span class="sd">                * certificate (str): a PEM-encoded certificate of the signer.</span>
+<span class="sd">                * usage (list of str): Key usages from the signing</span>
 <span class="sd">                    profile.</span>
-<span class="sd">                * expiry (:obj:`str`): the expiry string from the signing profile.</span>
+<span class="sd">                * expiry (str): the expiry string from the signing profile.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
@@ -207,14 +207,14 @@
         <span class="sd">&quot;&quot;&quot; It initializes a new certificate authority.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            certificate_request (:obj:`cfssl.CertificateRequest`): The certificate</span>
+<span class="sd">            certificate_request (CertificateRequest): The certificate</span>
 <span class="sd">                request to use when creating the CA.</span>
-<span class="sd">            ca (:obj:`cfssl.ConfigServer`, optional): The configuration of the</span>
+<span class="sd">            ca (ConfigServer, optional): The configuration of the</span>
 <span class="sd">                requested Certificate Authority.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (:obj:`dict`) Mapping with two keys:</span>
-<span class="sd">                * private key (:obj:`str`): a PEM-encoded CA private key.</span>
-<span class="sd">                * certificate (:obj:`str`): a PEM-encoded self-signed CA certificate.</span>
+<span class="sd">            dict: Mapping with two keys:</span>
+<span class="sd">                * private key (str): a PEM-encoded CA private key.</span>
+<span class="sd">                * certificate (str): a PEM-encoded self-signed CA certificate.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">csr_api</span> <span class="o">=</span> <span class="n">certificate_request</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
@@ -230,20 +230,20 @@
         <span class="sd">&quot;&quot;&quot; It generates and returns a new private key + CSR.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            hosts (:obj:`iter` of :obj:`cfssl.Host`): Subject Alternative Name(s) for the</span>
+<span class="sd">            hosts (tuple of Host): Subject Alternative Name(s) for the</span>
 <span class="sd">                requested certificate.</span>
-<span class="sd">            names (:obj:`iter` of :obj:`cfssl.SubjectInfo`): The Subject Info(s) for the</span>
+<span class="sd">            names (tuple of SubjectInfo): The Subject Info(s) for the</span>
 <span class="sd">                requested certificate.</span>
-<span class="sd">            CN (:obj:`str`): the common name for the certificate subject in the</span>
+<span class="sd">            CN (str): the common name for the certificate subject in the</span>
 <span class="sd">                requestedrequested CA certificate.</span>
-<span class="sd">            key (:obj:`cfssl.ConfigKey`): Cipher and strength to use for certificate.</span>
-<span class="sd">            ca (:obj:`cfssl.ConfigServer`): the CA configuration of the requested CA.</span>
+<span class="sd">            key (ConfigKey): Cipher and strength to use for certificate.</span>
+<span class="sd">            ca (ConfigServer): the CA configuration of the requested CA.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (:obj:`dict`) Mapping with three keys:</span>
-<span class="sd">                * private key (:obj:`str`): a PEM-encoded CA private key.</span>
-<span class="sd">                * certificate (:obj:`str`): a PEM-encoded self-signed CA certificate.</span>
-<span class="sd">                * sums: (:obj:`dict`) Mapping holding both MD5 and SHA1 digests for the</span>
-<span class="sd">                    certificate request</span>
+<span class="sd">            dict: Mapping with three keys:</span>
+<span class="sd">                * private key (str): a PEM-encoded CA private key.</span>
+<span class="sd">                * certificate (str): a PEM-encoded self-signed CA certificate.</span>
+<span class="sd">                * sums (dict): Mapping holding both MD5 and SHA1 digests for</span>
+<span class="sd">                  the certificate request</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span>
@@ -262,22 +262,22 @@
         <span class="sd">&quot;&quot;&quot; It generates and returns a new private key and certificate.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            request (:obj:`cfssl.CertificateRequest`): CSR to be used for</span>
+<span class="sd">            request (CertificateRequest): CSR to be used for</span>
 <span class="sd">                certificate creation.</span>
-<span class="sd">            label (:obj:`str`): Specifying which signer to be appointed to sign</span>
+<span class="sd">            label (str): Specifying which signer to be appointed to sign</span>
 <span class="sd">                the CSR, useful when interacting with cfssl server that stands</span>
 <span class="sd">                in front of a remote multi-root CA signer.</span>
-<span class="sd">            profile (:obj:`str`): Specifying the signing profile for the signer.</span>
-<span class="sd">            bundle (:obj:`bool`): Specifying whether to include an &quot;optimal&quot;</span>
+<span class="sd">            profile (str): Specifying the signing profile for the signer.</span>
+<span class="sd">            bundle (bool): Specifying whether to include an &quot;optimal&quot;</span>
 <span class="sd">                certificate bundle along with the certificate.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (:obj:`dict`) mapping with these keys:</span>
-<span class="sd">                * private key: a PEM-encoded private key.</span>
-<span class="sd">                * certificate_request: a PEM-encoded certificate request.</span>
-<span class="sd">                * certificate: a PEM-encoded certificate, signed by the server.</span>
-<span class="sd">                * sums: a JSON object holding both MD5 and SHA1 digests for the</span>
+<span class="sd">            dict: mapping with these keys:</span>
+<span class="sd">                * private key (str): a PEM-encoded private key.</span>
+<span class="sd">                * certificate_request (str): a PEM-encoded certificate request.</span>
+<span class="sd">                * certificate (str): a PEM-encoded certificate, signed by the server.</span>
+<span class="sd">                * sums (dict): Holding both MD5 and SHA1 digests for the</span>
 <span class="sd">                    certificate request and the certificate.</span>
-<span class="sd">                * bundle: See the result of endpoint_bundle.txt (only included</span>
+<span class="sd">                * bundle (str): See the result of endpoint_bundle.txt (only included</span>
 <span class="sd">                    if the bundle parameter was set).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
@@ -292,11 +292,11 @@
         <span class="sd">&quot;&quot;&quot; It provides certificate revocation.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            serial (:obj:`str`): Specifying the serial number of a certificate.</span>
-<span class="sd">            authority_key_id (:obj:`str`): Specifying the authority key identifier</span>
+<span class="sd">            serial (str): Specifying the serial number of a certificate.</span>
+<span class="sd">            authority_key_id (str): Specifying the authority key identifier</span>
 <span class="sd">                of the certificate to be revoked; this is used to distinguish</span>
 <span class="sd">                which private key was used to sign the certificate.</span>
-<span class="sd">            reason (:obj:`str`): Identifying why the certificate was revoked; see,</span>
+<span class="sd">            reason (str): Identifying why the certificate was revoked; see,</span>
 <span class="sd">                for example, ReasonStringToCode in the ocsp package or section</span>
 <span class="sd">                4.2.1.13 of RFC 5280. The &quot;reasons&quot; used here are the ReasonFlag</span>
 <span class="sd">                names in said RFC.</span>
@@ -312,25 +312,25 @@
         <span class="sd">&quot;&quot;&quot; It scans servers to determine the quality of their TLS setup.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            host (:obj:`cfssl.Host`): The host to scan.</span>
-<span class="sd">            ip (:obj:`str`): IP Address to override DNS lookup of host.</span>
-<span class="sd">            timeout (:obj:`str`): The amount of time allotted for the scan to complete</span>
+<span class="sd">            host (Host): The host to scan.</span>
+<span class="sd">            ip (str): IP Address to override DNS lookup of host.</span>
+<span class="sd">            timeout (str): The amount of time allotted for the scan to complete</span>
 <span class="sd">                (default: 1 minute).</span>
-<span class="sd">            family (:obj:`str`): regular expression specifying scan famil(ies) to run.</span>
-<span class="sd">            scanner (:obj:`str`): regular expression specifying scanner(s) to run.</span>
+<span class="sd">            family (str): regular expression specifying scan famil(ies) to run.</span>
+<span class="sd">            scanner (str): regular expression specifying scanner(s) to run.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (:obj:`dict`) Mapping with keys for each scan family. Each of these</span>
+<span class="sd">            dict: Mapping with keys for each scan family. Each of these</span>
 <span class="sd">            objects contains keys for each scanner run in that family </span>
 <span class="sd">            pointing to objects possibly containing the following keys:</span>
-<span class="sd">            * grade (:obj:`str`): Describing the exit status of the scan. Can be:</span>
+<span class="sd">            * grade (str): Describing the exit status of the scan. Can be:</span>
 <span class="sd">                * &quot;Good&quot;: host performing the expected state-of-the-art.</span>
 <span class="sd">                * &quot;Warning&quot;: host with non-ideal configuration,</span>
 <span class="sd">                             possibly maintaining support for legacy clients.</span>
 <span class="sd">                * &quot;Bad&quot;: host with serious misconfiguration or vulnerability</span>
 <span class="sd">                * &quot;Skipped&quot;: indicates that the scan was not performed for some</span>
 <span class="sd">                             reason.</span>
-<span class="sd">            * error (:obj:`str`): Any error encountered during the scan process.</span>
-<span class="sd">            * output: (:obj:`dict`) Arbitrary data retrieved during the scan.</span>
+<span class="sd">            * error (str): Any error encountered during the scan process.</span>
+<span class="sd">            * output: (dict) Arbitrary data retrieved during the scan.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="n">host</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
@@ -345,10 +345,10 @@
         <span class="sd">&quot;&quot;&quot; It lists options available for scanning.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            (:obj:`dict`) Mapping with keys for each scan family. For each family,</span>
-<span class="sd">            there exists a `description` containing a string describing</span>
-<span class="sd">            the family and a `scanners` object mapping each of the family&#39;s</span>
-<span class="sd">            scanners to an object containing a `description` string.</span>
+<span class="sd">            dict: Mapping with keys for each scan family. For each family,</span>
+<span class="sd">                there exists a `description` containing a string describing</span>
+<span class="sd">                the family and a `scanners` object mapping each of the family&#39;s</span>
+<span class="sd">                scanners to an object containing a `description` string.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;scaninfo&#39;</span><span class="p">)</span></div>
 
@@ -357,22 +357,22 @@
         <span class="sd">&quot;&quot;&quot; It signs and returns a certificate.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            certificate_request (:obj:`str`): the CSR bytes to be signed (in PEM).</span>
-<span class="sd">            hosts (:obj:`iter` of :obj:`cfssl.Host`): of SAN (subject alternative .names)</span>
+<span class="sd">            certificate_request (str): the CSR bytes to be signed (in PEM).</span>
+<span class="sd">            hosts (tuple of Host): of SAN (subject alternative .names)</span>
 <span class="sd">                which overrides the ones in the CSR</span>
-<span class="sd">            subject (:obj:`str`): The certificate subject which overrides</span>
+<span class="sd">            subject (str): The certificate subject which overrides</span>
 <span class="sd">                the ones in the CSR.</span>
-<span class="sd">            serial_sequence (:obj:`str`): Specify the prefix which the generated</span>
+<span class="sd">            serial_sequence (str): Specify the prefix which the generated</span>
 <span class="sd">                certificate serial should have.</span>
-<span class="sd">            label (:obj:`str`): Specifying which signer to be appointed to sign</span>
+<span class="sd">            label (str): Specifying which signer to be appointed to sign</span>
 <span class="sd">                the CSR, useful when interacting with a remote multi-root CA</span>
 <span class="sd">                signer.</span>
-<span class="sd">            profile (:obj:`cfssl.ConfigServer`): Specifying the signing profile for</span>
+<span class="sd">            profile (ConfigServer): Specifying the signing profile for</span>
 <span class="sd">                the signer, useful when interacting with a remote multi-root</span>
 <span class="sd">                CA signer.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            (:obj:`str`) A PEM-encoded certificate that has been signed by the</span>
-<span class="sd">            server.</span>
+<span class="sd">            str: A PEM-encoded certificate that has been signed by the</span>
+<span class="sd">                server.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;certificate_request&#39;</span><span class="p">:</span> <span class="n">certificate_request</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
@@ -391,16 +391,16 @@
         <span class="sd">&quot;&quot;&quot; It calls the remote endpoint and returns the result, if success.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            endpoint (:obj:`str`): CFSSL endpoint to call (e.g. ``newcert``).</span>
-<span class="sd">            method (:obj:`str`): HTTP method to utilize for the Request.</span>
+<span class="sd">            endpoint (str): CFSSL endpoint to call (e.g. ``newcert``).</span>
+<span class="sd">            method (str): HTTP method to utilize for the Request.</span>
 <span class="sd">            params: (dict|bytes) Data to be sent in the query string</span>
 <span class="sd">                for the Request.</span>
-<span class="sd">            data: (:obj:`dict`|:obj:`bytes`|:obj:`file`) Data to send in the body</span>
+<span class="sd">            data: (dict or bytes or file) Data to send in the body</span>
 <span class="sd">                of the Request.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            (mixed) Data contained in ``result`` key of the API response.</span>
 <span class="sd">        Raises:</span>
-<span class="sd">            :obj:`CFSSLRemoteException`: In the event of a ``False`` in the</span>
+<span class="sd">            CFSSLRemoteException: In the event of a ``False`` in the</span>
 <span class="sd">                ``success`` key of the API response.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">endpoint</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/api/v1/cfssl/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri_base</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">)</span>

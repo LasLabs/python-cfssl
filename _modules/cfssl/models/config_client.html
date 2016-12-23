@@ -57,13 +57,13 @@
         <span class="sd">&quot;&quot;&quot; Initialize a new Client Configuration.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            sign_policy_default (:obj:`cfssl.PolicySign`): Default signing</span>
+<span class="sd">            sign_policy_default (PolicySign): Default signing</span>
 <span class="sd">                policy for client to use.</span>
-<span class="sd">            sign_policies_add (:type:`iter` of :obj:`cfssl.PolicySign`):</span>
+<span class="sd">            sign_policies_add (tuple of PolicySign):</span>
 <span class="sd">                Additional signing policies to use for the client.</span>
-<span class="sd">            auth_policies (:type:`iter` of :obj:`cfssl.PolicyAuth`): Auth</span>
+<span class="sd">            auth_policies (tuple of PolicyAuth): Auth</span>
 <span class="sd">                policies for the client.</span>
-<span class="sd">            remotes (:type:`iter` of :obj:`cfssl.Host`): Remote hosts that</span>
+<span class="sd">            remotes (tuple of Host): Remote hosts that</span>
 <span class="sd">                client trusts.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ConfigClient</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>

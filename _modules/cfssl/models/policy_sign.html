@@ -57,12 +57,12 @@
         <span class="sd">&quot;&quot;&quot; Initialize a new Signing Policy.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (:obj:`str`): Canonical name for policy.</span>
-<span class="sd">            usage_policies (:type:`iter` of :obj:`cfssl.PolicyUse`): Usage</span>
+<span class="sd">            name (str): Canonical name for policy.</span>
+<span class="sd">            usage_policies (tuple of PolicyUser): Usage</span>
 <span class="sd">                policies that should apply to this signing policy.</span>
-<span class="sd">            auth_policy (:obj:`obj.PolicyAuth`): Authentication policy that</span>
+<span class="sd">            auth_policy (PolicyAuth): Authentication policy that</span>
 <span class="sd">                should apply to this signing policy.</span>
-<span class="sd">            expire_delta  (:obj:`datetime.timedelta`): Delta representing when</span>
+<span class="sd">            expire_delta  (timedelta): Delta representing when</span>
 <span class="sd">                the signature should expire.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
