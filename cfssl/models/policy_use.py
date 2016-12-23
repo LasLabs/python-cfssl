@@ -10,8 +10,8 @@ class PolicyUse(object):
         """ Initialize a new Use Policy.
 
         Args:
-            name (:obj:`str`): Canonical name for policy.
-            code (:obj:`str`): CFSSL use code that policy applies to.
+            name (str): Canonical name for policy.
+            code (str): CFSSL use code that policy applies to.
         """
         self.name = name
         self.code = code

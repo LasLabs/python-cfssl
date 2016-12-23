@@ -10,12 +10,12 @@ class SubjectInfo(object):
         """ Initialize a new Subject Information.
 
         Args:
-            org_name (:obj:`str`): The full legal name of the organization. Do
+            org_name (str): The full legal name of the organization. Do
                 not abbreviate.
-            org_unit (:obj:`str`): Section of the organization.
-            city (:obj:`str`): The city where the organization is legally
+            org_unit (str): Section of the organization.
+            city (str): The city where the organization is legally
                 located.
-            country (:obj:`str`): The two letter ISO abbreviation for the
+            country (str): The two letter ISO abbreviation for the
                 country.
         """
         self.org_name = org_name

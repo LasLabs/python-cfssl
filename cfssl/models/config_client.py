@@ -13,13 +13,13 @@ class ConfigClient(ConfigMixer):
         """ Initialize a new Client Configuration.
 
         Args:
-            sign_policy_default (:obj:`cfssl.PolicySign`): Default signing
+            sign_policy_default (PolicySign): Default signing
                 policy for client to use.
-            sign_policies_add (:type:`iter` of :obj:`cfssl.PolicySign`):
+            sign_policies_add (tuple of PolicySign):
                 Additional signing policies to use for the client.
-            auth_policies (:type:`iter` of :obj:`cfssl.PolicyAuth`): Auth
+            auth_policies (tuple of PolicyAuth): Auth
                 policies for the client.
-            remotes (:type:`iter` of :obj:`cfssl.Host`): Remote hosts that
+            remotes (tuple of Host): Remote hosts that
                 client trusts.
         """
         super(ConfigClient, self).__init__(
