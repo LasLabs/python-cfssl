@@ -13,9 +13,9 @@ class ConfigKey(object):
         """ Initialize a new Client Configuration.
 
         Args:
-            algorithm (:obj:`str`, optional): Algorithm to use for key, one of
+            algorithm (str, optional): Algorithm to use for key, one of
                 ``rsa`` or ``ecdsa``. Defaults to ``rsa``.
-            strength (:obj:`int`, optional): Key bit strength. Defaults to
+            strength (int, optional): Key bit strength. Defaults to
                 ``4096``.
         """
         self.algorithm = algorithm

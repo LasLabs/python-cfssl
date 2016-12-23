@@ -10,11 +10,11 @@ class ConfigMixer(object):
         """ Initialize a new General Configuration for Server or Client.
 
         Args:
-            sign_policy_default (:obj:`cfssl.PolicySign`): Default signing
+            sign_policy_default (PolicySign): Default signing
                 policy for entity to use.
-            sign_policies_add (:type:`iter` of :obj:`cfssl.PolicySign`):
+            sign_policies_add (tuple of PolicySign):
                 Additional signing policies to use for the entity.
-            auth_policies (:type:`iter` of :obj:`cfssl.PolicyAuth`): Auth
+            auth_policies (tuple of PolicyAuth): Auth
                 policies for the entity.
         """
         self.sign_policy = sign_policy_default

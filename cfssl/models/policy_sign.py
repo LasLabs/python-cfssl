@@ -13,12 +13,12 @@ class PolicySign(object):
         """ Initialize a new Signing Policy.
 
         Args:
-            name (:obj:`str`): Canonical name for policy.
-            usage_policies (:type:`iter` of :obj:`cfssl.PolicyUse`): Usage
+            name (str): Canonical name for policy.
+            usage_policies (tuple of PolicyUser): Usage
                 policies that should apply to this signing policy.
-            auth_policy (:obj:`obj.PolicyAuth`): Authentication policy that
+            auth_policy (PolicyAuth): Authentication policy that
                 should apply to this signing policy.
-            expire_delta  (:obj:`datetime.timedelta`): Delta representing when
+            expire_delta  (timedelta): Delta representing when
                 the signature should expire.
         """
         self.name = name

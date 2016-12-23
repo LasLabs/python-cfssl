@@ -10,9 +10,9 @@ class PolicyAuth(object):
         """ Initialize a new Authentication Policy.
 
         Args:
-            name (:obj:`str`): Canonical name for policy.
-            key (:obj:`str`): Key/password data.
-            key_type (:obj:`str`): Type of key. Currently only ``standard`` is
+            name (str): Canonical name for policy.
+            key (str): Key/password data.
+            key_type (str): Type of key. Currently only ``standard`` is
                 supported.
         """
         self.name = name

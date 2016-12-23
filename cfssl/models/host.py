@@ -10,9 +10,9 @@ class Host(object):
         """ Initialize a new Client Configuration.
 
         Args:
-            name (:obj:`str`): Canonical name of host/remote.
-            host (:obj:`str`): Advertised host name or IP for host.
-            port (:obj:`int`, optional): Port number advertised by host, if
+            name (str): Canonical name of host/remote.
+            host (str): Advertised host name or IP for host.
+            port (int, optional): Port number advertised by host, if
                 any.
         """
         self.name = name
