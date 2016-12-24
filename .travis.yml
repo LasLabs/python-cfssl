@@ -1,30 +1,40 @@
 addons:
-    apt:
-        packages:
-            - expect-dev  # provides unbuffer utility
+  apt:
+    packages:
+      - expect-dev  # provides unbuffer utility
 
 language: python
 
 python:
-    - "2.7"
+  - "2.7"
 
 virtualenv:
-    system_site_packages: true
+  system_site_packages: true
 
 env:
-    global:
-        - TESTS="0" LINT_CHECK="0" DOCS="0" VERSION="0.1.0" RELEASE="0.1.0" PROJECT="Python CFSSL" BRANCH_PROD="master" BRANCH_DOC="gh-pages"
-    matrix:
-        - TESTS="1"
-        - DOCS="1"
+  global:
+    - VERSION="0.1.0"
+    - RELEASE="0.0.2"
+    - PROJECT="Python CFSSL"
+    - BRANCH_PROD="master"
+    - BRANCH_DOC="gh-pages"
+    - TESTS="0"
+    - LINT_CHECK="0"
+    - DOCS="0"
+    - PYPI="0"
+    - secure: "m5bpPi2ZU6vNchdCjGrj75NR2AWeGHTdPzpU7GIkintcaNA/wX9HPly7NsC91bZ0M3gzuY+xcJuUhKCTlHmDTnr2owP9bS21UFl6sd+WX1SfWcJibrcBdYVtqi3iJphoRnGFcPVq6KAx2s3IcitZivE++PdyLNac1gQgOzcshYcFEenVT+Q1kemPf8uC7bYZHrm75o6ukoeJXA1ydMxBk479YLtWkx6GefMJdCE4vN73SKUakuwZSgBD6s3EqntBWtf6jvFrIKnq0taGe8bSu0GMgX2BwBRrDkLzk0bKRH8B4cmb1MJ/0wCHboKculPVNNrqsYJ7tPlExUnLloPUUKXQKQHNJkaNV77fI8OrRyqu/jZW2IMsN/VgPHrzofmewM++Zd8IRugBjAJAC5BPl2nZQNn4QGoS7rDCjhG6phL+0YyM4wCdzcLBPrqJ4p1hDE6s2Hw6pSmDRie8lKHVMmxasbVUi/SP4lSUMzE/0UeRbTlWAoSA4ogIhWhOUy9P46tfzm2PhRjckx2MCH9Z4fPTWA44lK1SjwPRxBjC4o5Cj6fa4B5PRMSz+DaXyuB0uW0OB7pN9aLozkv7gKemv4GEeid8IWyHl7RwRv/OsCdLJ26+mJ/vqpei33ZxzhGHKjFxechCLa5n3SJm8jGAZicWv3xbiWyxR2SHsJH7PIw="
+  matrix:
+    - TESTS="1"
+    - PYPI="1"
+    - DOCS="1"
 
 install:
-    - git clone --depth=1 https://github.com/LasLabs/python-quality-tools.git ${HOME}/python-quality-tools
-    - export PATH=${HOME}/python-quality-tools/travis:${PATH}
-    - travis_install
+  - git clone --depth=1 https://github.com/LasLabs/python-quality-tools.git ${HOME}/python-quality-tools
+  - export PATH=${HOME}/python-quality-tools/travis:${PATH}
+  - travis_install
 
 script:
-    - travis_run
+  - travis_run
 
 after_success:
-    - travis_after_success
+  - travis_after_success
