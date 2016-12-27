@@ -185,6 +185,7 @@ class TestCFSSL(unittest.TestCase):
             url='https://test:1/api/v1/cfssl/endpoint',
             params='params',
             data='data',
+            verify=True,
         )
 
     @mock.patch.object(requests, 'request')

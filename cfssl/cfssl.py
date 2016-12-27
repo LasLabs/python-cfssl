@@ -16,8 +16,19 @@ class CFSSL(object):
     https://github.com/cloudflare/cfssl/tree/master/doc/api
     """
 
-    def __init__(self, host, port, ssl=True):
+    def __init__(self, host, port, ssl=True, verify_cert=True):
+        """ Initialize the CFSSL object.
+
+        Args:
+            host (str): Host or IP of remote CFSSL instance.
+            port (int): Port number of remote CFSSL instance.
+            ssl (bool): Whether to use SSL.
+            verify_cert (bool or str): File path of CA cert for verification,
+                `True` to use system certs, or `False` to disable certificate
+                verification.
+        """
         ssl = 'https' if ssl else 'http'
+        self.verify = verify_cert
         self.uri_base = '%s://%s:%d' % (ssl, host, port)
 
     def auth_sign(self, token, request, datetime=None, remote_address=None):
@@ -72,7 +83,7 @@ class CFSSL(object):
             domain name.
 
         Returns:
-            dict: Object repesenting the bundle, with the following keys:
+            dict: Object representing the bundle, with the following keys:
                 * bundle contains the concatenated list of PEM certificates
                   forming the certificate chain; this forms the actual
                   bundle. The remaining parameters are additional metadata
@@ -365,6 +376,7 @@ class CFSSL(object):
             url=endpoint,
             params=params,
             data=data,
+            verify=self.verify,
         )
         response = response.json()
         if not response['success']:
