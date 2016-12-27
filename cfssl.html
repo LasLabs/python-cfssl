@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>cfssl package &#8212; Python CFSSL 0.0.2b211 documentation</title>
+    <title>cfssl package &#8212; Python CFSSL 0.0.2b212 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.0.2b211',
+        VERSION:     '0.0.2b212',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -89,7 +89,7 @@
 <span id="cfssl-cfssl-module"></span><h2>cfssl.cfssl module<a class="headerlink" href="#module-cfssl.cfssl" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="cfssl.cfssl.CFSSL">
-<em class="property">class </em><code class="descclassname">cfssl.cfssl.</code><code class="descname">CFSSL</code><span class="sig-paren">(</span><em>host</em>, <em>port</em>, <em>ssl=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.cfssl.CFSSL" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cfssl.cfssl.</code><code class="descname">CFSSL</code><span class="sig-paren">(</span><em>host</em>, <em>port</em>, <em>ssl=True</em>, <em>verify_cert=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.cfssl.CFSSL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>It provides Python bindings to a remote CFSSL server via HTTP(S).</p>
 <p>Additional documentation regarding the API endpoints is available at
@@ -169,7 +169,7 @@ domain name.</dd>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
-<dt>Object repesenting the bundle, with the following keys:</dt>
+<dt>Object representing the bundle, with the following keys:</dt>
 <dd><ul class="first last">
 <li>bundle contains the concatenated list of PEM certificates
 forming the certificate chain; this forms the actual
