@@ -1,20 +1,17 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>cfssl package &#8212; Python CFSSL 0.0.2b215 documentation</title>
-    
+    <title>cfssl package &#8212; Python CFSSL 0.0.2b218 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.0.2b215',
+        VERSION:     '0.0.2b218',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -35,7 +32,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -103,10 +100,10 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The authentication token.</li>
-<li><strong>request</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.certificate_request.CertificateRequest" title="cfssl.models.certificate_request.CertificateRequest"><em>CertificateRequest</em></a>) &#8211; Signing request document.</li>
-<li><strong>datetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><em>datetime.datetime</em></a>) &#8211; Authentication timestamp.</li>
-<li><strong>remote_address</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; An address used in making the request.</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The authentication token.</li>
+<li><strong>request</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.certificate_request.CertificateRequest" title="cfssl.models.certificate_request.CertificateRequest"><em>CertificateRequest</em></a>) – Signing request document.</li>
+<li><strong>datetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><em>datetime.datetime</em></a>) – Authentication timestamp.</li>
+<li><strong>remote_address</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – An address used in making the request.</li>
 </ul>
 </td>
 </tr>
@@ -133,7 +130,7 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>certificate</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The PEM-encoded certificate to be bundled.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>certificate</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The PEM-encoded certificate to be bundled.</td>
 </tr>
 </tbody>
 </table>
@@ -186,10 +183,10 @@ certificate.</li>
 <li>key contains the private key for the certificate, if one
 was presented.</li>
 <li>key_size contains the size of the key in bits for the
-certificate. It will be present even if the private key wasn&#8217;t
+certificate. It will be present even if the private key wasn’t
 provided because this can be determined from the public key.</li>
 <li>key_type contains a textual description of the key type,
-e.g. &#8216;2048-bit RSA&#8217;.</li>
+e.g. ‘2048-bit RSA’.</li>
 <li>ocsp contains the OCSP URLs for the certificate, if present.</li>
 <li>ocsp_support will be true if the certificate supports OCSP
 revocation checking.</li>
@@ -205,10 +202,10 @@ for any certificates that might expire soon (within 30
 days).</li>
 <li>messages is a list of human-readable warnings on bundle
 ubiquity and certificate expiration. For example, an expiration
-warning can be &#8220;The expiring cert is #1 in the chain&#8221;,
+warning can be “The expiring cert is #1 in the chain”,
 indicating the leaf certificate is expiring. Ubiquity warnings
 include SHA-1 deprecation warning (if the bundle triggers
-any major browser&#8217;s SHA-1 deprecation policy), SHA-2
+any major browser’s SHA-1 deprecation policy), SHA-2
 compatibility warning (if the bundle contains signatures using
 ECDSA SHA-2 hash algorithms, it will be rejected by Windows XP
 SP2), compatibility warning (if the bundle contains ECDSA
@@ -222,7 +219,7 @@ contains none of the required intermediates or a better set
 of intermediates was found. In this case, the server will
 mark rebundled as true.</li>
 <li>untrusted_root_stores contains the names of any major
-OSes and browsers that doesn&#8217;t trust the bundle. The names
+OSes and browsers that doesn’t trust the bundle. The names
 are used to construct the root trust warnings in the messages
 list</li>
 </ul>
@@ -252,11 +249,11 @@ list</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>endpoint</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; CFSSL endpoint to call (e.g. <code class="docutils literal"><span class="pre">newcert</span></code>).</li>
-<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; HTTP method to utilize for the Request.</li>
-<li><strong>params</strong> &#8211; (dict|bytes) Data to be sent in the query string
+<li><strong>endpoint</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – CFSSL endpoint to call (e.g. <code class="docutils literal"><span class="pre">newcert</span></code>).</li>
+<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – HTTP method to utilize for the Request.</li>
+<li><strong>params</strong> – (dict|bytes) Data to be sent in the query string
 for the Request.</li>
-<li><strong>data</strong> &#8211; (dict or bytes or file) Data to send in the body
+<li><strong>data</strong> – (dict or bytes or file) Data to send in the body
 of the Request.</li>
 </ul>
 </td>
@@ -264,7 +261,7 @@ of the Request.</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">(mixed) Data contained in <code class="docutils literal"><span class="pre">result</span></code> key of the API response.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">CFSSLRemoteException</span></code> &#8211; In the event of a <code class="docutils literal"><span class="pre">False</span></code> in the
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">CFSSLRemoteException</span></code> – In the event of a <code class="docutils literal"><span class="pre">False</span></code> in the
 <code class="docutils literal"><span class="pre">success</span></code> key of the API response.</p>
 </td>
 </tr>
@@ -281,8 +278,8 @@ of the Request.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; A string specifying the signer.</li>
-<li><strong>profile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; a string specifying the signing profile for the
+<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – A string specifying the signer.</li>
+<li><strong>profile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – a string specifying the signing profile for the
 signer. Signing profile specifies what key usages should be
 used and how long the expiry should be set.</li>
 </ul>
@@ -320,9 +317,9 @@ used and how long the expiry should be set.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>certificate_request</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.certificate_request.CertificateRequest" title="cfssl.models.certificate_request.CertificateRequest"><em>CertificateRequest</em></a>) &#8211; The certificate
+<li><strong>certificate_request</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.certificate_request.CertificateRequest" title="cfssl.models.certificate_request.CertificateRequest"><em>CertificateRequest</em></a>) – The certificate
 request to use when creating the CA.</li>
-<li><strong>ca</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_server.ConfigServer" title="cfssl.models.config_server.ConfigServer"><em>ConfigServer</em></a><em>, </em><em>optional</em>) &#8211; The configuration of the
+<li><strong>ca</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_server.ConfigServer" title="cfssl.models.config_server.ConfigServer"><em>ConfigServer</em></a><em>, </em><em>optional</em>) – The configuration of the
 requested Certificate Authority.</li>
 </ul>
 </td>
@@ -354,13 +351,13 @@ requested Certificate Authority.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>request</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.certificate_request.CertificateRequest" title="cfssl.models.certificate_request.CertificateRequest"><em>CertificateRequest</em></a>) &#8211; CSR to be used for
+<li><strong>request</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.certificate_request.CertificateRequest" title="cfssl.models.certificate_request.CertificateRequest"><em>CertificateRequest</em></a>) – CSR to be used for
 certificate creation.</li>
-<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Specifying which signer to be appointed to sign
+<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Specifying which signer to be appointed to sign
 the CSR, useful when interacting with cfssl server that stands
 in front of a remote multi-root CA signer.</li>
-<li><strong>profile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Specifying the signing profile for the signer.</li>
-<li><strong>bundle</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Specifying whether to include an &#8220;optimal&#8221;
+<li><strong>profile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Specifying the signing profile for the signer.</li>
+<li><strong>bundle</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – Specifying whether to include an “optimal”
 certificate bundle along with the certificate.</li>
 </ul>
 </td>
@@ -403,14 +400,14 @@ certificate bundle along with the certificate.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>hosts</strong> (<em>tuple of Host</em>) &#8211; Subject Alternative Name(s) for the
+<li><strong>hosts</strong> (<em>tuple of Host</em>) – Subject Alternative Name(s) for the
 requested certificate.</li>
-<li><strong>names</strong> (<em>tuple of SubjectInfo</em>) &#8211; The Subject Info(s) for the
+<li><strong>names</strong> (<em>tuple of SubjectInfo</em>) – The Subject Info(s) for the
 requested certificate.</li>
-<li><strong>CN</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the common name for the certificate subject in the
+<li><strong>CN</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the common name for the certificate subject in the
 requestedrequested CA certificate.</li>
-<li><strong>key</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_key.ConfigKey" title="cfssl.models.config_key.ConfigKey"><em>ConfigKey</em></a>) &#8211; Cipher and strength to use for certificate.</li>
-<li><strong>ca</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_server.ConfigServer" title="cfssl.models.config_server.ConfigServer"><em>ConfigServer</em></a>) &#8211; the CA configuration of the requested CA.</li>
+<li><strong>key</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_key.ConfigKey" title="cfssl.models.config_key.ConfigKey"><em>ConfigKey</em></a>) – Cipher and strength to use for certificate.</li>
+<li><strong>ca</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_server.ConfigServer" title="cfssl.models.config_server.ConfigServer"><em>ConfigServer</em></a>) – the CA configuration of the requested CA.</li>
 </ul>
 </td>
 </tr>
@@ -443,13 +440,13 @@ the certificate request</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>serial</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Specifying the serial number of a certificate.</li>
-<li><strong>authority_key_id</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Specifying the authority key identifier
+<li><strong>serial</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Specifying the serial number of a certificate.</li>
+<li><strong>authority_key_id</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Specifying the authority key identifier
 of the certificate to be revoked; this is used to distinguish
 which private key was used to sign the certificate.</li>
-<li><strong>reason</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Identifying why the certificate was revoked; see,
+<li><strong>reason</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Identifying why the certificate was revoked; see,
 for example, ReasonStringToCode in the ocsp package or section
-4.2.1.13 of RFC 5280. The &#8220;reasons&#8221; used here are the ReasonFlag
+4.2.1.13 of RFC 5280. The “reasons” used here are the ReasonFlag
 names in said RFC.</li>
 </ul>
 </td>
@@ -467,12 +464,12 @@ names in said RFC.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>host</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.host.Host" title="cfssl.models.host.Host"><em>Host</em></a>) &#8211; The host to scan.</li>
-<li><strong>ip</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; IP Address to override DNS lookup of host.</li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The amount of time allotted for the scan to complete
+<li><strong>host</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.host.Host" title="cfssl.models.host.Host"><em>Host</em></a>) – The host to scan.</li>
+<li><strong>ip</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – IP Address to override DNS lookup of host.</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The amount of time allotted for the scan to complete
 (default: 1 minute).</li>
-<li><strong>family</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; regular expression specifying scan famil(ies) to run.</li>
-<li><strong>scanner</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; regular expression specifying scanner(s) to run.</li>
+<li><strong>family</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – regular expression specifying scan famil(ies) to run.</li>
+<li><strong>scanner</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – regular expression specifying scanner(s) to run.</li>
 </ul>
 </td>
 </tr>
@@ -482,15 +479,15 @@ pointing to objects possibly containing the following keys:
 * grade (str): Describing the exit status of the scan. Can be:</p>
 <blockquote>
 <div><ul class="simple">
-<li>&#8220;Good&#8221;: host performing the expected state-of-the-art.</li>
+<li>”Good”: host performing the expected state-of-the-art.</li>
 <li><dl class="first docutils">
-<dt>&#8220;Warning&#8221;: host with non-ideal configuration,</dt>
+<dt>”Warning”: host with non-ideal configuration,</dt>
 <dd>possibly maintaining support for legacy clients.</dd>
 </dl>
 </li>
-<li>&#8220;Bad&#8221;: host with serious misconfiguration or vulnerability</li>
+<li>”Bad”: host with serious misconfiguration or vulnerability</li>
 <li><dl class="first docutils">
-<dt>&#8220;Skipped&#8221;: indicates that the scan was not performed for some</dt>
+<dt>”Skipped”: indicates that the scan was not performed for some</dt>
 <dd>reason.</dd>
 </dl>
 </li>
@@ -521,7 +518,7 @@ pointing to objects possibly containing the following keys:
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
 <dt>Mapping with keys for each scan family. For each family,</dt>
 <dd>there exists a <cite>description</cite> containing a string describing
-the family and a <cite>scanners</cite> object mapping each of the family&#8217;s
+the family and a <cite>scanners</cite> object mapping each of the family’s
 scanners to an object containing a <cite>description</cite> string.</dd>
 </dl>
 </td>
@@ -541,17 +538,17 @@ scanners to an object containing a <cite>description</cite> string.</dd>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>certificate_request</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the CSR bytes to be signed (in PEM).</li>
-<li><strong>hosts</strong> (<em>tuple of Host</em>) &#8211; of SAN (subject alternative .names)
+<li><strong>certificate_request</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the CSR bytes to be signed (in PEM).</li>
+<li><strong>hosts</strong> (<em>tuple of Host</em>) – of SAN (subject alternative .names)
 which overrides the ones in the CSR</li>
-<li><strong>subject</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The certificate subject which overrides
+<li><strong>subject</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The certificate subject which overrides
 the ones in the CSR.</li>
-<li><strong>serial_sequence</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Specify the prefix which the generated
+<li><strong>serial_sequence</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Specify the prefix which the generated
 certificate serial should have.</li>
-<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Specifying which signer to be appointed to sign
+<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Specifying which signer to be appointed to sign
 the CSR, useful when interacting with a remote multi-root CA
 signer.</li>
-<li><strong>profile</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_server.ConfigServer" title="cfssl.models.config_server.ConfigServer"><em>ConfigServer</em></a>) &#8211; Specifying the signing profile for
+<li><strong>profile</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_server.ConfigServer" title="cfssl.models.config_server.ConfigServer"><em>ConfigServer</em></a>) – Specifying the signing profile for
 the signer, useful when interacting with a remote multi-root
 CA signer.</li>
 </ul>
@@ -598,7 +595,7 @@ CA signer.</li>
 <div class="section" id="module-cfssl">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cfssl" title="Permalink to this headline">¶</a></h2>
 <p>This library allows you to interact with a remote CFSSL server using Python.</p>
-<p>CFSSL is CloudFlare&#8217;s open source toolkit for everything TLS/SSL. CFSSL is used by
+<p>CFSSL is CloudFlare’s open source toolkit for everything TLS/SSL. CFSSL is used by
 CloudFlare for their internal Certificate Authority infrastructure and for all of
 their TLS certificates.</p>
 <ul class="simple">
@@ -677,7 +674,7 @@ their TLS certificates.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2016 LasLabs Inc..
+      &copy;2017 LasLabs Inc..
       
       |
       <a href="_sources/cfssl.rst.txt"

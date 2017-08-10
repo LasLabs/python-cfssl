@@ -12,24 +12,24 @@ Subpackages
 Submodules
 ----------
 
-cfssl.cfssl module
-------------------
+cfssl\.cfssl module
+-------------------
 
 .. automodule:: cfssl.cfssl
     :members:
     :undoc-members:
     :show-inheritance:
 
-cfssl.defaults module
----------------------
+cfssl\.defaults module
+----------------------
 
 .. automodule:: cfssl.defaults
     :members:
     :undoc-members:
     :show-inheritance:
 
-cfssl.exceptions module
------------------------
+cfssl\.exceptions module
+------------------------
 
 .. automodule:: cfssl.exceptions
     :members:

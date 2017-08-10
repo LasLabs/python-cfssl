@@ -1,83 +1,83 @@
-cfssl.tests package
-===================
+cfssl\.tests package
+====================
 
 Submodules
 ----------
 
-cfssl.tests.test_certificate_request module
--------------------------------------------
+cfssl\.tests\.test\_certificate\_request module
+-----------------------------------------------
 
 .. automodule:: cfssl.tests.test_certificate_request
     :members:
     :undoc-members:
     :show-inheritance:
 
-cfssl.tests.test_cfssl module
------------------------------
+cfssl\.tests\.test\_cfssl module
+--------------------------------
 
 .. automodule:: cfssl.tests.test_cfssl
     :members:
     :undoc-members:
     :show-inheritance:
 
-cfssl.tests.test_config_client module
--------------------------------------
+cfssl\.tests\.test\_config\_client module
+-----------------------------------------
 
 .. automodule:: cfssl.tests.test_config_client
     :members:
     :undoc-members:
     :show-inheritance:
 
-cfssl.tests.test_config_key module
-----------------------------------
+cfssl\.tests\.test\_config\_key module
+--------------------------------------
 
 .. automodule:: cfssl.tests.test_config_key
     :members:
     :undoc-members:
     :show-inheritance:
 
-cfssl.tests.test_config_mixer module
-------------------------------------
+cfssl\.tests\.test\_config\_mixer module
+----------------------------------------
 
 .. automodule:: cfssl.tests.test_config_mixer
     :members:
     :undoc-members:
     :show-inheritance:
 
-cfssl.tests.test_host module
-----------------------------
+cfssl\.tests\.test\_host module
+-------------------------------
 
 .. automodule:: cfssl.tests.test_host
     :members:
     :undoc-members:
     :show-inheritance:
 
-cfssl.tests.test_policy_auth module
------------------------------------
+cfssl\.tests\.test\_policy\_auth module
+---------------------------------------
 
 .. automodule:: cfssl.tests.test_policy_auth
     :members:
     :undoc-members:
     :show-inheritance:
 
-cfssl.tests.test_policy_sign module
------------------------------------
+cfssl\.tests\.test\_policy\_sign module
+---------------------------------------
 
 .. automodule:: cfssl.tests.test_policy_sign
     :members:
     :undoc-members:
     :show-inheritance:
 
-cfssl.tests.test_policy_use module
-----------------------------------
+cfssl\.tests\.test\_policy\_use module
+--------------------------------------
 
 .. automodule:: cfssl.tests.test_policy_use
     :members:
     :undoc-members:
     :show-inheritance:
 
-cfssl.tests.test_subject_info module
-------------------------------------
+cfssl\.tests\.test\_subject\_info module
+----------------------------------------
 
 .. automodule:: cfssl.tests.test_subject_info
     :members:
