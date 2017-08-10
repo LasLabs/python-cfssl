@@ -27,8 +27,8 @@ setup_vals = {
     'author': 'LasLabs Inc.',
     'author_email': 'support@laslabs.com',
     'description': SHORT_DESC,
-    'url': 'https://laslabs.github.io/%s' % PROJECT,
-    'download_url': 'https://github.com/LasLabs/%s' % PROJECT,
+    'url': 'https://laslabs.github.io/python-%s' % PROJECT,
+    'download_url': 'https://github.com/LasLabs/python-%s' % PROJECT,
     'license': 'MIT',
     'classifiers': [
         'Development Status :: 4 - Beta',
