@@ -3,10 +3,13 @@
 # License MIT (https://opensource.org/licenses/MIT).
 
 import requests
+import logging
 
 from .exceptions import CFSSLException, CFSSLRemoteException
 
 from .models.config_key import ConfigKey
+
+log = logging.getLogger(__name__)
 
 
 class CFSSL(object):
@@ -388,6 +391,9 @@ class CFSSL(object):
                     '\n'.join(map(CFSSL._format_response_message, response.get('messages', []))),
                 ])
             )
+        if response['messages']:
+            for message in response['messages']:
+                log.warning(CFSSL._format_response_message(message))
         return response['result']
 
     @staticmethod
