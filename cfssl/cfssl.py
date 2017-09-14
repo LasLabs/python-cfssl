@@ -375,7 +375,7 @@ class CFSSL(object):
             method=method,
             url=endpoint,
             params=params,
-            data=data,
+            json=data,
             verify=self.verify,
         )
         response = response.json()
