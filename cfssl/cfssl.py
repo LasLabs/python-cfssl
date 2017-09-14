@@ -383,12 +383,23 @@ class CFSSL(object):
             raise CFSSLRemoteException(
                 '\n'.join([
                     'Errors:',
-                    '\n'.join(response.get('errors', [])),
+                    '\n'.join(map(CFSSL._format_response_message, response.get('errors', []))),
                     'Messages:'
-                    '\n'.join(response.get('messages', [])),
+                    '\n'.join(map(CFSSL._format_response_message, response.get('messages', []))),
                 ])
             )
         return response['result']
+
+    @staticmethod
+    def _format_response_message(error):
+        message = ''
+        if 'message' in error:
+            message += error['message']
+        if 'code' in error:
+            message += ' (%s)' % error['code']
+        if not message:
+            message = str(error)
+        return message
 
     def _clean_mapping(self, mapping):
         """ It removes false entries from mapping """
