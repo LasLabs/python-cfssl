@@ -10,11 +10,11 @@ from .subject_info import SubjectInfo
 class CertificateRequest(object):
     """ It provides a Certificate Request compatible with CFSSL. """
 
-    def __init__(self, common_name, names=None, hosts=None, key=None):
+    def __init__(self, common_name=None, names=None, hosts=None, key=None):
         """ Initialize a new CertificateRequest.
 
         Args:
-            common_name (str): The fully qualified domain name for the
+            common_name (str, optional): The fully qualified domain name for the
                 server. This must be an exact match.
             names (tuple of SubjectInfo, optional):
                 Subject Information to be added to the request.
@@ -26,17 +26,20 @@ class CertificateRequest(object):
         self.common_name = common_name
         self.names = names or []
         self.hosts = hosts or []
-        self.key = key or ConfigKey()
+        self.key = key
 
     def to_api(self):
         """ It returns an object compatible with the API. """
-        return {
-            'CN': self.common_name,
+        api = {
             'names': [
                 name.to_api() for name in self.names
             ],
             'hosts': [
                 host.to_api() for host in self.hosts
-            ],
-            'key': self.key.to_api(),
+            ]
         }
+        if self.common_name:
+            api['CN'] = self.common_name
+        if self.key:
+            api['key'] = self.key.to_api()
+        return api
