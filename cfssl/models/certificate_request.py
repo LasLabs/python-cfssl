@@ -26,7 +26,7 @@ class CertificateRequest(object):
         self.common_name = common_name
         self.names = names or []
         self.hosts = hosts or []
-        self.key = key or KeyConfig()
+        self.key = key or ConfigKey()
 
     def to_api(self):
         """ It returns an object compatible with the API. """
