@@ -15,6 +15,8 @@ class SubjectInfo(object):
             org_unit (str): Section of the organization.
             city (str): The city where the organization is legally
                 located.
+            state (str): The state or province where your organization
+                is legally located. Can not be abbreviated.
             country (str): The two letter ISO abbreviation for the
                 country.
         """
