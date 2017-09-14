@@ -392,4 +392,4 @@ class CFSSL(object):
 
     def _clean_mapping(self, mapping):
         """ It removes false entries from mapping """
-        return {k:v for k, v in mapping.iteritems() if v}
+        return {k:v for k, v in mapping.items() if v}
