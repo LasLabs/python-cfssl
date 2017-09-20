@@ -18,19 +18,14 @@ python:
 env:
   global:
     - VERSION="0.1.0"
-    - RELEASE="0.0.2"
+    - RELEASE="0.0.3"
     - PROJECT="Python CFSSL"
-    - BRANCH_PROD="master"
-    - BRANCH_DOC="gh-pages"
-    - TESTS="0"
-    - LINT_CHECK="0"
-    - DOCS="0"
-    - PYPI="0"
     - secure: "TFbJiAM7SKnuJ9bI5IIFQb1PsXX5OPrA6hmAcr2J5M+YnLL6F2eapfflig+ODR0gMtEIXdUWIQNQOOKWlONCA0YdwmmkWVfGE7FSKjOj7TRN1qoXiUSIxD6FxL9DB1lkEOSRUDxjqZR+bg3NWB5280C/pxwi2bUzvxOI0ixaTUrdQc41vnu0X3R53LDauthkmcXyPJ5uyNB6g+vhMqiMryvGaNM6hhVjdEKN7KJnh3yCAn0ARtlC4pWxEb0ZEQ31KYAzoh4RDQcKbfaG4f3deSs4k4Ti25X28Qx2uySmQ4NGSSPXbuxusG7FGo5PflPAF28sQU38T5QjjBzgY1A8Rjo3PsCqrGxQmfpZEt6KYe3X1pxkbtZ2K7ntM7Wb2l9w1vpfUpmuJLKigMee+6+Fs4mmHXY7spAYKFAxRrHBXShdZWzOmvFxmAW/cyU8hwonmQg6ZDf9iKt4IPwrRgpXFR7nnxY+oD5zNglt/QafdlJklJ0igxvp4eLxu8IWmaBY0S8I3RvFOGjLw8i4AhwfNzm2hhPaysc+QsESm9U9X5dGsOfo/Aa3TSxoLjIS0l4UCbe9KfV9bWjb9Vp8TDENMmlhrY8QQ5sjC65EOE2e8aqL+zLpE3MGs5RhM3WxP/aKYoTR7gLjC+jkeTpl7UKjmHt9NE/Lrq1E+KquvTrAEhE="
   matrix:
     - TESTS="1"
     - PYPI="1"
     - DOCS="1"
+    - LINT="1"
 
 install:
   - git clone --depth=1 https://github.com/LasLabs/python-quality-tools.git ${HOME}/python-quality-tools
