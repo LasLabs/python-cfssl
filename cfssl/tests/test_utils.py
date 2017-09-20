@@ -8,14 +8,15 @@ from ..utils import to_api
 
 class TestUtils(unittest.TestCase):
     def test_to_api_native_structure(self):
-        """ It should return the same object when it doesn't implement to_api()"""
+        """It should return the same object when it doesn't implement to_api.
+        """
 
         expect = "fallback"
         res = to_api(expect)
         self.assertIs(res, expect)
 
     def test_to_api_object(self):
-        """ It should delegate to to_api() method of a supported object"""
+        """It should delegate to to_api() method of a supported object."""
 
         class SupportedObject(object):
             def to_api(self):

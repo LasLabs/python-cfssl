@@ -38,7 +38,7 @@ class TestCertificateRequest(unittest.TestCase):
         self.assertDictEqual(res, expect)
 
     def test_to_api_partial(self):
-        """ It should return the correctly compatible obj when no CN and no key are defined """
+        """It should handle when no CN and no key are defined"""
         res = self.model_partial.to_api()
         expect = {
             'names': [self.partial_vals['names'][0].to_api()],

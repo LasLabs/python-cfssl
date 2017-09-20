@@ -3,9 +3,11 @@
 # License MIT (https://opensource.org/licenses/MIT).
 
 import mock
+import unittest
 
 from ..models.config_client import ConfigClient
 from .test_config_mixer import TestConfigMixer
+
 
 class TestConfigClient(TestConfigMixer):
 

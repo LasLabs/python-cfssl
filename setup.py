@@ -83,6 +83,7 @@ class Tests(Command):
         if not res.wasSuccessful():
             raise FailTestException()
 
+
 if __name__ == "__main__":
     setup(
         packages=find_packages(exclude=('tests')),
