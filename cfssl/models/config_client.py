@@ -3,6 +3,7 @@
 # License MIT (https://opensource.org/licenses/MIT).
 
 from .config_mixer import ConfigMixer
+from ..utils import to_api
 
 
 class ConfigClient(ConfigMixer):
@@ -31,6 +32,6 @@ class ConfigClient(ConfigMixer):
         """ It returns an object compatible with the API. """
         res = super(ConfigClient, self).to_api()
         res['remotes'] = {
-            r.name: r.to_api() for r in self.remotes
+            r.name: to_api(r) for r in self.remotes
         }
         return res

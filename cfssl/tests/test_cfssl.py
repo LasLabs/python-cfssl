@@ -10,6 +10,7 @@ from ..cfssl import (CFSSL,
                      CFSSLRemoteException,
                      requests,
                      )
+from cfssl import cfssl
 
 _logger = logging.getLogger(__name__)
 
@@ -184,7 +185,7 @@ class TestCFSSL(unittest.TestCase):
             method='method',
             url='https://test:1/api/v1/cfssl/endpoint',
             params='params',
-            data='data',
+            json='data',
             verify=True,
         )
 
@@ -197,11 +198,29 @@ class TestCFSSL(unittest.TestCase):
 
     @mock.patch.object(requests, 'request')
     def test_call_success(self, requests):
-        """ It should reteurn result on success response """
+        """ It should return result on success response """
         requests().json.return_value = {'success': True,
                                         'result': 'result'}
         res = self.cfssl.call(None)
         self.assertEqual(res, 'result')
+
+    @mock.patch.object(cfssl, 'log')
+    @mock.patch.object(requests, 'request')
+    def test_log_messages(self, requests, log):
+        """ It should return result on success response """
+        requests().json.return_value = {'success': True,
+                                        'messages': [
+                                            {'message': 'some message', 'code': 5000},
+                                            {'code': 5001},
+                                            {'message': 'message only'},
+                                            'another message'],
+                                        'result': 'result'}
+        res = self.cfssl.call(None)
+        self.assertEqual(res, 'result')
+        log.warning.assert_any_call('some message (5000)')
+        log.warning.assert_any_call('<undefined message> (5001)')
+        log.warning.assert_any_call('message only')
+        log.warning.assert_any_call('another message')
 
 if __name__ == '__main__':
     unittest.main()

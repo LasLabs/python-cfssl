@@ -3,6 +3,7 @@
 # License MIT (https://opensource.org/licenses/MIT).
 
 from ..defaults import DEFAULT_EXPIRE_DELTA
+from ..utils import to_api
 
 
 class PolicySign(object):
@@ -31,5 +32,5 @@ class PolicySign(object):
         return {
             'auth_key': self.auth_policy.name,
             'expiry': '%ds' % self.expire_delta.total_seconds(),
-            'usages': [u.to_api() for u in self.usage_policies],
+            'usages': [to_api(u) for u in self.usage_policies],
         }
