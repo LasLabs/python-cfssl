@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>cfssl.tests.test_utils &#8212; Python CFSSL 0.0.3b239 documentation</title>
+    <title>cfssl.tests.test_utils &#8212; Python CFSSL 0.0.3b243 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.0.3b239',
+        VERSION:     '0.0.3b243',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -49,14 +49,15 @@
 
 <div class="viewcode-block" id="TestUtils"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_utils.TestUtils">[docs]</a><span class="k">class</span> <span class="nc">TestUtils</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
 <div class="viewcode-block" id="TestUtils.test_to_api_native_structure"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_utils.TestUtils.test_to_api_native_structure">[docs]</a>    <span class="k">def</span> <span class="nf">test_to_api_native_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; It should return the same object when it doesn&#39;t implement to_api()&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;It should return the same object when it doesn&#39;t implement to_api.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">expect</span> <span class="o">=</span> <span class="s2">&quot;fallback&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="n">to_api</span><span class="p">(</span><span class="n">expect</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertIs</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">expect</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TestUtils.test_to_api_object"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_utils.TestUtils.test_to_api_object">[docs]</a>    <span class="k">def</span> <span class="nf">test_to_api_object</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; It should delegate to to_api() method of a supported object&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;It should delegate to to_api() method of a supported object.&quot;&quot;&quot;</span>
 
         <span class="k">class</span> <span class="nc">SupportedObject</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
             <span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

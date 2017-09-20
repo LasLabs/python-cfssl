@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>cfssl package &#8212; Python CFSSL 0.0.3b239 documentation</title>
+    <title>cfssl package &#8212; Python CFSSL 0.0.3b243 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.0.3b239',
+        VERSION:     '0.0.3b243',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -144,11 +144,11 @@ arguments are valid:</p>
 <code class="docutils literal"><span class="pre">keyless</span></code> mode.</dd>
 <dt>flavor (str): One of <code class="docutils literal"><span class="pre">ubiquitous</span></code>, <code class="docutils literal"><span class="pre">force</span></code>, or <code class="docutils literal"><span class="pre">optimal</span></code>,</dt>
 <dd>with a default value of <code class="docutils literal"><span class="pre">ubiquitous</span></code>. A ubiquitous bundle is
-one that has a higher probability of being verified everywhere,
-even by clients using outdated or unusual trust stores. Force will
-cause the endpoint to use the bundle provided in the
-<code class="docutils literal"><span class="pre">certificate</span></code> parameter, and will only verify that the bundle
-is a valid (verifiable) chain.</dd>
+one that has a higher probability of being verified
+everywhere, even by clients using outdated or unusual trust
+stores. Force will cause the endpoint to use the bundle
+provided in the <code class="docutils literal"><span class="pre">certificate</span></code> parameter, and will only
+verify that the bundle is a valid (verifiable) chain.</dd>
 <dt>domain (str): The domain name to verify as the hostname of the</dt>
 <dd>certificate.</dd>
 <dt>ip (str): The IP address to verify against the certificate IP</dt>
@@ -184,8 +184,9 @@ certificate.</li>
 <li>key contains the private key for the certificate, if one
 was presented.</li>
 <li>key_size contains the size of the key in bits for the
-certificate. It will be present even if the private key wasn’t
-provided because this can be determined from the public key.</li>
+certificate. It will be present even if the private key
+wasn’t provided because this can be determined from the
+public key.</li>
 <li>key_type contains a textual description of the key type,
 e.g. ‘2048-bit RSA’.</li>
 <li>ocsp contains the OCSP URLs for the certificate, if present.</li>
@@ -194,35 +195,38 @@ revocation checking.</li>
 <li>signature contains the signature type used in the
 certificate, e.g. <code class="docutils literal"><span class="pre">SHA1WithRSA</span></code>.</li>
 <li>status contains a <a href="#id1"><span class="problematic" id="id2">:type:`dict`</span></a> of elements:
-* code is bit-encoded error code. 1st bit indicates whether<blockquote>
-<div>there is a expiring certificate in the bundle. 2nd bit indicates
-whether there is a ubiquity issue with the bundle.</div></blockquote>
-<ul class="simple">
+* code is bit-encoded error code. 1st bit indicates<blockquote>
+<div>whether there is a expiring certificate in the bundle.
+2nd bit indicates whether there is a ubiquity issue with
+the bundle.</div></blockquote>
+<ul>
 <li>expiring_SKIs contains the SKIs (subject key identifiers)
 for any certificates that might expire soon (within 30
 days).</li>
 <li>messages is a list of human-readable warnings on bundle
-ubiquity and certificate expiration. For example, an expiration
-warning can be “The expiring cert is #1 in the chain”,
-indicating the leaf certificate is expiring. Ubiquity warnings
-include SHA-1 deprecation warning (if the bundle triggers
-any major browser’s SHA-1 deprecation policy), SHA-2
-compatibility warning (if the bundle contains signatures using
-ECDSA SHA-2 hash algorithms, it will be rejected by Windows XP
-SP2), compatibility warning (if the bundle contains ECDSA
-certificates, it will be rejected by Windows XP, Android 2.2 and
-Android 2.3 etc) and root trust warning (if the bundle cannot be
-trusted by some major OSes or browsers).</li>
+ubiquity and certificate expiration. For example, an
+expiration warning can be “The expiring cert is #1 in
+the chain”, indicating the leaf certificate is expiring.
+Ubiquity warnings include SHA-1 deprecation warning (if
+the bundle triggers any major browser’s SHA-1 deprecation
+policy), SHA-2 compatibility warning (if the bundle
+contains signatures using ECDSA SHA-2 hash algorithms, it
+will be rejected by Windows XP SP2), compatibility warning
+(if the bundle contains ECDSA certificates, it will be
+rejected by Windows XP, Android 2.2 and Android 2.3 etc)
+and root trust warning (if the bundle cannot be trusted by<blockquote>
+<div>some major OSes or browsers).</div></blockquote>
+</li>
 <li>rebundled indicates whether the server had to rebundle the
 certificate. The server will rebundle the uploaded
 certificate as needed; for example, if the certificate
-contains none of the required intermediates or a better set
-of intermediates was found. In this case, the server will
-mark rebundled as true.</li>
+contains none of the required intermediates or a better
+set of intermediates was found. In this case, the server
+will mark rebundled as true.</li>
 <li>untrusted_root_stores contains the names of any major
-OSes and browsers that doesn’t trust the bundle. The names
-are used to construct the root trust warnings in the messages
-list</li>
+OSes and browsers that doesn’t trust the bundle. The
+names are used to construct the root trust warnings in
+the messages list</li>
 </ul>
 </li>
 <li><dl class="first docutils">
@@ -354,9 +358,12 @@ requested Certificate Authority.</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>request</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.certificate_request.CertificateRequest" title="cfssl.models.certificate_request.CertificateRequest"><em>CertificateRequest</em></a>) – CSR to be used for
 certificate creation.</li>
-<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Specifying which signer to be appointed to sign
-the CSR, useful when interacting with cfssl server that stands
-in front of a remote multi-root CA signer.</li>
+<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – <p>Specifying which signer to be appointed to sign
+the CSR, useful when interacting with cfssl server that</p>
+<blockquote>
+<div>stands</div></blockquote>
+<p>in front of a remote multi-root CA signer.</p>
+</li>
 <li><strong>profile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Specifying the signing profile for the signer.</li>
 <li><strong>bundle</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – Specifying whether to include an “optimal”
 certificate bundle along with the certificate.</li>
@@ -367,16 +374,24 @@ certificate bundle along with the certificate.</li>
 <dt>mapping with these keys:</dt>
 <dd><ul class="first last simple">
 <li>private key (str): a PEM-encoded private key.</li>
-<li>certificate_request (str): a PEM-encoded certificate request.</li>
-<li>certificate (str): a PEM-encoded certificate, signed by the server.</li>
+<li><dl class="first docutils">
+<dt>certificate_request (str): a PEM-encoded certificate</dt>
+<dd>request.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>certificate (str): a PEM-encoded certificate, signed by the</dt>
+<dd>server.</dd>
+</dl>
+</li>
 <li><dl class="first docutils">
 <dt>sums (dict): Holding both MD5 and SHA1 digests for the</dt>
 <dd>certificate request and the certificate.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>bundle (str): See the result of endpoint_bundle.txt (only included</dt>
-<dd>if the bundle parameter was set).</dd>
+<dt>bundle (str): See the result of endpoint_bundle.txt (only</dt>
+<dd>included if the bundle parameter was set).</dd>
 </dl>
 </li>
 </ul>
@@ -447,8 +462,8 @@ of the certificate to be revoked; this is used to distinguish
 which private key was used to sign the certificate.</li>
 <li><strong>reason</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Identifying why the certificate was revoked; see,
 for example, ReasonStringToCode in the ocsp package or section
-4.2.1.13 of RFC 5280. The “reasons” used here are the ReasonFlag
-names in said RFC.</li>
+4.2.1.13 of RFC 5280. The “reasons” used here are the
+ReasonFlag names in said RFC.</li>
 </ul>
 </td>
 </tr>
@@ -465,20 +480,22 @@ names in said RFC.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>host</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.host.Host" title="cfssl.models.host.Host"><em>Host</em></a>) – The host to scan.</li>
+<li><strong>host</strong> (<a class="reference internal" href="#cfssl.Host" title="cfssl.Host"><em>Host</em></a>) – The host to scan.</li>
 <li><strong>ip</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – IP Address to override DNS lookup of host.</li>
-<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The amount of time allotted for the scan to complete
-(default: 1 minute).</li>
-<li><strong>family</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – regular expression specifying scan famil(ies) to run.</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The amount of time allotted for the scan to
+complete (default: 1 minute).</li>
+<li><strong>family</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – regular expression specifying scan famil(ies) to
+run.</li>
 <li><strong>scanner</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – regular expression specifying scanner(s) to run.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>Mapping with keys for each scan family. Each of these
-objects contains keys for each scanner run in that family
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>Mapping with keys for each scan family. Each of these</dt>
+<dd><p class="first">objects contains keys for each scanner run in that family
 pointing to objects possibly containing the following keys:
 * grade (str): Describing the exit status of the scan. Can be:</p>
-<blockquote>
+<blockquote class="last">
 <div><ul class="simple">
 <li>”Good”: host performing the expected state-of-the-art.</li>
 <li><dl class="first docutils">
@@ -488,12 +505,14 @@ pointing to objects possibly containing the following keys:
 </li>
 <li>”Bad”: host with serious misconfiguration or vulnerability</li>
 <li><dl class="first docutils">
-<dt>”Skipped”: indicates that the scan was not performed for some</dt>
-<dd>reason.</dd>
+<dt>”Skipped”: indicates that the scan was not performed for</dt>
+<dd>some reason.</dd>
 </dl>
 </li>
 </ul>
 </div></blockquote>
+</dd>
+</dl>
 <ul class="simple">
 <li>error (str): Any error encountered during the scan process.</li>
 <li>output: (dict) Arbitrary data retrieved during the scan.</li>
@@ -519,8 +538,9 @@ pointing to objects possibly containing the following keys:
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
 <dt>Mapping with keys for each scan family. For each family,</dt>
 <dd>there exists a <cite>description</cite> containing a string describing
-the family and a <cite>scanners</cite> object mapping each of the family’s
-scanners to an object containing a <cite>description</cite> string.</dd>
+the family and a <cite>scanners</cite> object mapping each of the
+family’s scanners to an object containing a <code class="docutils literal"><span class="pre">description</span></code>
+string.</dd>
 </dl>
 </td>
 </tr>
@@ -597,21 +617,21 @@ CA signer.</li>
 <span id="cfssl-utils-module"></span><h2>cfssl.utils module<a class="headerlink" href="#module-cfssl.utils" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="cfssl.utils.to_api">
-<code class="descclassname">cfssl.utils.</code><code class="descname">to_api</code><span class="sig-paren">(</span><em>object</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/utils.html#to_api"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.utils.to_api" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ensure an object is converted using it’s to_api method if it exists.</p>
+<code class="descclassname">cfssl.utils.</code><code class="descname">to_api</code><span class="sig-paren">(</span><em>_object</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/utils.html#to_api"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.utils.to_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure an object is converted using its <code class="docutils literal"><span class="pre">to_api</span></code> method if it exists.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>object</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#any" title="(in Python v2.7)"><em>any</em></a>) – </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>_object</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><em>object</em></a>) – Object to convert to API, or simply return.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
-<dt>A PEM-encoded certificate that has been signed by the</dt>
-<dd>server.</dd>
+<dt>A dictionary representation of the object that is compatible with</dt>
+<dd>the CFSSL server API.</dd>
 </dl>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
 </tr>
 </tbody>
 </table>
@@ -620,14 +640,632 @@ CA signer.</li>
 </div>
 <div class="section" id="module-cfssl">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cfssl" title="Permalink to this headline">¶</a></h2>
-<p>This library allows you to interact with a remote CFSSL server using Python.</p>
-<p>CFSSL is CloudFlare’s open source toolkit for everything TLS/SSL. CFSSL is used by
-CloudFlare for their internal Certificate Authority infrastructure and for all of
-their TLS certificates.</p>
+<p>This library allows you to interact with a remote CFSSL server in Python.</p>
+<p>CFSSL is CloudFlare’s open source toolkit for everything TLS/SSL. CFSSL is
+used by CloudFlare for their internal Certificate Authority infrastructure and
+for all of their TLS certificates.</p>
 <ul class="simple">
 <li><a class="reference external" href="https://blog.cloudflare.com/introducing-cfssl/">Read more on the CloudFlare blog</a>.</li>
 <li><a class="reference external" href="https://github.com/cloudflare/cfssl">View the CFSSL source</a>.</li>
 </ul>
+<dl class="class">
+<dt id="cfssl.CFSSL">
+<em class="property">class </em><code class="descclassname">cfssl.</code><code class="descname">CFSSL</code><span class="sig-paren">(</span><em>host</em>, <em>port</em>, <em>ssl=True</em>, <em>verify_cert=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.CFSSL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>It provides Python bindings to a remote CFSSL server via HTTP(S).</p>
+<p>Additional documentation regarding the API endpoints is available at
+<a class="reference external" href="https://github.com/cloudflare/cfssl/tree/master/doc/api">https://github.com/cloudflare/cfssl/tree/master/doc/api</a></p>
+<dl class="method">
+<dt id="cfssl.CFSSL.auth_sign">
+<code class="descname">auth_sign</code><span class="sig-paren">(</span><em>token</em>, <em>request</em>, <em>datetime=None</em>, <em>remote_address=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL.auth_sign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.CFSSL.auth_sign" title="Permalink to this definition">¶</a></dt>
+<dd><p>It provides returns a signed certificate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The authentication token.</li>
+<li><strong>request</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.certificate_request.CertificateRequest" title="cfssl.models.certificate_request.CertificateRequest"><em>CertificateRequest</em></a>) – Signing request document.</li>
+<li><strong>datetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/datetime.html#datetime.datetime" title="(in Python v2.7)"><em>datetime.datetime</em></a>) – Authentication timestamp.</li>
+<li><strong>remote_address</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – An address used in making the request.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>A PEM-encoded certificate that has been signed by the</dt>
+<dd><p class="first last">server.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cfssl.CFSSL.bundle">
+<code class="descname">bundle</code><span class="sig-paren">(</span><em>certificate</em>, <em>private_key=None</em>, <em>flavor='ubiquitous'</em>, <em>domain=None</em>, <em>ip=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL.bundle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.CFSSL.bundle" title="Permalink to this definition">¶</a></dt>
+<dd><p>It builds and returns certificate bundles.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>certificate</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The PEM-encoded certificate to be bundled.</td>
+</tr>
+</tbody>
+</table>
+<p>If the <code class="docutils literal"><span class="pre">certificate</span></code> parameter is present, the following four
+arguments are valid:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>private_key (str): The PEM-encoded private key to be included with</dt>
+<dd>the bundle. This is valid only if the server is not running in
+<code class="docutils literal"><span class="pre">keyless</span></code> mode.</dd>
+<dt>flavor (str): One of <code class="docutils literal"><span class="pre">ubiquitous</span></code>, <code class="docutils literal"><span class="pre">force</span></code>, or <code class="docutils literal"><span class="pre">optimal</span></code>,</dt>
+<dd>with a default value of <code class="docutils literal"><span class="pre">ubiquitous</span></code>. A ubiquitous bundle is
+one that has a higher probability of being verified
+everywhere, even by clients using outdated or unusual trust
+stores. Force will cause the endpoint to use the bundle
+provided in the <code class="docutils literal"><span class="pre">certificate</span></code> parameter, and will only
+verify that the bundle is a valid (verifiable) chain.</dd>
+<dt>domain (str): The domain name to verify as the hostname of the</dt>
+<dd>certificate.</dd>
+<dt>ip (str): The IP address to verify against the certificate IP</dt>
+<dd>SANs.</dd>
+</dl>
+</div></blockquote>
+<p>If only the <code class="docutils literal"><span class="pre">domain</span></code> parameter is present, the following
+parameter is valid:</p>
+<dl class="docutils">
+<dt>ip (str): The IP address of the remote host; this will fetch the</dt>
+<dd>certificate from the IP, and verify that it is valid for the
+domain name.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>Object representing the bundle, with the following keys:</dt>
+<dd><ul class="first last">
+<li>bundle contains the concatenated list of PEM certificates
+forming the certificate chain; this forms the actual
+bundle. The remaining parameters are additional metadata
+supporting the bundle.</li>
+<li>crl_support is true if CRL information is contained in the
+certificate.</li>
+<li>crt contains the original certificate the bundle is built
+from.</li>
+<li>expires contains the expiration date of the certificate.</li>
+<li>hostnames contains the SAN hostnames for the certificate.</li>
+<li>issuer contains the X.509 issuer information for the
+certificate.</li>
+<li>key contains the private key for the certificate, if one
+was presented.</li>
+<li>key_size contains the size of the key in bits for the
+certificate. It will be present even if the private key
+wasn’t provided because this can be determined from the
+public key.</li>
+<li>key_type contains a textual description of the key type,
+e.g. ‘2048-bit RSA’.</li>
+<li>ocsp contains the OCSP URLs for the certificate, if present.</li>
+<li>ocsp_support will be true if the certificate supports OCSP
+revocation checking.</li>
+<li>signature contains the signature type used in the
+certificate, e.g. <code class="docutils literal"><span class="pre">SHA1WithRSA</span></code>.</li>
+<li>status contains a <a href="#id3"><span class="problematic" id="id4">:type:`dict`</span></a> of elements:
+* code is bit-encoded error code. 1st bit indicates<blockquote>
+<div>whether there is a expiring certificate in the bundle.
+2nd bit indicates whether there is a ubiquity issue with
+the bundle.</div></blockquote>
+<ul>
+<li>expiring_SKIs contains the SKIs (subject key identifiers)
+for any certificates that might expire soon (within 30
+days).</li>
+<li>messages is a list of human-readable warnings on bundle
+ubiquity and certificate expiration. For example, an
+expiration warning can be “The expiring cert is #1 in
+the chain”, indicating the leaf certificate is expiring.
+Ubiquity warnings include SHA-1 deprecation warning (if
+the bundle triggers any major browser’s SHA-1 deprecation
+policy), SHA-2 compatibility warning (if the bundle
+contains signatures using ECDSA SHA-2 hash algorithms, it
+will be rejected by Windows XP SP2), compatibility warning
+(if the bundle contains ECDSA certificates, it will be
+rejected by Windows XP, Android 2.2 and Android 2.3 etc)
+and root trust warning (if the bundle cannot be trusted by<blockquote>
+<div>some major OSes or browsers).</div></blockquote>
+</li>
+<li>rebundled indicates whether the server had to rebundle the
+certificate. The server will rebundle the uploaded
+certificate as needed; for example, if the certificate
+contains none of the required intermediates or a better
+set of intermediates was found. In this case, the server
+will mark rebundled as true.</li>
+<li>untrusted_root_stores contains the names of any major
+OSes and browsers that doesn’t trust the bundle. The
+names are used to construct the root trust warnings in
+the messages list</li>
+</ul>
+</li>
+<li><dl class="first docutils">
+<dt>subject contains the X.509 subject identifier from the</dt>
+<dd>certificate.</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cfssl.CFSSL.call">
+<code class="descname">call</code><span class="sig-paren">(</span><em>endpoint</em>, <em>method='GET'</em>, <em>params=None</em>, <em>data=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL.call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.CFSSL.call" title="Permalink to this definition">¶</a></dt>
+<dd><p>It calls the remote endpoint and returns the result, if success.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>endpoint</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – CFSSL endpoint to call (e.g. <code class="docutils literal"><span class="pre">newcert</span></code>).</li>
+<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – HTTP method to utilize for the Request.</li>
+<li><strong>params</strong> – (dict|bytes) Data to be sent in the query string
+for the Request.</li>
+<li><strong>data</strong> – (dict or bytes or file) Data to send in the body
+of the Request.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">(mixed) Data contained in <code class="docutils literal"><span class="pre">result</span></code> key of the API response.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">CFSSLRemoteException</span></code> – In the event of a <code class="docutils literal"><span class="pre">False</span></code> in the
+<code class="docutils literal"><span class="pre">success</span></code> key of the API response.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cfssl.CFSSL.info">
+<code class="descname">info</code><span class="sig-paren">(</span><em>label</em>, <em>profile=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.CFSSL.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns information about the CA, including the cert.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – A string specifying the signer.</li>
+<li><strong>profile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – a string specifying the signing profile for the
+signer. Signing profile specifies what key usages should be
+used and how long the expiry should be set.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>Mapping with three keys:</dt>
+<dd><ul class="first last simple">
+<li>certificate (str): a PEM-encoded certificate of the signer.</li>
+<li><dl class="first docutils">
+<dt>usage (list of str): Key usages from the signing</dt>
+<dd>profile.</dd>
+</dl>
+</li>
+<li>expiry (str): the expiry string from the signing profile.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cfssl.CFSSL.init_ca">
+<code class="descname">init_ca</code><span class="sig-paren">(</span><em>certificate_request</em>, <em>ca=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL.init_ca"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.CFSSL.init_ca" title="Permalink to this definition">¶</a></dt>
+<dd><p>It initializes a new certificate authority.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>certificate_request</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.certificate_request.CertificateRequest" title="cfssl.models.certificate_request.CertificateRequest"><em>CertificateRequest</em></a>) – The certificate
+request to use when creating the CA.</li>
+<li><strong>ca</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_server.ConfigServer" title="cfssl.models.config_server.ConfigServer"><em>ConfigServer</em></a><em>, </em><em>optional</em>) – The configuration of the
+requested Certificate Authority.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>Mapping with two keys:</dt>
+<dd><ul class="first last simple">
+<li>private key (str): a PEM-encoded CA private key.</li>
+<li>certificate (str): a PEM-encoded self-signed CA certificate.</li>
+</ul>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cfssl.CFSSL.new_cert">
+<code class="descname">new_cert</code><span class="sig-paren">(</span><em>request</em>, <em>label=None</em>, <em>profile=None</em>, <em>bundle=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL.new_cert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.CFSSL.new_cert" title="Permalink to this definition">¶</a></dt>
+<dd><p>It generates and returns a new private key and certificate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>request</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.certificate_request.CertificateRequest" title="cfssl.models.certificate_request.CertificateRequest"><em>CertificateRequest</em></a>) – CSR to be used for
+certificate creation.</li>
+<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – <p>Specifying which signer to be appointed to sign
+the CSR, useful when interacting with cfssl server that</p>
+<blockquote>
+<div>stands</div></blockquote>
+<p>in front of a remote multi-root CA signer.</p>
+</li>
+<li><strong>profile</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Specifying the signing profile for the signer.</li>
+<li><strong>bundle</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – Specifying whether to include an “optimal”
+certificate bundle along with the certificate.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>mapping with these keys:</dt>
+<dd><ul class="first last simple">
+<li>private key (str): a PEM-encoded private key.</li>
+<li><dl class="first docutils">
+<dt>certificate_request (str): a PEM-encoded certificate</dt>
+<dd>request.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>certificate (str): a PEM-encoded certificate, signed by the</dt>
+<dd>server.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>sums (dict): Holding both MD5 and SHA1 digests for the</dt>
+<dd>certificate request and the certificate.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>bundle (str): See the result of endpoint_bundle.txt (only</dt>
+<dd>included if the bundle parameter was set).</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cfssl.CFSSL.new_key">
+<code class="descname">new_key</code><span class="sig-paren">(</span><em>hosts</em>, <em>names</em>, <em>common_name=None</em>, <em>key=None</em>, <em>ca=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL.new_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.CFSSL.new_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>It generates and returns a new private key + CSR.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hosts</strong> (<em>tuple of Host</em>) – Subject Alternative Name(s) for the
+requested certificate.</li>
+<li><strong>names</strong> (<em>tuple of SubjectInfo</em>) – The Subject Info(s) for the
+requested certificate.</li>
+<li><strong>CN</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the common name for the certificate subject in the
+requestedrequested CA certificate.</li>
+<li><strong>key</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_key.ConfigKey" title="cfssl.models.config_key.ConfigKey"><em>ConfigKey</em></a>) – Cipher and strength to use for certificate.</li>
+<li><strong>ca</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_server.ConfigServer" title="cfssl.models.config_server.ConfigServer"><em>ConfigServer</em></a>) – the CA configuration of the requested CA.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>Mapping with three keys:</dt>
+<dd><ul class="first last simple">
+<li>private key (str): a PEM-encoded CA private key.</li>
+<li>certificate (str): a PEM-encoded self-signed CA certificate.</li>
+<li>sums (dict): Mapping holding both MD5 and SHA1 digests for
+the certificate request</li>
+</ul>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cfssl.CFSSL.revoke">
+<code class="descname">revoke</code><span class="sig-paren">(</span><em>serial</em>, <em>authority_key_id</em>, <em>reason</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL.revoke"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.CFSSL.revoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>It provides certificate revocation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>serial</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Specifying the serial number of a certificate.</li>
+<li><strong>authority_key_id</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Specifying the authority key identifier
+of the certificate to be revoked; this is used to distinguish
+which private key was used to sign the certificate.</li>
+<li><strong>reason</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Identifying why the certificate was revoked; see,
+for example, ReasonStringToCode in the ocsp package or section
+4.2.1.13 of RFC 5280. The “reasons” used here are the
+ReasonFlag names in said RFC.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cfssl.CFSSL.scan">
+<code class="descname">scan</code><span class="sig-paren">(</span><em>host</em>, <em>ip=None</em>, <em>timeout=None</em>, <em>family=None</em>, <em>scanner=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL.scan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.CFSSL.scan" title="Permalink to this definition">¶</a></dt>
+<dd><p>It scans servers to determine the quality of their TLS setup.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>host</strong> (<a class="reference internal" href="#cfssl.Host" title="cfssl.Host"><em>Host</em></a>) – The host to scan.</li>
+<li><strong>ip</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – IP Address to override DNS lookup of host.</li>
+<li><strong>timeout</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The amount of time allotted for the scan to
+complete (default: 1 minute).</li>
+<li><strong>family</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – regular expression specifying scan famil(ies) to
+run.</li>
+<li><strong>scanner</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – regular expression specifying scanner(s) to run.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>Mapping with keys for each scan family. Each of these</dt>
+<dd><p class="first">objects contains keys for each scanner run in that family
+pointing to objects possibly containing the following keys:
+* grade (str): Describing the exit status of the scan. Can be:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>”Good”: host performing the expected state-of-the-art.</li>
+<li><dl class="first docutils">
+<dt>”Warning”: host with non-ideal configuration,</dt>
+<dd>possibly maintaining support for legacy clients.</dd>
+</dl>
+</li>
+<li>”Bad”: host with serious misconfiguration or vulnerability</li>
+<li><dl class="first docutils">
+<dt>”Skipped”: indicates that the scan was not performed for</dt>
+<dd>some reason.</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+<ul class="simple">
+<li>error (str): Any error encountered during the scan process.</li>
+<li>output: (dict) Arbitrary data retrieved during the scan.</li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cfssl.CFSSL.scan_info">
+<code class="descname">scan_info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL.scan_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.CFSSL.scan_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>It lists options available for scanning.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>Mapping with keys for each scan family. For each family,</dt>
+<dd>there exists a <cite>description</cite> containing a string describing
+the family and a <cite>scanners</cite> object mapping each of the
+family’s scanners to an object containing a <code class="docutils literal"><span class="pre">description</span></code>
+string.</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)">dict</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="cfssl.CFSSL.sign">
+<code class="descname">sign</code><span class="sig-paren">(</span><em>certificate_request</em>, <em>hosts=None</em>, <em>subject=None</em>, <em>serial_sequence=None</em>, <em>label=None</em>, <em>profile=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/cfssl.html#CFSSL.sign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.CFSSL.sign" title="Permalink to this definition">¶</a></dt>
+<dd><p>It signs and returns a certificate.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>certificate_request</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the CSR bytes to be signed (in PEM).</li>
+<li><strong>hosts</strong> (<em>tuple of Host</em>) – of SAN (subject alternative .names)
+which overrides the ones in the CSR</li>
+<li><strong>subject</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The certificate subject which overrides
+the ones in the CSR.</li>
+<li><strong>serial_sequence</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Specify the prefix which the generated
+certificate serial should have.</li>
+<li><strong>label</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Specifying which signer to be appointed to sign
+the CSR, useful when interacting with a remote multi-root CA
+signer.</li>
+<li><strong>profile</strong> (<a class="reference internal" href="cfssl.models.html#cfssl.models.config_server.ConfigServer" title="cfssl.models.config_server.ConfigServer"><em>ConfigServer</em></a>) – Specifying the signing profile for
+the signer, useful when interacting with a remote multi-root
+CA signer.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>A PEM-encoded certificate that has been signed by the</dt>
+<dd><p class="first last">server.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cfssl.CertificateRequest">
+<em class="property">class </em><code class="descclassname">cfssl.</code><code class="descname">CertificateRequest</code><span class="sig-paren">(</span><em>common_name=None</em>, <em>names=None</em>, <em>hosts=None</em>, <em>key=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/certificate_request.html#CertificateRequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.CertificateRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>It provides a Certificate Request compatible with CFSSL.</p>
+<dl class="method">
+<dt id="cfssl.CertificateRequest.to_api">
+<code class="descname">to_api</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/certificate_request.html#CertificateRequest.to_api"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.CertificateRequest.to_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns an object compatible with the API.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cfssl.ConfigClient">
+<em class="property">class </em><code class="descclassname">cfssl.</code><code class="descname">ConfigClient</code><span class="sig-paren">(</span><em>sign_policy_default</em>, <em>sign_policies_add</em>, <em>auth_policies</em>, <em>remotes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/config_client.html#ConfigClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.ConfigClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cfssl.models.html#cfssl.models.config_mixer.ConfigMixer" title="cfssl.models.config_mixer.ConfigMixer"><code class="xref py py-class docutils literal"><span class="pre">cfssl.models.config_mixer.ConfigMixer</span></code></a></p>
+<p>It provides a Client Config compatible with CFSSL.</p>
+<dl class="method">
+<dt id="cfssl.ConfigClient.to_api">
+<code class="descname">to_api</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/config_client.html#ConfigClient.to_api"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.ConfigClient.to_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns an object compatible with the API.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cfssl.ConfigKey">
+<em class="property">class </em><code class="descclassname">cfssl.</code><code class="descname">ConfigKey</code><span class="sig-paren">(</span><em>algorithm='rsa'</em>, <em>strength=4096</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/config_key.html#ConfigKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.ConfigKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>It provides a Key Config compatible with CFSSL.</p>
+<dl class="method">
+<dt id="cfssl.ConfigKey.to_api">
+<code class="descname">to_api</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/config_key.html#ConfigKey.to_api"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.ConfigKey.to_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns an object compatible with the API.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cfssl.ConfigServer">
+<em class="property">class </em><code class="descclassname">cfssl.</code><code class="descname">ConfigServer</code><span class="sig-paren">(</span><em>sign_policy_default</em>, <em>sign_policies_add</em>, <em>auth_policies</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/config_server.html#ConfigServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.ConfigServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cfssl.models.html#cfssl.models.config_mixer.ConfigMixer" title="cfssl.models.config_mixer.ConfigMixer"><code class="xref py py-class docutils literal"><span class="pre">cfssl.models.config_mixer.ConfigMixer</span></code></a></p>
+<p>It provides a Server Config compatible with CFSSL.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="cfssl.Host">
+<em class="property">class </em><code class="descclassname">cfssl.</code><code class="descname">Host</code><span class="sig-paren">(</span><em>name</em>, <em>host</em>, <em>port=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/host.html#Host"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.Host" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>It provides a Host compatible with CFSSL.</p>
+<dl class="method">
+<dt id="cfssl.Host.to_api">
+<code class="descname">to_api</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/host.html#Host.to_api"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.Host.to_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns an object compatible with the API.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cfssl.PolicyAuth">
+<em class="property">class </em><code class="descclassname">cfssl.</code><code class="descname">PolicyAuth</code><span class="sig-paren">(</span><em>name</em>, <em>key</em>, <em>key_type='standard'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/policy_auth.html#PolicyAuth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.PolicyAuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>It provides a Certificate Auth policy compatible with CFSSL</p>
+<dl class="method">
+<dt id="cfssl.PolicyAuth.to_api">
+<code class="descname">to_api</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/policy_auth.html#PolicyAuth.to_api"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.PolicyAuth.to_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns an object compatible with the API.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cfssl.PolicySign">
+<em class="property">class </em><code class="descclassname">cfssl.</code><code class="descname">PolicySign</code><span class="sig-paren">(</span><em>name</em>, <em>usage_policies</em>, <em>auth_policy</em>, <em>expire_delta=datetime.timedelta(365)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/policy_sign.html#PolicySign"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.PolicySign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>It provides a Certificate Auth policy compatible with CFSSL</p>
+<dl class="method">
+<dt id="cfssl.PolicySign.to_api">
+<code class="descname">to_api</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/policy_sign.html#PolicySign.to_api"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.PolicySign.to_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns an object compatible with the API.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cfssl.PolicyUse">
+<em class="property">class </em><code class="descclassname">cfssl.</code><code class="descname">PolicyUse</code><span class="sig-paren">(</span><em>name</em>, <em>code</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/policy_use.html#PolicyUse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.PolicyUse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>It provides a Certificate Use policy compatible with CFSSL</p>
+<dl class="method">
+<dt id="cfssl.PolicyUse.to_api">
+<code class="descname">to_api</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/policy_use.html#PolicyUse.to_api"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.PolicyUse.to_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns an object compatible with the API.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cfssl.SubjectInfo">
+<em class="property">class </em><code class="descclassname">cfssl.</code><code class="descname">SubjectInfo</code><span class="sig-paren">(</span><em>org_name</em>, <em>org_unit</em>, <em>city</em>, <em>state</em>, <em>country</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/subject_info.html#SubjectInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.SubjectInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>It provides a SubjectInfo (Name) compatible with CFSSL.</p>
+<dl class="method">
+<dt id="cfssl.SubjectInfo.to_api">
+<code class="descname">to_api</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/cfssl/models/subject_info.html#SubjectInfo.to_api"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cfssl.SubjectInfo.to_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>It returns an object compatible with the API.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 

@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>cfssl.utils &#8212; Python CFSSL 0.0.3b239 documentation</title>
+    <title>cfssl.utils &#8212; Python CFSSL 0.0.3b243 documentation</title>
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.0.3b239',
+        VERSION:     '0.0.3b243',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -44,16 +44,19 @@
 <span class="c1"># License MIT (https://opensource.org/licenses/MIT).</span>
 
 
-<div class="viewcode-block" id="to_api"><a class="viewcode-back" href="../../cfssl.html#cfssl.utils.to_api">[docs]</a><span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Ensure an object is converted using it&#39;s to_api method if it exists.</span>
+<div class="viewcode-block" id="to_api"><a class="viewcode-back" href="../../cfssl.html#cfssl.utils.to_api">[docs]</a><span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="n">_object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Ensure an object is converted using its ``to_api`` method if it exists.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        object (any):</span>
+<span class="sd">        _object (object): Object to convert to API, or simply return.</span>
 <span class="sd">    Returns:</span>
-<span class="sd">        str: A PEM-encoded certificate that has been signed by the</span>
-<span class="sd">            server.</span>
+<span class="sd">       dict: A dictionary representation of the object that is compatible with</span>
+<span class="sd">        the CFSSL server API.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="s1">&#39;to_api&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="nb">object</span></div>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_object</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_object</span></div>
 </pre></div>
 
           </div>

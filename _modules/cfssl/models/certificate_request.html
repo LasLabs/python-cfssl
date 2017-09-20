@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>cfssl.models.certificate_request &#8212; Python CFSSL 0.0.3b239 documentation</title>
+    <title>cfssl.models.certificate_request &#8212; Python CFSSL 0.0.3b243 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.0.3b239',
+        VERSION:     '0.0.3b243',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -43,21 +43,18 @@
 <span class="c1"># Copyright 2016 LasLabs Inc.</span>
 <span class="c1"># License MIT (https://opensource.org/licenses/MIT).</span>
 
-<span class="kn">from</span> <span class="nn">.host</span> <span class="k">import</span> <span class="n">Host</span>
-<span class="kn">from</span> <span class="nn">.config_key</span> <span class="k">import</span> <span class="n">ConfigKey</span>
-<span class="kn">from</span> <span class="nn">.subject_info</span> <span class="k">import</span> <span class="n">SubjectInfo</span>
 <span class="kn">from</span> <span class="nn">..utils</span> <span class="k">import</span> <span class="n">to_api</span>
 
 
-<div class="viewcode-block" id="CertificateRequest"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.models.certificate_request.CertificateRequest">[docs]</a><span class="k">class</span> <span class="nc">CertificateRequest</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; It provides a Certificate Request compatible with CFSSL. &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CertificateRequest"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.CertificateRequest">[docs]</a><span class="k">class</span> <span class="nc">CertificateRequest</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;It provides a Certificate Request compatible with CFSSL.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">common_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hosts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Initialize a new CertificateRequest.</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a new CertificateRequest.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            common_name (str, optional): The fully qualified domain name for the</span>
-<span class="sd">                server. This must be an exact match.</span>
+<span class="sd">            common_name (str, optional): The fully qualified domain name for</span>
+<span class="sd">                the server. This must be an exact match.</span>
 <span class="sd">            names (tuple of SubjectInfo, optional):</span>
 <span class="sd">                Subject Information to be added to the request.</span>
 <span class="sd">            hosts (tuple of Host, optional): Hosts</span>
@@ -70,8 +67,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="n">hosts</span> <span class="ow">or</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
 
-<div class="viewcode-block" id="CertificateRequest.to_api"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.models.certificate_request.CertificateRequest.to_api">[docs]</a>    <span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; It returns an object compatible with the API. &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CertificateRequest.to_api"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.CertificateRequest.to_api">[docs]</a>    <span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;It returns an object compatible with the API.&quot;&quot;&quot;</span>
         <span class="n">api</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span>
                 <span class="n">to_api</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">names</span>

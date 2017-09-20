@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>cfssl.models.policy_sign &#8212; Python CFSSL 0.0.3b239 documentation</title>
+    <title>cfssl.models.policy_sign &#8212; Python CFSSL 0.0.3b243 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.0.3b239',
+        VERSION:     '0.0.3b243',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -47,7 +47,7 @@
 <span class="kn">from</span> <span class="nn">..utils</span> <span class="k">import</span> <span class="n">to_api</span>
 
 
-<div class="viewcode-block" id="PolicySign"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.models.policy_sign.PolicySign">[docs]</a><span class="k">class</span> <span class="nc">PolicySign</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="PolicySign"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.PolicySign">[docs]</a><span class="k">class</span> <span class="nc">PolicySign</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; It provides a Certificate Auth policy compatible with CFSSL &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">usage_policies</span><span class="p">,</span> <span class="n">auth_policy</span><span class="p">,</span>
@@ -68,7 +68,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">auth_policy</span> <span class="o">=</span> <span class="n">auth_policy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">expire_delta</span> <span class="o">=</span> <span class="n">expire_delta</span>
 
-<div class="viewcode-block" id="PolicySign.to_api"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.models.policy_sign.PolicySign.to_api">[docs]</a>    <span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PolicySign.to_api"><a class="viewcode-back" href="../../../cfssl.models.html#cfssl.PolicySign.to_api">[docs]</a>    <span class="k">def</span> <span class="nf">to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It returns an object compatible with the API. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s1">&#39;auth_key&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_policy</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
