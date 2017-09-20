@@ -1,4 +1,6 @@
-|License MIT| | |Build Status| | |Coveralls Status| | |Codecov Status| | |Code Climate|
+|License MIT| | |PyPi Package| | |PyPi Versions|
+
+|Build Status| | |Test Coverage| | |Code Climate|
 
 ====================
 Python CFSSL Library
@@ -56,14 +58,18 @@ Maintainer
    :alt: LasLabs Inc.
    :target: https://laslabs.com
 
-.. |Build Status| image:: https://api.travis-ci.org/LasLabs/python-cfssl.svg?branch=master
+.. |Build Status| image:: https://img.shields.io/travis/LasLabs/python-cfssl/master.svg
    :target: https://travis-ci.org/LasLabs/python-cfssl
-.. |Coveralls Status| image:: https://coveralls.io/repos/LasLabs/python-cfssl/badge.svg?branch=master
-   :target: https://coveralls.io/r/LasLabs/python-cfssl?branch=master
-.. |Codecov Status| image:: https://codecov.io/gh/LasLabs/python-cfssl/branch/master/graph/badge.svg
+.. |Test Coverage| image:: https://img.shields.io/codecov/c/github/LasLabs/python-cfssl/master.svg
    :target: https://codecov.io/gh/LasLabs/python-cfssl
-.. |Code Climate| image:: https://codeclimate.com/github/laslabs/Python-CFSSL/badges/gpa.svg
-   :target: https://codeclimate.com/github/laslabs/Python-CFSSL
-.. |License MIT| image:: https://img.shields.io/badge/license-MIT-blue.svg
+.. |Code Climate| image:: https://img.shields.io/codeclimate/github/LasLabs/python-cfssl.svg
+   :target: https://codeclimate.com/github/LasLabs/python-cfssl
+.. |License MIT| image:: https://img.shields.io/github/license/laslabs/python-cfssl.svg
    :target: https://opensource.org/licenses/MIT
-   :alt: License: AGPL-3
+   :alt: License: MIT
+.. |PyPi Package| image:: https://img.shields.io/pypi/v/cfssl.svg
+   :target: https://pypi.python.org/pypi/cfssl
+   :alt: PyPi Package
+.. |PyPi Versions| image:: https://img.shields.io/pypi/pyversions/cfssl.svg
+   :target: https://pypi.python.org/pypi/cfssl
+   :alt: PyPi Versions
