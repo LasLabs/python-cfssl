@@ -84,6 +84,14 @@ cfssl\.tests\.test\_subject\_info module
     :undoc-members:
     :show-inheritance:
 
+cfssl\.tests\.test\_utils module
+--------------------------------
+
+.. automodule:: cfssl.tests.test_utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------

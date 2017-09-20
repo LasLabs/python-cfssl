@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>cfssl.tests.test_certificate_request &#8212; Python CFSSL 0.0.2b218 documentation</title>
+    <title>cfssl.tests.test_certificate_request &#8212; Python CFSSL 0.0.2b229 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.0.2b218',
+        VERSION:     '0.0.2b229',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -59,7 +59,13 @@
             <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()],</span>
             <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">(),</span>
         <span class="p">}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">CertificateRequest</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">vals</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">CertificateRequest</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">vals</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">partial_vals</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()],</span>
+            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mock</span><span class="o">.</span><span class="n">MagicMock</span><span class="p">()],</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_partial</span> <span class="o">=</span> <span class="n">CertificateRequest</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">partial_vals</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TestCertificateRequest.test_to_api"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_certificate_request.TestCertificateRequest.test_to_api">[docs]</a>    <span class="k">def</span> <span class="nf">test_to_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It should return the correctly compatible obj &quot;&quot;&quot;</span>
@@ -69,6 +75,15 @@
             <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">vals</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()],</span>
             <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">vals</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()],</span>
             <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vals</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertDictEqual</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">expect</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestCertificateRequest.test_to_api_partial"><a class="viewcode-back" href="../../../cfssl.tests.html#cfssl.tests.test_certificate_request.TestCertificateRequest.test_to_api_partial">[docs]</a>    <span class="k">def</span> <span class="nf">test_to_api_partial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; It should return the correctly compatible obj when no CN and no key are defined &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_partial</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
+        <span class="n">expect</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">partial_vals</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()],</span>
+            <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">partial_vals</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_api</span><span class="p">()],</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertDictEqual</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">expect</span><span class="p">)</span></div></div>
 

@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>cfssl.cfssl &#8212; Python CFSSL 0.0.2b218 documentation</title>
+    <title>cfssl.cfssl &#8212; Python CFSSL 0.0.2b229 documentation</title>
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.0.2b218',
+        VERSION:     '0.0.2b229',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -44,10 +44,14 @@
 <span class="c1"># License MIT (https://opensource.org/licenses/MIT).</span>
 
 <span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">CFSSLException</span><span class="p">,</span> <span class="n">CFSSLRemoteException</span>
 
 <span class="kn">from</span> <span class="nn">.models.config_key</span> <span class="k">import</span> <span class="n">ConfigKey</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">to_api</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="CFSSL"><a class="viewcode-back" href="../../cfssl.html#cfssl.cfssl.CFSSL">[docs]</a><span class="k">class</span> <span class="nc">CFSSL</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -86,7 +90,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">token</span><span class="p">,</span>
-            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">to_api</span><span class="p">(</span><span class="n">request</span><span class="p">),</span>
             <span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
             <span class="s1">&#39;remote_address&#39;</span><span class="p">:</span> <span class="n">remote_address</span><span class="p">,</span>
         <span class="p">})</span>
@@ -224,13 +228,13 @@
 <span class="sd">                * private key (str): a PEM-encoded CA private key.</span>
 <span class="sd">                * certificate (str): a PEM-encoded self-signed CA certificate.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">csr_api</span> <span class="o">=</span> <span class="n">certificate_request</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span>
+        <span class="n">csr_api</span> <span class="o">=</span> <span class="n">to_api</span><span class="p">(</span><span class="n">certificate_request</span><span class="p">)</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="n">csr_api</span><span class="p">[</span><span class="s1">&#39;hosts&#39;</span><span class="p">],</span>
             <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="n">csr_api</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">],</span>
             <span class="s1">&#39;CN&#39;</span><span class="p">:</span> <span class="n">csr_api</span><span class="p">[</span><span class="s1">&#39;CN&#39;</span><span class="p">],</span>
             <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">csr_api</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;ca&#39;</span><span class="p">:</span> <span class="n">ca</span> <span class="ow">and</span> <span class="n">ca</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;ca&#39;</span><span class="p">:</span> <span class="n">ca</span> <span class="ow">and</span> <span class="n">to_api</span><span class="p">(</span><span class="n">ca</span><span class="p">)</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;init_ca&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
 
@@ -255,14 +259,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
             <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="n">host</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span>
+                <span class="n">to_api</span><span class="p">(</span><span class="n">host</span><span class="p">)</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span>
             <span class="p">],</span>
             <span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="n">name</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span>
+                <span class="n">to_api</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span>
             <span class="p">],</span>
             <span class="s1">&#39;CN&#39;</span><span class="p">:</span> <span class="n">common_name</span><span class="p">,</span>
-            <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span> <span class="ow">and</span> <span class="n">key</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="ow">or</span> <span class="n">ConfigKey</span><span class="p">()</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
-            <span class="s1">&#39;ca&#39;</span><span class="p">:</span> <span class="n">ca</span> <span class="ow">and</span> <span class="n">ca</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span> <span class="ow">and</span> <span class="n">to_api</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">or</span> <span class="n">ConfigKey</span><span class="p">()</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+            <span class="s1">&#39;ca&#39;</span><span class="p">:</span> <span class="n">ca</span> <span class="ow">and</span> <span class="n">to_api</span><span class="p">(</span><span class="n">ca</span><span class="p">)</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;newkey&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span></div>
 
@@ -289,7 +293,7 @@
 <span class="sd">                    if the bundle parameter was set).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
-            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+            <span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">to_api</span><span class="p">(</span><span class="n">request</span><span class="p">),</span>
             <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
             <span class="s1">&#39;profile&#39;</span><span class="p">:</span> <span class="n">profile</span><span class="p">,</span>
             <span class="s1">&#39;bundle&#39;</span><span class="p">:</span> <span class="n">bundle</span><span class="p">,</span>
@@ -341,7 +345,7 @@
 <span class="sd">            * output: (dict) Arbitrary data retrieved during the scan.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
-            <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="n">host</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+            <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="n">to_api</span><span class="p">(</span><span class="n">host</span><span class="p">),</span>
             <span class="s1">&#39;ip&#39;</span><span class="p">:</span> <span class="n">ip</span><span class="p">,</span>
             <span class="s1">&#39;timeout&#39;</span><span class="p">:</span> <span class="n">timeout</span><span class="p">,</span>
             <span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="n">family</span><span class="p">,</span>
@@ -383,14 +387,14 @@
 <span class="sd">                server.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean_mapping</span><span class="p">({</span>
-            <span class="s1">&#39;certificate_request&#39;</span><span class="p">:</span> <span class="n">certificate_request</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+            <span class="s1">&#39;certificate_request&#39;</span><span class="p">:</span> <span class="n">to_api</span><span class="p">(</span><span class="n">certificate_request</span><span class="p">),</span>
             <span class="s1">&#39;hosts&#39;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="n">host</span><span class="o">.</span><span class="n">to_api</span><span class="p">()</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span>
+                <span class="n">to_api</span><span class="p">(</span><span class="n">host</span><span class="p">)</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span>
             <span class="p">],</span>
             <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="n">subject</span><span class="p">,</span>
             <span class="s1">&#39;serial_sequence&#39;</span><span class="p">:</span> <span class="n">serial_sequence</span><span class="p">,</span>
             <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
-            <span class="s1">&#39;profile&#39;</span><span class="p">:</span> <span class="n">profile</span><span class="o">.</span><span class="n">to_api</span><span class="p">(),</span>
+            <span class="s1">&#39;profile&#39;</span><span class="p">:</span> <span class="n">to_api</span><span class="p">(</span><span class="n">profile</span><span class="p">),</span>
         <span class="p">})</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;sign&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;certificate&#39;</span><span class="p">]</span></div>
@@ -416,7 +420,7 @@
             <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
             <span class="n">url</span><span class="o">=</span><span class="n">endpoint</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-            <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+            <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
             <span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verify</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
@@ -424,16 +428,30 @@
             <span class="k">raise</span> <span class="n">CFSSLRemoteException</span><span class="p">(</span>
                 <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
                     <span class="s1">&#39;Errors:&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;errors&#39;</span><span class="p">,</span> <span class="p">[])),</span>
+                    <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">CFSSL</span><span class="o">.</span><span class="n">_format_response_message</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;errors&#39;</span><span class="p">,</span> <span class="p">[]))),</span>
                     <span class="s1">&#39;Messages:&#39;</span>
-                    <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;messages&#39;</span><span class="p">,</span> <span class="p">[])),</span>
+                    <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">CFSSL</span><span class="o">.</span><span class="n">_format_response_message</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;messages&#39;</span><span class="p">,</span> <span class="p">[]))),</span>
                 <span class="p">])</span>
             <span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;messages&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;messages&#39;</span><span class="p">]:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">CFSSL</span><span class="o">.</span><span class="n">_format_response_message</span><span class="p">(</span><span class="n">message</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_format_response_message</span><span class="p">(</span><span class="n">error</span><span class="p">):</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="n">error</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;message&#39;</span> <span class="ow">in</span> <span class="n">error</span> <span class="k">else</span> <span class="s1">&#39;&lt;undefined message&gt;&#39;</span>
+            <span class="k">if</span> <span class="s1">&#39;code&#39;</span> <span class="ow">in</span> <span class="n">error</span><span class="p">:</span>
+                <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39; (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">error</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">message</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">message</span>
 
     <span class="k">def</span> <span class="nf">_clean_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; It removes false entries from mapping &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="p">}</span></div>
+        <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="p">}</span></div>
 </pre></div>
 
           </div>

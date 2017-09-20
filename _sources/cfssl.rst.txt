@@ -36,6 +36,14 @@ cfssl\.exceptions module
     :undoc-members:
     :show-inheritance:
 
+cfssl\.utils module
+-------------------
+
+.. automodule:: cfssl.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------
