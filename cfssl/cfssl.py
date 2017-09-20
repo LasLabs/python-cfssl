@@ -392,7 +392,7 @@ class CFSSL(object):
                     '\n'.join(map(CFSSL._format_response_message, response.get('messages', []))),
                 ])
             )
-        if response['messages']:
+        if 'messages' in response:
             for message in response['messages']:
                 log.warning(CFSSL._format_response_message(message))
         return response['result']
@@ -400,10 +400,10 @@ class CFSSL(object):
     @staticmethod
     def _format_response_message(error):
         message = ''
-        if 'message' in error:
-            message += error['message']
-        if 'code' in error:
-            message += ' (%s)' % error['code']
+        if isinstance(error, dict):
+            message += error['message'] if 'message' in error else '<undefined message>'
+            if 'code' in error:
+                message += ' (%s)' % error['code']
         if not message:
             message = str(error)
         return message
