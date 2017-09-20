@@ -8,6 +8,7 @@ import logging
 from .exceptions import CFSSLException, CFSSLRemoteException
 
 from .models.config_key import ConfigKey
+from .utils import to_api
 
 log = logging.getLogger(__name__)
 
@@ -48,7 +49,7 @@ class CFSSL(object):
         """
         data = self._clean_mapping({
             'token': token,
-            'request': request.to_api(),
+            'request': to_api(request),
             'datetime': datetime,
             'remote_address': remote_address,
         })
@@ -186,13 +187,13 @@ class CFSSL(object):
                 * private key (str): a PEM-encoded CA private key.
                 * certificate (str): a PEM-encoded self-signed CA certificate.
         """
-        csr_api = certificate_request.to_api()
+        csr_api = to_api(certificate_request)
         data = self._clean_mapping({
             'hosts': csr_api['hosts'],
             'names': csr_api['names'],
             'CN': csr_api['CN'],
             'key': csr_api['key'],
-            'ca': ca and ca.to_api() or None,
+            'ca': ca and to_api(ca) or None,
         })
         return self.call('init_ca', 'POST', data=data)
 
@@ -217,14 +218,14 @@ class CFSSL(object):
         """
         data = self._clean_mapping({
             'hosts': [
-                host.to_api() for host in hosts
+                to_api(host) for host in hosts
             ],
             'names': [
-                name.to_api() for name in names
+                to_api(name) for name in names
             ],
             'CN': common_name,
-            'key': key and key.to_api() or ConfigKey().to_api(),
-            'ca': ca and ca.to_api() or None,
+            'key': key and to_api(key) or ConfigKey().to_api(),
+            'ca': ca and to_api(ca) or None,
         })
         return self.call('newkey', 'POST', data=data)
 
@@ -251,7 +252,7 @@ class CFSSL(object):
                     if the bundle parameter was set).
         """
         data = self._clean_mapping({
-            'request': request.to_api(),
+            'request': to_api(request),
             'label': label,
             'profile': profile,
             'bundle': bundle,
@@ -303,7 +304,7 @@ class CFSSL(object):
             * output: (dict) Arbitrary data retrieved during the scan.
         """
         data = self._clean_mapping({
-            'host': host.to_api(),
+            'host': to_api(host),
             'ip': ip,
             'timeout': timeout,
             'family': family,
@@ -345,14 +346,14 @@ class CFSSL(object):
                 server.
         """
         data = self._clean_mapping({
-            'certificate_request': certificate_request.to_api(),
+            'certificate_request': to_api(certificate_request),
             'hosts': [
-                host.to_api() for host in hosts
+                to_api(host) for host in hosts
             ],
             'subject': subject,
             'serial_sequence': serial_sequence,
             'label': label,
-            'profile': profile.to_api(),
+            'profile': to_api(profile),
         })
         result = self.call('sign', 'POST', data=data)
         return result['certificate']

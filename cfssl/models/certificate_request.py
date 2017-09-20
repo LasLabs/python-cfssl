@@ -5,6 +5,7 @@
 from .host import Host
 from .config_key import ConfigKey
 from .subject_info import SubjectInfo
+from ..utils import to_api
 
 
 class CertificateRequest(object):
@@ -32,14 +33,14 @@ class CertificateRequest(object):
         """ It returns an object compatible with the API. """
         api = {
             'names': [
-                name.to_api() for name in self.names
+                to_api(name) for name in self.names
             ],
             'hosts': [
-                host.to_api() for host in self.hosts
+                to_api(host) for host in self.hosts
             ]
         }
         if self.common_name:
             api['CN'] = self.common_name
         if self.key:
-            api['key'] = self.key.to_api()
+            api['key'] = to_api(self.key)
         return api

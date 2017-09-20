@@ -2,6 +2,8 @@
 # Copyright 2016 LasLabs Inc.
 # License MIT (https://opensource.org/licenses/MIT).
 
+from ..utils import to_api
+
 
 class ConfigMixer(object):
     """ It provides a mixer for the Client and Server Configs """
@@ -25,12 +27,12 @@ class ConfigMixer(object):
         """ It returns an object compatible with the API. """
         return {
             'signing': {
-                'default': self.sign_policy.to_api(),
+                'default': to_api(self.sign_policy),
                 'profiles': {
-                    p.name: p.to_api() for p in self.sign_policies
+                    p.name: to_api(p) for p in self.sign_policies
                 },
             },
             'auth_keys': {
-                k.name: k.to_api() for k in self.auth_policies
+                k.name: to_api(k) for k in self.auth_policies
             },
         }
