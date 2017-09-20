@@ -3,13 +3,16 @@
 # License MIT (https://opensource.org/licenses/MIT).
 
 
-def to_api(object):
-    """ Ensure an object is converted using it's to_api method if it exists.
+def to_api(_object):
+    """Ensure an object is converted using its ``to_api`` method if it exists.
 
     Args:
-        object (any):
+        _object (object): Object to convert to API, or simply return.
     Returns:
-        str: A PEM-encoded certificate that has been signed by the
-            server.
+       dict: A dictionary representation of the object that is compatible with
+        the CFSSL server API.
     """
-    return object.to_api() if hasattr(object, 'to_api') else object
+    try:
+        return _object.to_api()
+    except AttributeError:
+        return _object

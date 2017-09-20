@@ -5,7 +5,7 @@
 import requests
 import logging
 
-from .exceptions import CFSSLException, CFSSLRemoteException
+from .exceptions import CFSSLRemoteException
 
 from .models.config_key import ConfigKey
 from .utils import to_api
@@ -69,11 +69,11 @@ class CFSSL(object):
                 ``keyless`` mode.
             flavor (str): One of ``ubiquitous``, ``force``, or ``optimal``,
                 with a default value of ``ubiquitous``. A ubiquitous bundle is
-                one that has a higher probability of being verified everywhere,
-                even by clients using outdated or unusual trust stores. Force will
-                cause the endpoint to use the bundle provided in the
-                ``certificate`` parameter, and will only verify that the bundle
-                is a valid (verifiable) chain.
+                one that has a higher probability of being verified
+                everywhere, even by clients using outdated or unusual trust
+                stores. Force will cause the endpoint to use the bundle
+                provided in the ``certificate`` parameter, and will only
+                verify that the bundle is a valid (verifiable) chain.
             domain (str): The domain name to verify as the hostname of the
                 certificate.
             ip (str): The IP address to verify against the certificate IP
@@ -103,8 +103,9 @@ class CFSSL(object):
                 * key contains the private key for the certificate, if one
                   was presented.
                 * key_size contains the size of the key in bits for the
-                  certificate. It will be present even if the private key wasn't
-                  provided because this can be determined from the public key.
+                  certificate. It will be present even if the private key
+                  wasn't provided because this can be determined from the
+                  public key.
                 * key_type contains a textual description of the key type,
                   e.g. '2048-bit RSA'.
                 * ocsp contains the OCSP URLs for the certificate, if present.
@@ -113,34 +114,36 @@ class CFSSL(object):
                 * signature contains the signature type used in the
                   certificate, e.g. ``SHA1WithRSA``.
                 * status contains a :type:`dict` of elements:
-                  * code is bit-encoded error code. 1st bit indicates whether
-                    there is a expiring certificate in the bundle. 2nd bit indicates
-                    whether there is a ubiquity issue with the bundle.
+                  * code is bit-encoded error code. 1st bit indicates
+                    whether there is a expiring certificate in the bundle.
+                    2nd bit indicates whether there is a ubiquity issue with
+                    the bundle.
                   * expiring_SKIs contains the SKIs (subject key identifiers)
                     for any certificates that might expire soon (within 30
                     days).
                   * messages is a list of human-readable warnings on bundle
-                    ubiquity and certificate expiration. For example, an expiration
-                    warning can be "The expiring cert is #1 in the chain",
-                    indicating the leaf certificate is expiring. Ubiquity warnings
-                    include SHA-1 deprecation warning (if the bundle triggers
-                    any major browser's SHA-1 deprecation policy), SHA-2
-                    compatibility warning (if the bundle contains signatures using
-                    ECDSA SHA-2 hash algorithms, it will be rejected by Windows XP
-                    SP2), compatibility warning (if the bundle contains ECDSA
-                    certificates, it will be rejected by Windows XP, Android 2.2 and
-                    Android 2.3 etc) and root trust warning (if the bundle cannot be
-                    trusted by some major OSes or browsers).
+                    ubiquity and certificate expiration. For example, an
+                    expiration warning can be "The expiring cert is #1 in
+                    the chain", indicating the leaf certificate is expiring.
+                    Ubiquity warnings include SHA-1 deprecation warning (if
+                    the bundle triggers any major browser's SHA-1 deprecation
+                    policy), SHA-2 compatibility warning (if the bundle
+                    contains signatures using ECDSA SHA-2 hash algorithms, it
+                    will be rejected by Windows XP SP2), compatibility warning
+                    (if the bundle contains ECDSA certificates, it will be
+                    rejected by Windows XP, Android 2.2 and Android 2.3 etc)
+                    and root trust warning (if the bundle cannot be trusted by
+                     some major OSes or browsers).
                   * rebundled indicates whether the server had to rebundle the
                     certificate. The server will rebundle the uploaded
                     certificate as needed; for example, if the certificate
-                    contains none of the required intermediates or a better set
-                    of intermediates was found. In this case, the server will
-                    mark rebundled as true.
+                    contains none of the required intermediates or a better
+                    set of intermediates was found. In this case, the server
+                    will mark rebundled as true.
                   * untrusted_root_stores contains the names of any major
-                    OSes and browsers that doesn't trust the bundle. The names
-                    are used to construct the root trust warnings in the messages
-                    list
+                    OSes and browsers that doesn't trust the bundle. The
+                    names are used to construct the root trust warnings in
+                    the messages list
                 * subject contains the X.509 subject identifier from the
                     certificate.
         """
@@ -236,7 +239,8 @@ class CFSSL(object):
             request (CertificateRequest): CSR to be used for
                 certificate creation.
             label (str): Specifying which signer to be appointed to sign
-                the CSR, useful when interacting with cfssl server that stands
+                the CSR, useful when interacting with cfssl server that
+                    stands
                 in front of a remote multi-root CA signer.
             profile (str): Specifying the signing profile for the signer.
             bundle (bool): Specifying whether to include an "optimal"
@@ -244,12 +248,14 @@ class CFSSL(object):
         Returns:
             dict: mapping with these keys:
                 * private key (str): a PEM-encoded private key.
-                * certificate_request (str): a PEM-encoded certificate request.
-                * certificate (str): a PEM-encoded certificate, signed by the server.
+                * certificate_request (str): a PEM-encoded certificate
+                    request.
+                * certificate (str): a PEM-encoded certificate, signed by the
+                    server.
                 * sums (dict): Holding both MD5 and SHA1 digests for the
                     certificate request and the certificate.
-                * bundle (str): See the result of endpoint_bundle.txt (only included
-                    if the bundle parameter was set).
+                * bundle (str): See the result of endpoint_bundle.txt (only
+                    included if the bundle parameter was set).
         """
         data = self._clean_mapping({
             'request': to_api(request),
@@ -269,8 +275,8 @@ class CFSSL(object):
                 which private key was used to sign the certificate.
             reason (str): Identifying why the certificate was revoked; see,
                 for example, ReasonStringToCode in the ocsp package or section
-                4.2.1.13 of RFC 5280. The "reasons" used here are the ReasonFlag
-                names in said RFC.
+                4.2.1.13 of RFC 5280. The "reasons" used here are the
+                ReasonFlag names in said RFC.
         """
         data = self._clean_mapping({
             'serial': serial,
@@ -285,21 +291,22 @@ class CFSSL(object):
         Args:
             host (Host): The host to scan.
             ip (str): IP Address to override DNS lookup of host.
-            timeout (str): The amount of time allotted for the scan to complete
-                (default: 1 minute).
-            family (str): regular expression specifying scan famil(ies) to run.
+            timeout (str): The amount of time allotted for the scan to
+                complete (default: 1 minute).
+            family (str): regular expression specifying scan famil(ies) to
+                run.
             scanner (str): regular expression specifying scanner(s) to run.
         Returns:
             dict: Mapping with keys for each scan family. Each of these
-            objects contains keys for each scanner run in that family 
-            pointing to objects possibly containing the following keys:
-            * grade (str): Describing the exit status of the scan. Can be:
+             objects contains keys for each scanner run in that family
+             pointing to objects possibly containing the following keys:
+             * grade (str): Describing the exit status of the scan. Can be:
                 * "Good": host performing the expected state-of-the-art.
                 * "Warning": host with non-ideal configuration,
                              possibly maintaining support for legacy clients.
                 * "Bad": host with serious misconfiguration or vulnerability
-                * "Skipped": indicates that the scan was not performed for some
-                             reason.
+                * "Skipped": indicates that the scan was not performed for
+                             some reason.
             * error (str): Any error encountered during the scan process.
             * output: (dict) Arbitrary data retrieved during the scan.
         """
@@ -318,8 +325,9 @@ class CFSSL(object):
         Returns:
             dict: Mapping with keys for each scan family. For each family,
                 there exists a `description` containing a string describing
-                the family and a `scanners` object mapping each of the family's
-                scanners to an object containing a `description` string.
+                the family and a `scanners` object mapping each of the
+                family's scanners to an object containing a ``description``
+                string.
         """
         return self.call('scaninfo')
 
@@ -387,9 +395,11 @@ class CFSSL(object):
             raise CFSSLRemoteException(
                 '\n'.join([
                     'Errors:',
-                    '\n'.join(map(CFSSL._format_response_message, response.get('errors', []))),
+                    '\n'.join(map(CFSSL._format_response_message,
+                                  response.get('errors', []))),
                     'Messages:'
-                    '\n'.join(map(CFSSL._format_response_message, response.get('messages', []))),
+                    '\n'.join(map(CFSSL._format_response_message,
+                                  response.get('messages', []))),
                 ])
             )
         if 'messages' in response:
@@ -401,7 +411,8 @@ class CFSSL(object):
     def _format_response_message(error):
         message = ''
         if isinstance(error, dict):
-            message += error['message'] if 'message' in error else '<undefined message>'
+            message += (error['message'] if 'message' in error
+                        else '<undefined message>')
             if 'code' in error:
                 message += ' (%s)' % error['code']
         if not message:
@@ -410,4 +421,4 @@ class CFSSL(object):
 
     def _clean_mapping(self, mapping):
         """ It removes false entries from mapping """
-        return {k:v for k, v in mapping.items() if v}
+        return {k: v for k, v in mapping.items() if v}

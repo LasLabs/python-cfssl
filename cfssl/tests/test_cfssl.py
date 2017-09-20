@@ -88,7 +88,7 @@ class TestCFSSL(unittest.TestCase):
         expect['CN'] = 'cn'
         del expect['common_name']
         del expect['certificate_request']
-        expect['hosts'][0]= expect['hosts'][0].to_api()
+        expect['hosts'][0] = expect['hosts'][0].to_api()
         expect['names'][0] = expect['names'][0].to_api()
         expect['key'] = expect['key'].to_api()
         expect['ca'] = expect['ca'].to_api()
@@ -109,7 +109,7 @@ class TestCFSSL(unittest.TestCase):
         self.cfssl.new_key(**expect)
         expect['CN'] = 'cn'
         del expect['common_name']
-        expect['hosts'][0]= expect['hosts'][0].to_api()
+        expect['hosts'][0] = expect['hosts'][0].to_api()
         expect['names'][0] = expect['names'][0].to_api()
         expect['ca'] = expect['ca'].to_api()
         expect['key'] = expect['key'].to_api()
@@ -170,7 +170,8 @@ class TestCFSSL(unittest.TestCase):
             'profile': mock.MagicMock(),
         }
         self.cfssl.sign(**expect)
-        expect['certificate_request'] = expect['certificate_request'].to_api()
+        expect['certificate_request'] = \
+            expect['certificate_request'].to_api()
         expect['hosts'][0] = expect['hosts'][0].to_api()
         expect['profile'] = expect['profile'].to_api()
         call.assert_called_once_with(
@@ -210,7 +211,8 @@ class TestCFSSL(unittest.TestCase):
         """ It should return result on success response """
         requests().json.return_value = {'success': True,
                                         'messages': [
-                                            {'message': 'some message', 'code': 5000},
+                                            {'message': 'some message',
+                                             'code': 5000},
                                             {'code': 5001},
                                             {'message': 'message only'},
                                             'another message'],
@@ -221,6 +223,7 @@ class TestCFSSL(unittest.TestCase):
         log.warning.assert_any_call('<undefined message> (5001)')
         log.warning.assert_any_call('message only')
         log.warning.assert_any_call('another message')
+
 
 if __name__ == '__main__':
     unittest.main()

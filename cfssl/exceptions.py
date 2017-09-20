@@ -2,8 +2,6 @@
 # Copyright 2016 LasLabs Inc.
 # License MIT (https://opensource.org/licenses/MIT).
 
-import requests
-
 
 class CFSSLException(EnvironmentError):
     """ This exception is raised from errors in the CFSSL Library. """
